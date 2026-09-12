@@ -519,8 +519,16 @@ if(params.writerId)url+='&writerId='+encodeURIComponent(params.writerId);
 if(params.writerName)url+='&writerName='+encodeURIComponent(params.writerName);
 try{const res=await fetch(url);return await res.json();}catch(e){return [];}
 }
+
 async function submitData(data){
 try{await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(data)});return true;}catch(e){return false;}
+}async function fetchRetry(action,params={}){
+for(let i=0;i<3;i++){
+const r=await fetchData(action,params);
+if(Array.isArray(r)?r.length:(r&&typeof r==='object'&&Object.keys(r).length))return r;
+await new Promise(rs=>setTimeout(rs,1200));
+}
+return fetchData(action,params);
 }
 
 function shareButtonsHTML(p,stop){
@@ -590,14 +598,15 @@ async function initMain(){
 trackVisitor();updateDate();renderBooks();renderGranthGrids();
 var c=getCache();
 if(c){ALL_POSTS=(c.posts||[]);ALL_WRITERS=(c.writers||[]);renderHomeBlocks();}
-const res=await Promise.all([fetchData('getPosts'),fetchData('getStats'),fetchData('getWriters'),fetchData('getPostStats')]);
-let posts=Array.isArray(res[0])?res[0]:[];
-posts=posts.map(normalizePost).filter(okPost);
+const stats=await fetchRetry('getStats')||{};
+let posts=await fetchRetry('getPosts');
+posts=(Array.isArray(posts)?posts:[]).map(normalizePost).filter(okPost);
 ALL_POSTS=posts;
-const stats=res[1]||{};
-ALL_WRITERS=Array.isArray(res[2])?res[2]:[];
+const wr=await fetchRetry('getWriters');
+ALL_WRITERS=Array.isArray(wr)?wr:[];
+const pst=await fetchRetry('getPostStats');
 STATS_MAP={};
-(Array.isArray(res[3])?res[3]:[]).forEach(s=>{STATS_MAP[s.id]={views:s.views||0,likes:s.likes||0};});
+(Array.isArray(pst)?pst:[]).forEach(s=>{STATS_MAP[s.id]={views:s.views||0,likes:s.likes||0};});
 setCache({posts:ALL_POSTS,writers:ALL_WRITERS});
 document.getElementById('stat-visitors').textContent=toBn(stats.visitors||0);
 document.getElementById('stat-today').textContent=toBn(stats.today||0);
