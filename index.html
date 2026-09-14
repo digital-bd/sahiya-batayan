@@ -207,7 +207,6 @@ body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text
 <a href="#" onclick="showWriterDirectory();return false;" class="admin-link" style="color:#fff;padding:12px 14px;text-decoration:none">👥 লেখক তালিকা</a>
 <a href="#" onclick="showWriter();return false;" class="admin-link" style="color:#fff;padding:12px 14px;text-decoration:none">✍️ লিখুন</a>
 <a href="#" onclick="showWriterRegister();return false;" class="admin-link" style="color:#fff;padding:12px 14px;text-decoration:none">📝 নিবন্ধন</a>
-<a href="#" onclick="showAdminPanel();return false;" class="admin-link" style="color:#fff;padding:12px 14px;text-decoration:none">⚙️ অ্যাডমিন</a>
 </div></nav>
 </header>
 
@@ -271,7 +270,12 @@ body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text
 <a href="https://whatsapp.com/channel/0029VbDjmKUIN9ivthbx0K34" target="_blank" class="fb-follow" style="background:#25D366;margin-left:8px">💬 WhatsApp</a>
 </div>
 </div>
-<div class="footer-bottom"><p>সম্পাদক ও প্রকাশক: মুহিতুল ইসলাম মুন্না</p><p>© ২০২৬ সাহিত্য বাতায়ন কর্তৃক সর্বস্বত্ব সংরক্ষিত</p></div>
+<div class="footer-bottom">
+    <p>সম্পাদক ও প্রকাশক: মুহিতুল ইসলাম মুন্না</p>
+    <p>© ২০২৬ সাহিত্য বাতায়ন কর্তৃক সর্বস্বত্ব সংরক্ষিত 
+    <a href="#" onclick="secretAdminLogin();return false;" style="color:#555;font-size:10px;text-decoration:none;margin-left:5px;">⚙</a>
+    </p>
+</div>
 </div></footer>
 </div>
 
@@ -373,7 +377,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text
 </div>
 <div id="admin-pending" class="admin-content active"><div id="pending-list"></div></div>
 <div id="admin-edit" class="admin-content">
-<div class="form-group"><label>🔑 সম্পাদক কোড (এডিট করতে লাগবে)</label><input id="edit-code" type="password" placeholder="SB2026"></div>
+<div class="form-group"><label>🔑 সম্পাদক কোড (এডিট করতে লাগবে)</label><input id="edit-code" type="password" placeholder="সম্পাদক কোড দিন"></div>
 <div id="edit-form-wrap" style="display:none;background:#fff;padding:20px;border-radius:8px;border:2px solid var(--primary);margin-bottom:20px">
 <h3 style="color:var(--primary);margin-bottom:15px">লেখা সম্পাদনা</h3>
 <div class="form-group"><label>শিরোনাম</label><input id="ed-title"></div>
@@ -945,6 +949,18 @@ document.addEventListener('DOMContentLoaded',initMain);
 document.getElementById('article-modal').addEventListener('click',function(e){if(e.target.id==='article-modal')closeModal();});
 document.getElementById('granth-modal').addEventListener('click',function(e){if(e.target.id==='granth-modal')closeGranth();});
 document.getElementById('paper-modal').addEventListener('click',function(e){if(e.target.id==='paper-modal')closePaper();});
+
+// ===== নিচের ফাংশনটি এখানে বসান =====
+function secretAdminLogin() {
+    var code = prompt("অ্যাডমিন প্যানেলে প্রবেশ করতে সম্পাদক কোড দিন:");
+    if (code === 'SB2026') {
+        showAdminPanel();
+    } else if (code !== null) {
+        alert("ভুল কোড! অ্যাক্সেস denied।");
+    }
+}
+// ===== শেষ =====
+
 </script>
 </body>
 </html>
