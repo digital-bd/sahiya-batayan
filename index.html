@@ -271,7 +271,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text
 </div>
 </div>
 <div class="footer-bottom">
-    <p>সম্পাদক ও প্রকাশক: মুহিতুল ইসলাম মুন্না</p>
+    <p>সম্পাদক: মুহিতুল ইসলাম | প্রকাশক: মশিউর রহমান</p>
     <p>© ২০২৬ সাহিত্য বাতায়ন কর্তৃক সর্বস্বত্ব সংরক্ষিত 
     <a href="#" onclick="secretAdminLogin();return false;" style="color:#555;font-size:10px;text-decoration:none;margin-left:5px;">⚙</a>
     </p>
@@ -653,7 +653,7 @@ ${post.bookurl?'<div style="text-align:center;margin:25px 0"><a class="buy-btn" 
 <span style="color:var(--text-light);font-size:15px">👁️ ${toBn(st.views)} বার পঠিত</span>
 </div>
 <div class="ad-slot" id="ad-article"></div>
-<div class="modal-footer-brand">© ২০২৬ <strong>সাহিত্য বাতায়ন</strong> | সম্পাদক: মুহিতুল ইসলাম মুন্না</div>
+<div class="modal-footer-brand">© ২০২৬ <strong>সাহিত্য বাতায়ন</strong> | সম্পাদক: মুহিতুল ইসলাম</div>
 ${shareButtonsHTML(post,false)}
 <div class="comments-section"><h3>💬 মন্তব্য করুন</h3>
 <div class="comment-form"><input id="comment-author" placeholder="আপনার নাম"><textarea id="comment-text" placeholder="আপনার মন্তব্য লিখুন..."></textarea>
@@ -745,7 +745,7 @@ img{width:100%;border-radius:8px;margin:20px 0}
 ${post.image?`<img src="${post.image}">`:''}
 <div class="content">${post.content.split('\n').map(p=>p.trim()?`<p>${p}</p>`:'').join('')}</div>
 ${post.bookurl?`<div style="text-align:center;margin:30px 0"><a href="${post.bookurl}" style="background:#f85c2c;color:#fff;padding:14px 30px;border-radius:5px;text-decoration:none;font-weight:600" target="_blank">🛒 বইটি কিনুন</a></div>`:''}
-<div class="footer">© ২০২৬ সাহিত্য বাতায়ন কর্তৃক সর্বস্বত্ব সংরক্ষিত | সম্পাদক: মুহিতুল ইসলাম মুন্না</div>
+<div class="footer">© ২০২৬ সাহিত্য বাতায়ন কর্তৃক সর্বস্বত্ব সংরক্ষিত | সম্পাদক: মুহিতুল ইসলাম</div>
 <script>
 function doPrint(){if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){window.print();});}else{window.print();}}
 window.onload=function(){setTimeout(function(){doPrint();},1500);};
