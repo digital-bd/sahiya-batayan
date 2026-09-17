@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সাহিত্য বাতায়ন - ই-বুক শপ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans Bengali',sans-serif;background:#f4f7f5;color:#2c3e50;line-height:1.7}
+header{background:#fff;padding:15px 0;box-shadow:0 2px 8px rgba(0,0,0,.08);position:sticky;top:0;z-index:10}
+.header-in{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.logo{font-size:26px;font-weight:900;color:#c0392b;text-decoration:none}
+.logo small{display:block;font-size:11px;color:#7f8c8d;font-weight:400}
+.nav a{color:#1f3a5f;text-decoration:none;font-weight:600;margin-left:18px;font-size:15px}
+.wrap{max-width:1100px;margin:0 auto;padding:25px 20px}
+.sec-title{text-align:center;font-size:26px;font-weight:900;color:#1f3a5f;margin:25px 0 5px}
+.sec-title span{color:#c0392b}
+.sec-note{text-align:center;color:#7f8c8d;font-size:14px;margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+.card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08);position:relative;display:flex;flex-direction:column}
+.card img{width:100%;height:280px;object-fit:cover;background:#eee}
+.card-body{padding:16px;display:flex;flex-direction:column;flex:1}
+.card-body h3{font-size:16px;margin-bottom:8px;line-height:1.5}
+.buy.roko{background:#1f3a5f;color:#fff;text-decoration:none;text-align:center;display:block;padding:12px;border-radius:6px;font-weight:700}
+.buy.roko:hover{background:#c0392b}
+.famous{background:#fff;border-radius:10px;box-shadow:0 3px 12px rgba(0,0,0,.08);padding:18px;margin-bottom:15px;display:flex;gap:15px;align-items:center;flex-wrap:wrap}
+.famous .ft{flex:1;min-width:200px}
+.famous h3{color:#1f3a5f;font-size:19px;margin-bottom:4px}
+.famous p{color:#555;font-size:14px}
+.more{display:inline-block;background:#f85c2c;color:#fff;padding:10px 22px;border-radius:6px;text-decoration:none;font-weight:700}
+footer{background:#1f3a5f;color:#bdc3c7;text-align:center;padding:25px 20px;margin-top:40px;font-size:14px}
+footer b{color:#fff}
+</style>
+</head>
+<body>
+
+<header><div class="header-in">
+<a class="logo" href="index.html">সাহিত্য বাতায়ন<small>A LITERARY PORTAL</small></a>
+<div class="nav">
+<a href="index.html">🏠 প্রচ্ছদ</a>
+<a href="epaper-archive.html">📰 ই-পেপার</a>
+<a href="epaper-download.html">📥 ডাউনলোড</a>
+<a href="#rokomari">🛒 বই সংগ্রহ</a>
+<a href="#famous">✍️ বিখ্যাতদের লেখা</a>
+</div>
+</div></header>
+
+<div class="wrap">
+
+<h2 class="sec-title" id="rokomari">— <span>বই সংগ্রহ</span> (রোকমারি) —</h2>
+<p class="sec-note">পছন্দের বই — সরাসরি রোকমারি থেকে সংগ্রহ করুন</p>
+<div class="grid" id="roko-grid"></div>
+
+<h2 class="sec-title" id="famous">— <span>বিখ্যাতদের</span> লেখা —</h2>
+<p class="sec-note">ক্লাসিক সাহিত্য — বিনামূল্যে পড়ুন</p>
+<div id="famous-list"></div>
+<div style="text-align:center;margin-top:20px"><a class="more" href="index.html">আরও পড়ুন 📖</a></div>
+</div>
+
+<footer>
+<p><b>© ২০২৬ সাহিত্য বাতায়ন</b> — সর্বস্বত্ব সংরক্ষিত</p>
+<p>📞 ০১৫৭৭৪৩৯২৫৭ | 📧 sahityabatayan@gmail.com</p>
+</footer>
+
+<script>
+const ROKO_BOOKS=[
+{t:'পথের পাঁচালী',a:'বিভূতিভূষণ বন্দ্যোপাধ্যায়',c:'https://placehold.co/400x560/e67e22/ffffff?text=Pather+Panchali',s:'পথের+পাঁচালী'},
+{t:'গীতাঞ্জলি',a:'রবীন্দ্রনাথ াকুর',c:'https://placehold.co/400x560/c0392b/ffffff?text=Gitanjali',s:'গীতাঞ্জলি'},
+{t:'সঞ্চয়িতা',a:'কাজী নজরুল ইসলাম',c:'https://placehold.co/400x560/1f3a5f/ffffff?text=Sanchayita',s:'সঞ্চয়িতা'},
+{t:'বনলতা সেন',a:'জীবনানন্দ দাশ',c:'https://placehold.co/400x560/27ae60/ffffff?text=Banalata+Sen',s:'বনলতা+সেন'},
+{t:'ফেলুদা সমগ্র',a:'সত্যজিৎ রায়',c:'https://placehold.co/400x560/8e44ad/ffffff?text=Feluda',s:'ফেলুদা'},
+{t:'পদ্মা নদীর মাঝি',a:'মানিক বন্দ্যোপাধ্যায়',c:'https://placehold.co/400x560/16a085/ffffff?text=Podma',s:'পদ্মা+নদীর+মাঝি'},
+{t:'দেবদাস',a:'শরৎচন্দ্র চট্টোপাধ্যায়',c:'https://placehold.co/400x560/d35400/ffffff?text=Devdas',s:'দেবদাস'},
+{t:'নকশী কাঁথার মাঠ',a:'জসীম উদ্‌দীন',c:'https://placehold.co/400x560/d9a520/ffffff?text=Nakshi+Katha',s:'নকশী+কাঁথার+মাঠ'}
+];
+
+const FAMOUS=[
+{t:'ঈদের দিনে',a:'আল মাহমুদ',x:'ঈদের দিনে আল মাহমুদ — জিদ ধরি না আর কানে আমার'},
+{t:'আমাদের ছোট নদী',a:'রবীন্দ্রনাথ ঠাকুর',x:'আমাদের ছোট নদী চলে বাঁকে বাঁকে'},
+{t:'পাখির মতো',a:'আল মাহমুদ',x:'পাখির মতো আল মাহমুদ — বলেন, পড়রে সোনা'}
+];
+
+document.getElementById('roko-grid').innerHTML=ROKO_BOOKS.map(b=>`
+<div class="card">
+<img src="${b.c}" alt="${b.t}">
+<div class="card-body">
+<h3>${b.t}</h3>
+<p style="font-size:13px;color:#7f8c8d">✍️ ${b.a}</p>
+<a class="buy roko" target="_blank" href="https://www.rokomari.com/search?term=${b.s}">🛒 রোকমারিতে দেখুন</a>
+</div></div>`).join('');
+
+document.getElementById('famous-list').innerHTML=FAMOUS.map(f=>`
+<div class="famous">
+<div class="ft"><h3>${f.t}</h3><p>${f.x} — ✍️ ${f.a}</p></div>
+</div>`).join('');
+</script>
+</body>
+</html>

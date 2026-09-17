@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সাহিত্য বাতায়ন ই-পেপার - সেপ্টেম্বর ২০২৬</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans Bengali',sans-serif;background:#1f3a5f;min-height:100vh;padding:20px}
+.top-bar{text-align:center;color:#fff;margin-bottom:20px}
+.top-bar h1{font-size:28px;margin-bottom:5px}
+.top-bar a{color:#f85c2c;text-decoration:none;font-weight:600}
+#flipbook{width:800px;height:600px;margin:0 auto;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
+#flipbook .page{background:#fff;overflow:hidden}
+.page-content{padding:20px 25px;height:100%;background:#fff;position:relative;overflow:hidden}
+.logo-header{display:flex;align-items:center;gap:10px;border-bottom:2px solid #c0392b;padding-bottom:8px;margin-bottom:12px}
+.logo-header svg{width:50px;height:50px;flex-shrink:0}
+.logo-header .logo-text h2{color:#c0392b;font-size:20px;margin:0}
+.logo-header .logo-text p{color:#1f3a5f;font-size:10px;margin:0;font-weight:600}
+.watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0.04;width:200px;height:200px;pointer-events:none;z-index:0}
+.page-title{color:#c0392b;font-size:24px;text-align:center;margin:10px 0 5px 0;font-weight:900}
+.page-author{text-align:center;color:#1f3a5f;font-size:15px;font-weight:700;font-style:italic;margin-bottom:12px}
+.category-tag{display:inline-block;background:#c0392b;color:#fff;padding:3px 12px;border-radius:3px;font-size:12px;font-weight:700;margin-bottom:8px}
+.page-content p{color:#333;line-height:1.7;margin-bottom:8px;text-align:justify;font-size:14px}
+.poem-box{text-align:center;margin:10px 0}
+.poem-box p{color:#333;line-height:2;text-align:center;font-size:15px;margin-bottom:5px}
+.cover-page{background:#fff;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%}
+.cover-page .big-logo{width:120px;height:120px;margin-bottom:15px}
+.cover-page h1{color:#c0392b;font-size:40px;margin-bottom:5px}
+.cover-page .subtitle{color:#1f3a5f;font-size:16px;font-weight:700;margin-bottom:15px}
+.cover-page .date{color:#555;font-size:18px;font-weight:700;margin:10px 0}
+.cover-page .editor{color:#1f3a5f;font-size:14px;margin-top:25px}
+.toc-section{margin:10px 0}
+.toc-section h3{color:#1f3a5f;font-size:16px;margin-bottom:8px;border-bottom:2px solid #c0392b;padding-bottom:3px}
+.toc-item{padding:6px 10px;margin:4px 0;background:#f8f9fa;border-left:3px solid #c0392b;font-size:13px}
+.toc-item strong{color:#c0392b}
+.page-num{position:absolute;bottom:8px;right:15px;color:#999;font-size:11px}
+.back-cover{background:#fff;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%}
+.back-cover h1{color:#c0392b;font-size:32px;margin-bottom:15px}
+.back-cover p{color:#1f3a5f;font-size:14px;margin:5px 0}
+.controls{text-align:center;margin-top:25px}
+.controls button{background:#f85c2c;color:#fff;border:none;padding:12px 25px;margin:0 10px;font-size:16px;cursor:pointer;border-radius:6px;font-weight:700;font-family:inherit}
+.controls button:hover{background:#fff;color:#f85c2c}
+@media(max-width:850px){#flipbook{width:100%;height:500px}.cover-page h1{font-size:28px}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>📰 সাহিত্য বাতায়ন ই-পেপার</h1>
+  <p style="color:#fff;margin-bottom:10px">সেপ্টেম্বর ২২৬</p>
+  <a href="epaper-archive.html">← সব ইস্যু দেখুন</a>
+</div>
+
+<div id="flipbook">
+  
+  <div class="page"><div class="page-content cover-page">
+    <svg class="big-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <h1>সাহিত্য বাতায়ন</h1><p class="subtitle">A LITERARY PORTAL</p>
+    <p class="date">ই-পেপার সংস্করণ</p><p class="date" style="font-size:16px">সেপ্টেম্বর ২০২</p>
+    <p class="editor">সম্পাদনা: মুহিতুল ইসলাম মুন্না</p><div class="page-num"></div>
+  </div></div>
+
+  <div class="page"><div class="page-content">
+    <div class="logo-header"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-text"><h2>সাহিত্য বাতায়ন</h2><p>A LITERARY PORTAL</p></div></div>
+    <h1 class="page-title">📖 সূচিপত্র</h1>
+    <div class="toc-section"><h3>গল্প</h3>
+      <div class="toc-item"><strong>১.</strong> একটুখানি মায়া — ফারজানা আক্তার ইভা</div>
+      <div class="toc-item"><strong>২.</strong> প্রতিশোধ — ফজলুল কবির পাভেল</div>
+    </div>
+    <div class="toc-section"><h3>কবিতা</h3>
+      <div class="toc-item"><strong>৩.</strong> ফিরে যেতে চাই — জেরিন জাহান দিশা</div>
+      <div class="toc-item"><strong>৪.</strong> ব্যক্তিগত আকাশ — তাকিয়া জান্নাত নীলা খাঁন</div>
+      <div class="toc-item"><strong>৫.</strong> সময়ের ভিতর — মুহিতুল ইসলাম মুন্না</div>
+    </div>
+    <div class="page-num">২</div>
+  </div></div>
+
+  <div class="page"><div class="page-content">
+    <svg class="watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-header"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-text"><h2>সাহিত্য বাতায়ন</h2><p>A LITERARY PORTAL</p></div></div>
+    <span class="category-tag">গল্প</span><h1 class="page-title">একটুখানি মায়া</h1><p class="page-author">ফারজানা আক্তার ইভা</p>
+    <p>সেদিন স্কুলের আশপাশ দিয়ে হেঁটে যাওয়ার সময় প্রতিদিনের চেনা ব্যস্ততার মাঝে হঠাৎ আমার চোখ আটকে গেল একটি কুকুরের ওপর। সে চুপচাপ দাঁড়িয়ে ছিল, আর কিছুক্ষণ লক্ষ্য করতেই বুঝলাম—একদৃষ্টিতে আমার দিকেই তাকিয়ে আছে।</p>
+    <p>কেন জানি না, সেই চোখের দৃষ্টিতে সেদিন অন্যরকম এক আকুতি অনুভব করলাম। মনে হলো, মুখে কোনো ভাষা না থাকলেও, ও যেন নীরবে আমাকে কিছু বলতে চাইছে। আমি কিছু সময় থমকে দাঁড়িয়ে রইলাম। মনে হলো, হয়তো ও ক্ষুধার্ত; তাই সঙ্গে থাকা কয়েকটি বিস্কুট বের করে ওর সামনে বাড়িয়ে দিলাম।</p>
+    <p>সত্যি বলতে, তখনও আমার জানা ছিল না কুকুর বিস্কুট খায় কি না। কিন্তু বিস্কুটগুলো সামনে রাখতেই ও যেভাবে দ্রুত খেতে শুরু করল, তাতে স্পষ্ট হয়ে গেল—ক্ষুধাটা ওর অনেকক্ষণ ধরেই ছিল।</p>
+    <p>ওর খাওয়ার সেই দৃশ্যটা আমাকে গভীরভাবে ভাবিয়ে তুলল। আমার কাছে যা ছিল মাত্র কয়েকটি সামান্য বিস্কুট, ওর কাছে সেটাই হয়ে উঠল এক বিশাল প্রাপ্তি। খাওয়ার পর মনে হলো, ওর নিশ্চয়ই পানিরও প্রয়োজন। একটু পানি এনে পাত্রটি সামনে রাখতেই ও দারুণ আগ্রহ নিয়ে পান করতে শুরু করল।</p>
+    <div class="page-num">৩</div>
+  </div></div>
+
+  <div class="page"><div class="page-content">
+    <svg class="watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-header"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-text"><h2>সাহিত্য বাতায়ন</h2><p>A LITERARY PORTAL</p></div></div>
+    <p>তখনই উপলব্ধি করলাম, একটি প্রাণীর মৌলিক প্রয়োজন মেটাতে খুব বেশি আয়োজনের প্রয়োজন হয় না—লাগে কেবল একটু মায়া আর একটু সহানুভূতি।</p>
+    <p>সেদিনের অভিজ্ঞতা থেকে একটা সত্য খুব স্পষ্টভাবে উপলব্ধি করলাম—ক্ষুধা মানুষের হোক কিংবা কোনো প্রাণীর, তার ভাষা সর্বত্রই এক। পার্থক্য কেবল এতটুকুই যে, মানুষ মুখে বলে তার ক্ষুধার কথা প্রকাশ করতে পারে, আর নির্বাক প্রাণীরা তা পারে না।</p>
+    <p>আমরা প্রায়ই ভাবি, "একটু খাবার দিলে আর এমন কী হবে?" অথচ যে অবলা প্রাণীটি হয়তো সারাদিন পেটে দানাপানি ছাড়াই কাটিয়ে দিয়েছে, তার কাছে সেই সামান্য খাবারটুকুই হয়ে উঠতে পারে দিনের সবচেয়ে বড় আনন্দ।</p>
+    <p>সেদিন সেই কুকুরটির চোখের দিকে তাকিয়ে মনে হয়েছিল, পৃথিবীতে ভালোবাসা ছড়িয়ে দেওয়ার জন্য সবসময় বড় কিছু করার প্রয়োজন হয় না। কখনো কখনো এক মুঠো খাবার, এক বাটি পানি আর একটুখানি মায়াই যথেষ্ট।</p>
+    <p>আমাদের চারপাশে এমন অসংখ্য অবলা প্রাণী রয়েছে, যারা বেঁচে থাকার জন্য মানুষের দয়ার ওপর নির্ভর করে। তারা নিজেদের কষ্টের কথা কাউকে জানাতে পারে না; তাই তাদের এই নীরবতাটুকু বোঝার দায়িত্ব আমাদেরই।</p>
+    <div class="page-num">৪</div>
+  </div></div>
+
+  <div class="page"><div class="page-content">
+    <svg class="watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-header"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-text"><h2>সাহিত্য বাতায়ন</h2><p>A LITERARY PORTAL</p></div></div>
+    <p>আমরা যদি প্রত্যেকে নিজ নিজ সামর্থ্য অনুযায়ী একটি ক্ষুধার্ত প্রাণীর মুখে এক মুঠো খাবার আর একটু পানি তুলে দিই, তবে এই পৃথিবীটা তাদের জাঁকজমকহীন জীবনের জন্যও একটু হলেও সুন্দর হয়ে উঠবে।</p>
+    <p>সেদিন আমি কেবল একটি পথ্যহীন কুকুরকে খাবার দিইনি; বরং তার চেয়ে অনেক বড় একটি শিক্ষা লাভ করেছি—মায়া বা সহানুভূতি দেখানোর জন্য বড় কোনো পরিচয়ের প্রয়োজন হয় না, কেবল প্রয়োজন একটি কোমল হৃদয়ের।</p>
+    <p>হয়তো আমার দেওয়া সেই কয়েকটি বিস্কুট খুব সামান্যই ছিল, কিন্তু সেই ক্ষুদ্র খাবারটুকুই হয়তো তার সারাদিনের সবচেয়ে আনন্দের মুহূর্ত হয়ে বেঁচে ছিল।</p>
+    <p>কারণ, এক মুঠো খাবার আর একটুখানি মায়া—কখনো কখনো ঠিক এতটুকুই হয়ে ওঠে একটি প্রাণের জন্য অফুরন্ত ভালোবাসার নাম।</p>
+    <div class="page-num">৫</div>
+  </div></div>
+
+  <div class="page"><div class="page-content">
+    <svg class="watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-header"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-text"><h2>সাহিত্য বাতায়ন</h2><p>A LITERARY PORTAL</p></div></div>
+    <span class="category-tag">গল্প</span><h1 class="page-title">প্রতিশোধ</h1><p class="page-author">ফজলুল কবির পাভেল</p>
+    <p>হঠাৎ করেই রাশেদকে ডেকে পাঠায় রিমা। রাশেদের মন কেমন জানি করতে থাকে। তাই তো ২০ বছর হয়ে গেল।</p>
+    <p>কি তাড়াতাড়িই না সব সময় চলে গেল মনে হলো রাশেদের। এখনো তাদের প্রথম পরিচয়ের কথা মনে করতে পারে। রাশেদের চোখগুলো ছিল ভারী সুন্দর। সে সুন্দর চোখের কথাই বলেছিল রিমা। প্রেম হয়েছিল। ভেঙে গিয়েছিল হঠাৎ।</p>
+    <p>২ বছরের মধ্যে একটি বারের জন্যও রাশেদকে ফোন করেনি রিমা। হঠাৎ করে রাশেদের শহর বগুড়ায় এসে রিমা ফোন করে বসে। কিভাবে নম্বার পেল রাশেদ হয়তো কিছুটা আঁচ করতে পারে। দুজনেরই একজন কমন বন্ধু ছিল বা আছে—ঈমন নাম। সম্ভবত ঈমনের কাছ থেকে নাম্বারটি পেয়েছে।</p>
+    <p>আর এখনকার দিনে কারো নম্বার বের করা মনে হয় খুব কঠিন কিছু না। সন্ধ্যা আসতেই মন কেমন জানি করতে থাকে রাশেদের। রিমা এদিকে সংসার করে সুখে শান্তিতেই আছে। রিমার ছবি ফেসবুকে দেখতে পায় রাশেদ। তিনটে বাচ্চা নিয়ে সুখেই আছে রিমা বুঝতে পারে।</p>
+    <p>সুখে চেহারায় একটু ফোলা ফোলা ভাবে এসেছে। অথচ এক সময় মনে হচ্ছিল তাকে ছাড়া রিমা কোনভাবেই বাঁচতে পারবে না। অথচ ২০ বছর দিব্যি ভালো আছে।</p>
+    <div class="page-num">৬</div>
+  </div></div>
+
+  <div class="page"><div class="page-content">
+    <svg class="watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-header"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-text"><h2>সাহিত্য বাতায়ন</h2><p>A LITERARY PORTAL</p></div></div>
+    <p>রাশেদ মন খারাপ করে না। কেউ একজন ভালো আছে এটা দেখার মধ্যে আনন্দ লাগে তার। সন্ধ্যার জন্য প্রস্তুতি গ্রহণ করতে থাকে। সন্ধ্যার সময় কেমন জানি করতে থাকে মন।</p>
+    <p>হঠাৎ করেই খুব অভিমান হয়। তাকে চরম বিপদের দিনে ফেলে রেখে গিয়েছিল রিমা। চার বছর প্রেম করার পর ভালো একটা প্রস্তাব পেয়ে চলে যায় রিমা। কষ্ট পেলেও বুঝতেও দেয়নি রাশেদ কাউকে।</p>
+    <p>চোখ থেকে অজান্তেই পানি বের হয়ে আসে। ভাবে সে কোনভাবে সেখানে যাবে না। সন্ধ্যার পর থেকে রিমা কন্টিনিউয়াস ফোন করতে থাকে। সেটা দেখতে পেয়ে রাশেদ একবার মনে করে যাবে। কিন্তু হঠাৎ করেই বুকের ভিতরে সব অভিমান একত্রিত হয়ে যায়।</p>
+    <p>রিমা রেস্টুরেন্টে অনেকক্ষণ বসে থাকে। রাশেদকে মেসেজ পাঠায়। কোন কিছুই রাশেদের মনকে নাড়া দিতে পারে না। পাথরের মত হয়ে গেছে মন। চিরকালের জন্য যে সম্পর্ক ভেঙে গেছে হঠাৎ করে তাকে আবার জাগিয়ে লাভ কি।</p>
+    <div class="page-num">৭</div>
+  </div></div>
+
+  <div class="page"><div class="page-content">
+    <svg class="watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-header"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-text"><h2>সাহিত্য বাতায়ন</h2><p>A LITERARY PORTAL</p></div></div>
+    <span class="category-tag">কবিতা</span><h1 class="page-title">ফিরে যেতে চাই</h1><p class="page-author">জেরিন জাহান দিশা</p>
+    <div class="poem-box">
+      <p>ফিরে যেতে চাই, সেই শৈশবের দিনগুলোতে।</p>
+      <p>যে সময় ছিল না এত হিংসা, ছিল না এত স্বার্থপরতা।</p>
+      <p>শুধু ছিল সরলতা আর নির্মল আনন্দ।</p><br>
+      <p>প্রতি শুক্রবার ছুটির দিনে, বিটিভিতে সিসিমপুর।</p>
+      <p>আর ছবি দেখার আনন্দ, বিকেলে সবার সাথে।</p>
+      <p>গোল্লাছুট আর লুকোচুরি খেলা।</p><br>
+      <p>শনিবার সকালে, ঢুলুঢুলু চোখে স্কুলে যাওয়া।</p>
+      <p>৩০ জন বন্ধু-বান্ধবী মিলে, হাসাহাসি, দুষ্টুমি আর গল্পে,</p>
+      <p>কেটে যেত পুরোটা দিন।</p><br>
+      <p>কী অদ্ভুত সুন্দর ছিল সেই সময়টা!</p>
+      <p>আজ সব আছে, শুধু নেই সেই শৈশবের দিনগুলো।</p>
+      <p>মাঝে মাঝে খুব ইচ্ছে করে, আর একবার ফিরে পাই মিষ্টি শৈশব।</p>
+    </div>
+    <div class="page-num">৮</div>
+  </div></div>
+
+  <div class="page"><div class="page-content">
+    <svg class="watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-header"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-text"><h2>সাহিত্য বাতায়ন</h2><p>A LITERARY PORTAL</p></div></div>
+    <span class="category-tag">কবিতা</span><h1 class="page-title">ব্যক্তিগত আকাশ</h1><p class="page-author">তাকিয়া জান্নাত নীলা খাঁন</p>
+    <div class="poem-box">
+      <p>আমি চাই'না তুমি আমার জীবনে; কোনো চাঁদ, সূর্য, তারা, অথবা'</p>
+      <p>প্রবহমান নদী হয়ে এসো! যারা কি'না সময়ের ধারায় বদলে যায়।</p><br>
+      <p>তুমি না হয়, আমার আকাশ হয়েই এলে!! একটা ব্যক্তিগত আকাশ।</p>
+      <p>কাছে আসতে হবে না! অন্তত দূরত্বটা তো আর বাড়লো না।</p><br>
+      <p>তুমি আমার নির্ভরতা হও। আমি না হয়' মেঘ হয়ে;</p>
+      <p>তোমার বুকে ভেসে বেড়াব।</p><br>
+      <p>মাঝে মধ্যে মন খারাপে না'হয়, তোমার ওমন আকাশ বিশাল বুকে-</p>
+      <p>মেঘেদের ন্যায় বৃষ্টির মতো অশ্রু ঝরাবো। তুমি আকাশ হয়ে সামলে নিয়ো আমায়।</p>
+    </div>
+    <div class="page-num">৯</div>
+  </div></div>
+
+  <div class="page"><div class="page-content">
+    <svg class="watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-header"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <div class="logo-text"><h2>সাহিত্য বাতায়ন</h2><p>A LITERARY PORTAL</p></div></div>
+    <span class="category-tag">কবিতা</span><h1 class="page-title">সময়ের ভিতর</h1><p class="page-author">মুহিতুল ইসলাম মুন্না</p>
+    <div class="poem-box">
+      <p>সময় থামে না কোনো দিন, দিনরাত মিশে যায় কোনো অদৃশ্য সীমানায়।</p>
+      <p>বুকের গভীরে লুকিয়ে রাখা কথারা মেঘের মতো উড়ে যায় নীল আকাশে।</p><br>
+      <p>কে বুঝে ক্লান্তির রূপ? কে দেখে শূন্যতার চেহারা?</p>
+      <p>তবু মানুষ ভাঙা স্বপ্ন নিয়ে বাঁচে, আশার খড়কুটো আঁকড়ে থাকে।</p><br>
+      <p>শেষ হলে ও থাকে কিছু না বলা গল্প,</p>
+      <p>কালের প্রবাহে ভেসে চলে সময়ের ভিতর।</p>
+    </div>
+    <div class="page-num">০</div>
+  </div></div>
+
+  <div class="page"><div class="page-content back-cover">
+    <svg class="big-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>
+    <h1>ধন্যবাদ</h1><p class="subtitle">সাহিত্য বাতায়ন</p>
+    <p style="margin-top:15px">https://digital-bd.github.io/sahiya-batayan/</p>
+    <p>📧 sahityabatayan@gmail.com</p>
+    <p class="editor">পরবর্তী সংস্করণ: অক্টোবর ২০২৬</p>
+    <p style="margin-top:10px;font-size:11px;color:#c0392b">© ২০২৬ সাহিত্য বাতায়ন - সর্বস্বত্ব সংরক্ষিত</p>
+    <div class="page-num">১</div>
+  </div></div>
+
+</div>
+
+<div class="controls">
+  <button onclick="$('#flipbook').turn('previous')">← পূর্ববর্তী পাতা</button>
+  <button onclick="$('#flipbook').turn('next')">পরবর্তী পাতা →</button>
+</div>
+
+<script>
+$(document).ready(function() {
+  $("#flipbook").turn({ width: 800, height: 600, autoCenter: true, duration: 1000, elevation: 50, gradients: true });
+});
+$(document).keydown(function(e){
+  if(e.which==37) $("#flipbook").turn('previous');
+  else if(e.which==39) $("#flipbook").turn('next');
+});
+</script>
+</body>
+</html>
