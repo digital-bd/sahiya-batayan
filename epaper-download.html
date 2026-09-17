@@ -61,7 +61,7 @@ footer b{color:#fff}
 <header><div class="header-in">
 <a class="logo" href="index.html">সাহিত্য বাতায়ন<small>A LITERARY PORTAL</small></a>
 <div class="nav">
-<a href="index.html">🏠 প্রচ্ছদ</a>
+<a href="index.html"> প্রচ্ছদ</a>
 <a href="epaper-archive.html">📰 ই-পেপার</a>
 <a href="epaper-download.html">📥 ডাউনলোড</a>
 <a href="ebook-shop.html">📚 ই-বুক শপ</a>
@@ -78,8 +78,8 @@ footer b{color:#fff}
 </div>
 
 <footer>
-<p><b>© ২০৬ সাহিত্য বাতায়ন</b> — সর্বস্বত্ব সংরক্ষিত</p>
-<p>📞 ১৫৭৭৪৯২৫৭ |  sahityabatayan@gmail.com</p>
+<p><b>© ২০২৬ সাহিত্য বাতায়ন</b> — সর্বস্বত্ব সংরক্ষিত</p>
+<p>📞 ০১৭৭৪৩৯২৫৭ | 📧 sahityabatayan@gmail.com</p>
 </footer>
 
 <script>
@@ -159,7 +159,7 @@ const ARTICLES = [
 
 শনিবার সকালে,
 ঢুলুঢুলু চোখে স্কুলে যাওয়া।
-৩০ জন বন্ধু-বান্ধবী মিলে,
+৩ জন বন্ধু-বান্ধবী মিলে,
 হাসাহাসি, দুষ্টুমি আর গল্পে,
 কেটে যেত পুরোটা দিন।
 
@@ -248,27 +248,41 @@ function generatePDF(index) {
   
   const paragraphs = article.content.split('\n').filter(p => p.trim() !== '');
   
+  const logoSVG = `<svg width="70" height="70" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text><path fill="#D4AF37" d="M150 35l15-15 10 10-15 15z"/><path fill="#D4AF37" d="M160 90l20-5-10 15z"/></svg>`;
+  
   const pdfContent = document.createElement('div');
-  pdfContent.style.cssText = 'width:595px;padding:30px 40px;font-family:"Noto Sans Bengali",sans-serif;background:#fff;color:#333;line-height:1.8;';
+  pdfContent.style.cssText = 'width:595px;padding:40px 35px;font-family:"Noto Sans Bengali",sans-serif;background:#fff;color:#000;';
   
   let contentHTML = `
-    <div style="text-align:center;margin-bottom:25px;border-bottom:2px solid #c0392b;padding-bottom:15px;">
-      <h1 style="color:#c0392b;font-size:26px;margin:0 0 8px 0;font-weight:900;">${article.title}</h1>
-      <p style="font-size:16px;font-style:italic;color:#1f3a5f;margin:0;">✍️ ${article.author}</p>
-      <p style="font-size:12px;color:#7f8c8d;margin:8px 0 0 0;">[${article.category}] | সাহিত্য বাতায়ন</p>
+    <div style="text-align:center;margin-bottom:20px;padding-bottom:15px;border-bottom:4px solid #228B22;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <div style="flex:1;text-align:left;">
+          <h1 style="color:#c0392b;font-size:32px;margin:0;font-weight:900;font-family:'Noto Sans Bengali',sans-serif;">সাহিত্য বাতায়ন</h1>
+          <p style="color:#000;font-size:18px;margin:5px 0 0 0;font-family:'Noto Sans Bengali',sans-serif;">Sahitya Batayon</p>
+        </div>
+        <div style="margin-left:15px;">${logoSVG}</div>
+      </div>
     </div>
-    <div style="font-size:14px;line-height:1.9;text-align:justify;">
+    
+    <div style="background:#f8f9fa;padding:15px 20px;margin-bottom:25px;border-left:4px solid #c0392b;border-radius:4px;">
+      <h2 style="color:#1f3a5f;font-size:22px;margin:0 0 8px 0;font-weight:700;font-family:'Noto Sans Bengali',sans-serif;">${article.title}</h2>
+      <p style="color:#555;font-size:15px;margin:0;font-style:italic;font-family:'Noto Sans Bengali',sans-serif;">✍️ ${article.author} | [${article.category}]</p>
+    </div>
+    
+    <div style="font-size:14px;line-height:2;text-align:justify;color:#222;font-family:'Noto Sans Bengali',sans-serif;">
   `;
   
   paragraphs.forEach(p => {
-    contentHTML += `<p style="margin:0 0 12px 0;text-indent:20px;">${p}</p>`;
+    contentHTML += `<p style="margin:0 0 15px 0;text-align:justify;font-family:'Noto Sans Bengali',sans-serif;">${p}</p>`;
   });
   
   contentHTML += `
     </div>
-    <div style="margin-top:40px;padding-top:15px;border-top:1px solid #ddd;text-align:center;color:#999;font-size:11px;">
-      <p style="margin:0;">সাহিত্য বাতায়ন — A Literary Portal</p>
-      <p style="margin:3px 0;">https://digital-bd.github.io/sahiya-batayan/</p>
+    
+    <div style="margin-top:50px;padding-top:20px;border-top:2px solid #ddd;text-align:center;">
+      <p style="color:#888;font-size:12px;margin:0;font-family:'Noto Sans Bengali',sans-serif;">© স্বত্ব সংরক্ষিত © ২০২</p>
+      <p style="color:#999;font-size:11px;margin:8px 0 0 0;font-family:'Noto Sans Bengali',sans-serif;">সাহিত্য বাতায়ন — A Literary Portal</p>
+      <p style="color:#999;font-size:11px;margin:5px 0 0 0;font-family:'Noto Sans Bengali',sans-serif;">https://digital-bd.github.io/sahiya-batayan/</p>
     </div>
   `;
   
@@ -276,7 +290,7 @@ function generatePDF(index) {
   document.body.appendChild(pdfContent);
   
   const opt = {
-    margin: [10, 10, 10, 10],
+    margin: [8, 8, 8, 8],
     filename: `${article.title}.pdf`,
     image: { type: 'jpeg', quality: 0.95 },
     html2canvas: { 
@@ -284,7 +298,9 @@ function generatePDF(index) {
       useCORS: true,
       letterRendering: true,
       logging: false,
-      scrollY: 0
+      scrollY: 0,
+      backgroundColor: '#ffffff',
+      allowTaint: true
     },
     jsPDF: { 
       unit: 'mm', 
