@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সাহিত্য বাতায়ন - লেখা ডাউনলোড</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans Bengali',sans-serif;background:#f4f7f5;color:#2c3e50;line-height:1.7}
+header{background:#fff;padding:15px 0;box-shadow:0 2px 8px rgba(0,0,0,.08);position:sticky;top:0;z-index:10}
+.header-in{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.logo{font-size:26px;font-weight:900;color:#c0392b;text-decoration:none}
+.logo small{display:block;font-size:11px;color:#7f8c8d;font-weight:400}
+.nav a{color:#1f3a5f;text-decoration:none;font-weight:600;margin-left:18px;font-size:15px}
+.wrap{max-width:1100px;margin:0 auto;padding:25px 20px}
+.sec-title{text-align:center;font-size:26px;font-weight:900;color:#1f3a5f;margin:25px 0 5px}
+.sec-title span{color:#c0392b}
+.sec-note{text-align:center;color:#7f8c8d;font-size:14px;margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:25px}
+
+.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.08);position:relative;display:flex;flex-direction:column;transition:transform 0.3s}
+.card:hover{transform:translateY(-5px);box-shadow:0 8px 25px rgba(0,0,0,.15)}
+.card-badge{position:absolute;top:12px;left:12px;background:#c0392b;color:#fff;padding:4px 14px;border-radius:4px;font-weight:700;font-size:12px;z-index:3}
+
+.card-cover{height:200px;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden}
+.card-cover .cover-title{color:#fff;font-size:22px;font-weight:900;text-align:center;padding:0 20px;text-shadow:2px 2px 4px rgba(0,0,0,.3);z-index:2}
+.card-cover svg{width:80px;height:80px;opacity:0.9;margin-bottom:10px}
+
+.color-red{background:linear-gradient(135deg,#c0392b,#e74c3c)}
+.color-blue{background:linear-gradient(135deg,#1f3a5f,#2980b9)}
+.color-green{background:linear-gradient(135deg,#27ae60,#2ecc71)}
+.color-purple{background:linear-gradient(135deg,#8e44ad,#9b59b6)}
+.color-orange{background:linear-gradient(135deg,#d35400,#e67e22)}
+.color-teal{background:linear-gradient(135deg,#16a085,#1abc9c)}
+
+.author-photo{width:70px;height:70px;border-radius:50%;border:3px solid #fff;object-fit:cover;position:absolute;bottom:-35px;right:20px;box-shadow:0 3px 10px rgba(0,0,0,.2);z-index:3;background:#fff}
+.author-photo-placeholder{width:70px;height:70px;border-radius:50%;border:3px solid #fff;position:absolute;bottom:-35px;right:20px;box-shadow:0 3px 10px rgba(0,0,0,.2);z-index:3;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.author-photo-placeholder svg{width:50px;height:50px}
+
+.card-body{padding:20px 16px 16px;display:flex;flex-direction:column;flex:1;margin-top:35px}
+.card-body h3{font-size:18px;margin-bottom:6px;line-height:1.4;color:#1f3a5f}
+.card-body .author{font-size:13px;color:#7f8c8d;margin-bottom:15px;font-style:italic}
+.download-btn{margin-top:auto;background:#27ae60;color:#fff;border:none;padding:12px;border-radius:6px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;text-align:center;display:block;transition:0.3s}
+.download-btn:hover{background:#219150;transform:scale(1.02)}
+.back-link{text-align:center;margin-top:30px}
+.back-link a{color:#1f3a5f;text-decoration:none;font-weight:600}
+footer{background:#1f3a5f;color:#bdc3c7;text-align:center;padding:25px 20px;margin-top:40px;font-size:14px}
+footer b{color:#fff}
+
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center}
+.loading-overlay.active{display:flex}
+.loading-box{background:#fff;padding:30px 40px;border-radius:10px;text-align:center}
+.spinner{width:40px;height:40px;border:4px solid #f3f3f3;border-top:4px solid #27ae60;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 15px}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loading">
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <p>PDF তৈরি হচ্ছে...<br><small>অনুগ্রহ করে অপেক্ষা করুন</small></p>
+  </div>
+</div>
+
+<header><div class="header-in">
+<a class="logo" href="index.html">সাহিত্য বাতায়ন<small>A LITERARY PORTAL</small></a>
+<div class="nav">
+<a href="index.html">🏠 প্রচ্ছদ</a>
+<a href="epaper-archive.html">📰 ই-পেপার</a>
+<a href="epaper-download.html">📥 ডাউনলোড</a>
+<a href="ebook-shop.html">📚 ই-বুক শপ</a>
+</div>
+</div></header>
+
+<div class="wrap">
+<h2 class="sec-title">— <span>লেখা</span> ডাউনলোড —</h2>
+<p class="sec-note">প্রিয় লেখকদের গল্প ও কবিতা আলাদা আলাদা PDF হিসেবে ডাউনলোড করুন</p>
+
+<div class="grid" id="articles-grid"></div>
+
+<div class="back-link">
+  <a href="epaper-archive.html">← ই-পেপার আর্কাইভে ফিরে যান</a>
+</div>
+</div>
+
+<footer>
+<p><b>© ২০২৬ সাহিত্য বাতায়ন</b> — সর্বস্বত্ব সংরক্ষিত</p>
+<p>📞 ০১৫৭৭৪৩৯২৫৭ | 📧 sahityabatayan@gmail.com</p>
+</footer>
+
+<script>
+const LOGO_SVG = `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/>
+  <path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/>
+  <text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text>
+</svg>`;
+
+const ARTICLES = [
+  {
+    category: 'গল্প',
+    title: 'একটুখানি মায়া',
+    author: 'ফারজানা আক্তার ইভা',
+    color: 'color-red',
+    authorPhoto: '',
+    content: `সেদিন স্কুলের আশপাশ দিয়ে হেঁটে যাওয়ার সময় প্রতিদিনের চেনা ব্যস্ততার মাঝে হঠাৎ আমার চোখ আটকে গেল একটি কুকুরের ওপর। সে চুপচাপ দাঁড়িয়ে ছিল, আর কিছুক্ষণ লক্ষ্য করতেই বুঝলাম—একদৃষ্টিতে আমার দিকেই তাকিয়ে আছে।
+
+কেন জানি না, সেই চোখের দৃষ্টিতে সেদিন অন্যরকম এক আকুতি অনুভব করলাম। মনে হলো, মুখে কোনো ভাষা না থাকলেও, ও যেন নীরবে আমাকে কিছু বলতে চাইছে। আমি কিছু সময় থমকে দাঁড়িয়ে রইলাম। মনে হলো, হয়তো ও ক্ষুধার্ত; তাই সঙ্গে থাকা কয়েকটি বিস্কুট বের করে ওর সামনে বাড়িয়ে দিলাম।
+
+সত্যি বলতে, তখনও আমার জানা ছিল না কুকুর বিস্কুট খায় কি না। কিন্তু বিস্কুটগুলো সামনে রাখতেই ও যেভাবে দ্রুত খেতে শুরু করল, তাতে স্পষ্ট হয়ে গেল—ক্ষুধাটা ওর অনেকক্ষণ ধরেই ছিল।
+
+ওর খাওয়ার সেই দৃশ্যটা আমাকে গভীরভাবে ভাবিয়ে তুলল। আমার কাছে যা ছিল মাত্র কয়েকটি সামান্য বিস্কুট, ওর কাছে সেটাই হয়ে উঠল এক বিশাল প্রাপ্তি। খাওয়ার পর মনে হলো, ওর নিশ্চয়ই পানিরও প্রয়োজন। একটু পানি এনে পাত্রটি সামনে রাখতেই ও দারুণ আগ্রহ নিয়ে পান করতে শুরু করল।
+
+তখনই উপলব্ধি করলাম, একটি প্রাণীর মৌলিক প্রয়োজন মেটাতে খুব বেশি আয়োজনের প্রয়োজন হয় না—লাগে কেবল একটু মায়া আর একটু সহানুভূতি।
+
+সেদিনের অভিজ্ঞতা থেকে একটা সত্য খুব স্পষ্টভাবে উপলব্ধি করলাম—ক্ষুধা মানুষের হোক কিংবা কোনো প্রাণীর, তার ভাষা সর্বত্রই এক। পার্থক্য কেবল এতটুকুই যে, মানুষ মুখে বলে তার ক্ষুধার কথা প্রকাশ করতে পারে, আর নির্বাক প্রাণীরা তা পারে না। তারা কেবল তাকিয়ে থাকে, আর সেই দৃষ্টির গভীরেই লুকিয়ে থাকে তাদের হাজারো না-বলা কথা।
+
+আমরা প্রায়ই ভাবি, "একটু খাবার দিলে আর এমন কী হবে?" অথচ যে অবলা প্রাণীটি হয়তো সারাদিন পেটে দানাপানি ছাড়াই কাটিয়ে দিয়েছে, তার কাছে সেই সামান্য খাবারটুকুই হয়ে উঠতে পারে দিনের সবচেয়ে বড় আনন্দ।
+
+সেদিন সেই কুকুরটির চোখের দিকে তাকিয়ে মনে হয়েছিল, পৃথিবীতে ভালোবাসা ছড়িয়ে দেওয়ার জন্য সবসময় বড় কিছু করার প্রয়োজন হয় না। কখনো কখনো এক মুঠো খাবার, এক বাটি পানি আর একটুখানি মায়াই যথেষ্ট।
+
+আমাদের চারপাশে এমন অসংখ্য অবলা প্রাণী রয়েছে, যারা বেঁচে থাকার জন্য মানুষের দয়ার ওপর নির্ভর করে। তারা নিজেদের কষ্টের কথা কাউকে জানাতে পারে না; তাই তাদের এই নীরবতাটুকু বোঝার দায়িত্ব আমাদেরই।
+
+আমরা যদি প্রত্যেকে নিজ নিজ সামর্থ্য অনুযায়ী একটি ক্ষুধার্ত প্রাণীর মুখে এক মুঠো খাবার আর একটু পানি তুলে দিই, তবে এই পৃথিবীটা তাদের জাঁকজমকহীন জীবনের জন্যও একটু হলেও সুন্দর হয়ে উঠবে।
+
+সেদিন আমি কেবল একটি পথ্যহীন কুকুরকে খাবার দিইনি; বরং তার চেয়ে অনেক বড় একটি শিক্ষা লাভ করেছি—মায়া বা সহানুভূতি দেখানোর জন্য বড় কোনো পরিচয়ের প্রয়োজন হয় না, কেবল প্রয়োজন একটি কোমল হৃদয়ের।
+
+হয়তো আমার দেওয়া সেই কয়েকটি বিস্কুট খুব সামান্যই ছিল, কিন্তু সেই ক্ষুদ্র খাবারটুকুই হয়তো তার সারাদিনের সবচেয়ে আনন্দের মুহূর্ত হয়ে বেঁচে ছিল।
+
+কারণ, এক মুঠো খাবার আর একটুখানি মায়া—কখনো কখনো ঠিক এতটুকুই হয়ে ওঠে একটি প্রাণের জন্য অফুরন্ত ভালোবাসার নাম।`
+  },
+  {
+    category: 'গল্প',
+    title: 'প্রতিশোধ',
+    author: 'ফজলুল কবির পাভেল',
+    color: 'color-blue',
+    authorPhoto: '',
+    content: `হঠাৎ করেই রাশেদকে ডেকে পাঠায় রিমা। রাশেদের মন কেমন জানি করতে থাকে। তাই তো ২০ বছর হয়ে গেল।
+
+কি তাড়াতাড়িই না সব সময় চলে গেল মনে হলো রাশেদের। এখনো তাদের প্রথম পরিচয়ের কথা মনে করতে পারে। রাশেদের চোখগুলো ছিল ভারী সুন্দর। সে সুন্দর চোখের কথাই বলেছিল রিমা। প্রেম হয়েছিল। ভেঙে গিয়েছিল হঠাৎ।
+
+২০ বছরের মধ্যে একটি বারের জন্যও রাশেদকে ফোন করেনি রিমা। হঠাৎ করে রাশেদের শহর বগুড়ায় এসে রিমা ফোন করে বসে। কিভাবে নম্বার পেল রাশেদ হয়তো কিছুটা আঁচ করতে পারে। দুজনেরই একজন কমন বন্ধু ছিল বা আছে—ঈমন নাম। সম্ভবত ঈমনের কাছ থেকে নাম্বারটি পেয়েছে।
+
+আর এখনকার দিনে কারো নম্বার বের করা মনে হয় খুব কঠিন কিছু না। সন্ধ্যা আসতেই মন কেমন জানি করতে থাকে রাশেদের। রিমা এদিকে সংসার করে সুখে শান্তিতেই আছে। রিমার ছবি ফেসবুকে দেখতে পায় রাশেদ। তিনটে বাচ্চা নিয়ে সুখেই আছে রিমা বুঝতে পারে।
+
+সুখে চেহারায় একটু ফোলা ফোলা ভাবে এসেছে। অথচ এক সময় মনে হচ্ছিল তাকে ছাড়া রিমা কোনভাবেই বাঁচতে পারবে না। অথচ ২০ বছর দিব্যি ভালো আছে। সুখে থাকলে চেহারার মধ্যে কিছুটা ছাপ পড়ে। সে ছাপটাও আছে রিমার হাসিতে।
+
+রাশেদ মন খারাপ করে না। কেউ একজন ভালো আছে এটা দেখার মধ্যে আনন্দ লাগে তার। সন্ধ্যার জন্য প্রস্তুতি গ্রহণ করতে থাকে। সন্ধ্যার সময় কেমন জানি করতে থাকে মন।
+
+হঠাৎ করেই খুব অভিমান হয়। তাকে চরম বিপদের দিনে ফেলে রেখে গিয়েছিল রিমা। চার বছর প্রেম করার পর ভালো একটা প্রস্তাব পেয়ে চলে যায় রিমা। কষ্ট পেলেও বুঝতেও দেয়নি রাশেদ কাউকে।
+
+চোখ থেকে অজান্তেই পানি বের হয়ে আসে। ভাবে সে কোনভাবে সেখানে যাবে না। সন্ধ্যার পর থেকে রিমা কন্টিনিউয়াস ফোন করতে থাকে। সেটা দেখতে পেয়ে রাশেদ একবার মনে করে যাবে। কিন্তু হঠাৎ করেই বুকের ভিতরে সব অভিমান একত্রিত হয়ে যায়।
+
+রিমা রেস্টুরেন্টে অনেকক্ষণ বসে থাকে। রাশেদকে মেসেজ পাঠায়। কোন কিছুই রাশেদের মনকে নাড়া দিতে পারে না। পাথরের মত হয়ে গেছে মন। চিরকালের জন্য যে সম্পর্ক ভেঙে গেছে হঠাৎ করে তাকে আবার জাগিয়ে লাভ কি।`
+  },
+  {
+    category: 'কবিতা',
+    title: 'ফিরে যেতে চাই',
+    author: 'জেরিন জাহান দিশা',
+    color: 'color-green',
+    authorPhoto: '',
+    content: `ফিরে যেতে চাই,
+সেই শৈশবের দিনগুলোতে।
+যে সময় ছিল না এত হিংসা,
+ছিল না এত স্বার্থপরতা।
+শুধু ছিল সরলতা আর নির্মল আনন্দ।
+
+প্রতি শুক্রবার ছুটির দিনে,
+বিটিভিতে সিসিমপুর।
+আর ছবি দেখার আনন্দ,
+বিকেলে সবার সাথে।
+গোল্লাছুট আর লুকোচুরি খেলা।
+
+শনিবার সকালে,
+ঢুলুঢুলু চোখে স্কুলে যাওয়া।
+৩০ জন বন্ধু-বান্ধবী মিলে,
+হাসাহাসি, দুষ্টুমি আর গল্পে,
+কেটে যেত পুরোটা দিন।
+
+কী অদ্ভুত সুন্দর ছিল সেই সময়টা!
+আজ সব আছে,
+শুধু নেই সেই শৈশবের দিনগুলো।
+মাঝে মাঝে খুব ইচ্ছে করে,
+আর একবার ফিরে পাই মিষ্টি শৈশব।`
+  },
+  {
+    category: 'কবিতা',
+    title: 'ব্যক্তিগত আকাশ',
+    author: 'তাকিয়া জান্নাত নীলা খাঁন',
+    color: 'color-purple',
+    authorPhoto: '',
+    content: `আমি চাই'না তুমি আমার জীবনে;
+কোনো চাঁদ, সূর্য, তারা, অথবা'
+প্রবহমান নদী হয়ে এসো!
+যারা কি'না সময়ের ধারায় বদলে যায়।
+
+তুমি না হয়, আমার আকাশ হয়েই এলে!!
+একটা ব্যক্তিগত আকাশ।
+কাছে আসতে হবে না!
+অন্তত দূরত্বটা তো আর বাড়লো না।
+
+তুমি আমার নির্ভরতা হও।
+আমি না হয়' মেঘ হয়ে;
+তোমার বুকে ভেসে বেড়াব।
+
+মাঝে মধ্যে মন খারাপে না'হয়,
+তোমার ওমন আকাশ বিশাল বুকে-
+মেঘেদের ন্যায় বৃষ্টির মতো অশ্রু ঝরাবো।
+তুমি আকাশ হয়ে সামলে নিয়ো আমায়।
+
+আচ্ছা... তুমি কি আমার,
+একটা ব্যক্তিগত নির্ভরতার আকাশ হবে?
+মেঘেদের মতো করে,
+তোমার বুকে আমায় আগলে নেবে?
+
+আমার রোনাজারি সামলাবে কি নীরবে?
+অজশ্র ক্লান্তি-ক্লেথ একপাশে রেখে;
+আমার সকল পাগলামির সঙ্গ কি দেবে?
+এক তুমি টা একান্ত আমার কি রবে..?`
+  },
+  {
+    category: 'কবিতা',
+    title: 'সময়ের ভিতর',
+    author: 'মুহিতুল ইসলাম মুন্না',
+    color: 'color-orange',
+    authorPhoto: '',
+    content: `সময় থামে না কোনো দিন,
+দিনরাত মিশে যায় কোনো অদৃশ্য সীমানায়।
+বুকের গভীরে লুকিয়ে রাখা
+কথারা মেঘের মতো উড়ে যায় নীল আকাশে।
+
+কে বুঝে ক্লান্তির রূপ?
+কে দেখে শূন্যতার চেহারা?
+তবু মানুষ ভাঙা স্বপ্ন নিয়ে বাঁচে,
+আশার খড়কুটো আঁকড়ে থাকে।
+
+শেষ হলে ও থাকে কিছু না বলা গল্প,
+কালের প্রবাহে ভেসে চলে সময়ের ভিতর।`
+  }
+];
+
+const gridContainer = document.getElementById('articles-grid');
+gridContainer.innerHTML = ARTICLES.map((article, index) => {
+  const authorImageHTML = article.authorPhoto 
+    ? `<img src="${article.authorPhoto}" alt="${article.author}" class="author-photo" onerror="this.outerHTML='<div class=\\'author-photo-placeholder\\'>${LOGO_SVG}</div>'">`
+    : `<div class="author-photo-placeholder">${LOGO_SVG}</div>`;
+  
+  return `
+  <div class="card">
+    <span class="card-badge">${article.category}</span>
+    <div class="card-cover ${article.color}">
+      ${LOGO_SVG}
+      <div class="cover-title">${article.title}</div>
+      ${authorImageHTML}
+    </div>
+    <div class="card-body">
+      <h3>${article.title}</h3>
+      <p class="author">✍️ ${article.author}</p>
+      <button class="download-btn" onclick="generatePDF(${index})">📥 PDF ডাউনলোড</button>
+    </div>
+  </div>`;
+}).join('');
+
+function generatePDF(index) {
+  const article = ARTICLES[index];
+  const loading = document.getElementById('loading');
+  loading.classList.add('active');
+  
+  const paragraphs = article.content.split('\n').filter(p => p.trim() !== '');
+  
+  const pdfContent = document.createElement('div');
+  pdfContent.style.cssText = 'width:700px;padding:50px 40px;font-family:Noto Sans Bengali,sans-serif;background:#fff;color:#333;';
+  
+  let contentHTML = `
+    <div style="text-align:center;border-bottom:3px solid #c0392b;padding-bottom:25px;margin-bottom:35px;">
+      <h1 style="color:#c0392b;font-size:32px;margin-bottom:12px;">${article.title}</h1>
+      <p style="font-size:18px;font-style:italic;color:#1f3a5f;margin-bottom:8px;">✍️ ${article.author}</p>
+      <p style="font-size:13px;color:#7f8c8d;">[${article.category}] | সাহিত্য বাতায়ন</p>
+    </div>
+    <div style="font-size:16px;line-height:2.2;text-align:justify;">
+  `;
+  
+  paragraphs.forEach(p => {
+    contentHTML += `<p style="margin-bottom:18px;">${p}</p>`;
+  });
+  
+  contentHTML += `
+    </div>
+    <div style="margin-top:60px;padding-top:25px;border-top:2px solid #eee;text-align:center;color:#999;font-size:13px;">
+      <p style="margin-bottom:5px;">সাহিত্য বাতায়ন — A Literary Portal</p>
+      <p style="margin-bottom:5px;">https://digital-bd.github.io/sahiya-batayan/</p>
+      <p>📧 sahityabatayan@gmail.com</p>
+    </div>
+  `;
+  
+  pdfContent.innerHTML = contentHTML;
+  document.body.appendChild(pdfContent);
+  
+  const opt = {
+    margin: [15, 15, 15, 15],
+    filename: `${article.title} - ${article.author}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { 
+      scale: 2, 
+      useCORS: true,
+      letterRendering: true,
+      logging: false
+    },
+    jsPDF: { 
+      unit: 'mm', 
+      format: 'a4', 
+      orientation: 'portrait' 
+    },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  };
+  
+  html2pdf().set(opt).from(pdfContent).save().then(() => {
+    document.body.removeChild(pdfContent);
+    loading.classList.remove('active');
+  }).catch((err) => {
+    console.error('PDF Error:', err);
+    document.body.removeChild(pdfContent);
+    loading.classList.remove('active');
+    alert('PDF তৈরিতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+  });
+}
+</script>
+
+</body>
+</html>

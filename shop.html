@@ -51,22 +51,12 @@ footer b{color:#fff}
 </head>
 <body>
 
-<!--
-=========================================================
-  ভবিষ্যতে নিজের ই-বুক যোগ করার নিয়ম:
-  নিচের EBOOKS তালিকায় নতুন লাইন যোগ করুন:
-  {t:'বইয়ের নাম', d:'সংক্ষিপ্ত পরিচিতি', p:35, o:50,
-   c:'কভার ছবির লিংক', pdf:'Google Drive PDF লিংক'},
-  - p = বিক্রয় মূল্য, o = আগের দাম (Sale ব্যাজ দেখাবে)
-  - pdf লিংক: পেমেন্ট কনফার্ম হওয়ার পর ক্রেতাকে পাঠাবেন
-  - তারপর এই ফাইলটি আবার GitHub-এ আপলোড করুন
-=========================================================
--->
-
 <header><div class="header-in">
 <a class="logo" href="index.html">সাহিত্য বাতায়ন<small>A LITERARY PORTAL</small></a>
 <div class="nav">
 <a href="index.html">🏠 প্রচ্ছদ</a>
+<a href="epaper-archive.html">📰 ই-পেপার</a>
+<a href="epaper-download.html">📥 ডাউনলোড</a>
 <a href="#ebooks">📚 আমাদের ই-বুক</a>
 <a href="#rokomari">🛒 বই সংগ্রহ</a>
 <a href="#famous">✍️ বিখ্যাতদের লেখা</a>
@@ -74,7 +64,6 @@ footer b{color:#fff}
 </div></header>
 
 <div class="wrap">
-
 <h2 class="sec-title" id="ebooks">— <span>আমাদের</span> ই-বুক —</h2>
 <p class="sec-note">সাহিত্য বাতায়ন প্রকাশিত — bKash / Nagad পেমেন্ট</p>
 <div class="grid" id="shop-grid"></div>
@@ -94,7 +83,7 @@ footer b{color:#fff}
 <button class="x" onclick="closeBuy()">×</button>
 <h3 id="buy-title"></h3>
 <p id="buy-price" style="font-size:18px;font-weight:700;color:#c0392b"></p>
-<div class="pay-step"><b>ধাপ ১:</b> নিচের নাম্বারে <b>bKash / Nagad</b> (Send Money) করুন:<br><span class="pay-num">০১৭৭৩৯২৫৭</span></div>
+<div class="pay-step"><b>ধাপ ১:</b> নিচের নাম্বারে <b>bKash / Nagad</b> (Send Money) করুন:<br><span class="pay-num">০১৫৭৭৪৩৯২৫৭</span></div>
 <div class="pay-step"><b>ধাপ ২:</b> WhatsApp-এ ট্রানজেকশন আইডি পাঠান — কনফার্ম হলে <b>PDF ডাউনলোড লিংক</b> পাঠিয়ে দেওয়া হবে।</div>
 <a class="wa" id="buy-wa" target="_blank" href="#">💬 WhatsApp-এ কনফার্ম করুন</a>
 <p style="font-size:12px;color:#7f8c8d;margin-top:12px;text-align:center">কার্ড পেমেন্ট (Visa/MasterCard) শীঘ্রই যুক্ত হবে</p>
@@ -107,13 +96,7 @@ footer b{color:#fff}
 
 <script>
 const WA_NUM='8801577439257';
-
-// ===== আমাদের ই-বুক (এখন খালি — পরে এখানে যোগ করুন) =====
-const EBOOKS=[
-// {t:'সাহিত্য বাতায়ন — ই-বুক সংখ্যা ১', d:'কবিতা, গল্প, প্রবন্ধ — প্রথম সংখ্যা', p:35, o:50, c:'https://placehold.co/400x560/c0392b/ffffff?text=E-Book+1', pdf:''},
-];
-
-// ===== রোকমারির বই (অ্যাফিলিয়েট হলে লিংকে ?ref=আপনারআইডি যোগ করবেন) =====
+const EBOOKS=[];
 const ROKO_BOOKS=[
 {t:'পথের পাঁচালী',a:'বিভূতিভূষণ বন্দ্যোপাধ্যায়',c:'https://placehold.co/400x560/e67e22/ffffff?text=পথের+পাঁচালী',s:'পথের+পাঁচালী'},
 {t:'গীতাঞ্জলি',a:'রবীন্দ্রনাথ ঠাকুর',c:'https://placehold.co/400x560/c0392b/ffffff?text=গীতাঞ্জলি',s:'গীতাঞ্জলি'},
@@ -124,7 +107,6 @@ const ROKO_BOOKS=[
 {t:'দেবদাস',a:'শরৎচন্দ্র চট্টোপাধ্যায়',c:'https://placehold.co/400x560/d35400/ffffff?text=দেবদাস',s:'দেবদাস'},
 {t:'নকশী কাঁথার মাঠ',a:'জসীম উদ্‌দীন',c:'https://placehold.co/400x560/d9a520/ffffff?text=নকশী+কাঁথার+মাঠ',s:'নকশী+কাঁথার+মাঠ'}
 ];
-
 const FAMOUS=[
 {t:'ঈদের দিনে',a:'আল মাহমুদ',x:'ঈদের দিনে আল মাহমুদ — জিদ ধরি না আর কানে আমার',c:'https://placehold.co/220x160/e67e22/ffffff?text=ঈদ'},
 {t:'আমাদের ছোট নদী',a:'রবীন্দ্রনাথ ঠাকুর',x:'আমাদের ছোট নদী চলে বাঁকে বাঁকে',c:''},
