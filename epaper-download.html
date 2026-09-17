@@ -62,7 +62,7 @@ footer b{color:#fff}
 <a class="logo" href="index.html">সাহিত্য বাতায়ন<small>A LITERARY PORTAL</small></a>
 <div class="nav">
 <a href="index.html">🏠 প্রচ্ছদ</a>
-<a href="epaper-archive.html"> ই-পেপার</a>
+<a href="epaper-archive.html">📰 ই-পেপার</a>
 <a href="epaper-download.html">📥 ডাউনলোড</a>
 <a href="ebook-shop.html">📚 ই-বুক শপ</a>
 </div>
@@ -78,8 +78,8 @@ footer b{color:#fff}
 </div>
 
 <footer>
-<p><b>© ২২৬ সাহিত্য বাতায়ন</b> — সর্বস্বত্ব সংরক্ষিত</p>
-<p> ০১৫৭৭৪৩৯২৫৭ | 📧 sahityabatayan@gmail.com</p>
+<p><b>© ২০৬ সাহিত্য বাতায়ন</b> — সর্বস্বত্ব সংরক্ষিত</p>
+<p>📞 ১৫৭৭৪৯২৫৭ |  sahityabatayan@gmail.com</p>
 </footer>
 
 <script>
@@ -159,7 +159,7 @@ const ARTICLES = [
 
 শনিবার সকালে,
 ঢুলুঢুলু চোখে স্কুলে যাওয়া।
-৩ জন বন্ধু-বান্ধবী মিলে,
+৩০ জন বন্ধু-বান্ধবী মিলে,
 হাসাহাসি, দুষ্টুমি আর গল্পে,
 কেটে যেত পুরোটা দিন।
 
@@ -249,27 +249,26 @@ function generatePDF(index) {
   const paragraphs = article.content.split('\n').filter(p => p.trim() !== '');
   
   const pdfContent = document.createElement('div');
-  pdfContent.style.cssText = 'width:700px;padding:50px 40px;font-family:Noto Sans Bengali,sans-serif;background:#fff;color:#333;';
+  pdfContent.style.cssText = 'width:595px;padding:30px 40px;font-family:"Noto Sans Bengali",sans-serif;background:#fff;color:#333;line-height:1.8;';
   
   let contentHTML = `
-    <div style="text-align:center;border-bottom:3px solid #c0392b;padding-bottom:25px;margin-bottom:35px;">
-      <h1 style="color:#c0392b;font-size:32px;margin-bottom:12px;">${article.title}</h1>
-      <p style="font-size:18px;font-style:italic;color:#1f3a5f;margin-bottom:8px;">✍️ ${article.author}</p>
-      <p style="font-size:13px;color:#7f8c8d;">[${article.category}] | সাহিত্য বাতায়ন</p>
+    <div style="text-align:center;margin-bottom:25px;border-bottom:2px solid #c0392b;padding-bottom:15px;">
+      <h1 style="color:#c0392b;font-size:26px;margin:0 0 8px 0;font-weight:900;">${article.title}</h1>
+      <p style="font-size:16px;font-style:italic;color:#1f3a5f;margin:0;">✍️ ${article.author}</p>
+      <p style="font-size:12px;color:#7f8c8d;margin:8px 0 0 0;">[${article.category}] | সাহিত্য বাতায়ন</p>
     </div>
-    <div style="font-size:16px;line-height:2.2;text-align:justify;">
+    <div style="font-size:14px;line-height:1.9;text-align:justify;">
   `;
   
   paragraphs.forEach(p => {
-    contentHTML += `<p style="margin-bottom:18px;">${p}</p>`;
+    contentHTML += `<p style="margin:0 0 12px 0;text-indent:20px;">${p}</p>`;
   });
   
   contentHTML += `
     </div>
-    <div style="margin-top:60px;padding-top:25px;border-top:2px solid #eee;text-align:center;color:#999;font-size:13px;">
-      <p style="margin-bottom:5px;">সাহিত্য বাতায়ন — A Literary Portal</p>
-      <p style="margin-bottom:5px;">https://digital-bd.github.io/sahiya-batayan/</p>
-      <p>📧 sahityabatayan@gmail.com</p>
+    <div style="margin-top:40px;padding-top:15px;border-top:1px solid #ddd;text-align:center;color:#999;font-size:11px;">
+      <p style="margin:0;">সাহিত্য বাতায়ন — A Literary Portal</p>
+      <p style="margin:3px 0;">https://digital-bd.github.io/sahiya-batayan/</p>
     </div>
   `;
   
@@ -277,20 +276,39 @@ function generatePDF(index) {
   document.body.appendChild(pdfContent);
   
   const opt = {
-    margin: [15, 15, 15, 15],
-    filename: `${article.title} - ${article.author}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, letterRendering: true, logging: false },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    margin: [10, 10, 10, 10],
+    filename: `${article.title}.pdf`,
+    image: { type: 'jpeg', quality: 0.95 },
+    html2canvas: { 
+      scale: 2, 
+      useCORS: true,
+      letterRendering: true,
+      logging: false,
+      scrollY: 0
+    },
+    jsPDF: { 
+      unit: 'mm', 
+      format: 'a4', 
+      orientation: 'portrait',
+      compress: true
+    },
+    pagebreak: { 
+      mode: ['avoid-all']
+    }
   };
   
   html2pdf().set(opt).from(pdfContent).save().then(() => {
-    document.body.removeChild(pdfContent);
-    loading.classList.remove('active');
+    setTimeout(() => {
+      if(document.body.contains(pdfContent)) {
+        document.body.removeChild(pdfContent);
+      }
+      loading.classList.remove('active');
+    }, 500);
   }).catch((err) => {
     console.error('PDF Error:', err);
-    document.body.removeChild(pdfContent);
+    if(document.body.contains(pdfContent)) {
+      document.body.removeChild(pdfContent);
+    }
     loading.classList.remove('active');
     alert('PDF তৈরিতে সমস্যা হয়েছে। আবার চেষ্টা করুন।');
   });
