@@ -425,7 +425,8 @@ body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text
 </div>
 
 <script>
-const SCRIPT_URL='https://script.google.com/macros/s/AKfycbzpBeoWSRJiNgYrp4rzASU2AsMMVoqeJuIoI-3Vy2Iu6_5c813hwFftANB9Itxt8itf/exec';
+// ✅ সঠিক SCRIPT_URL বসানো হয়েছে
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbxuCrL62mocLAYLn7tIMzjj8koUfE98ZOStOv-EDDNylUxsNjBm7_Brvu5fHekqgTCU/exec';
 const EDITOR_CODE='SB2026';
 let ALL_POSTS=[],ALL_WRITERS=[],WP_POSTS=[],STATS_MAP={},currentPostId='',editingId='',imageData='',imageData2='';
 
@@ -572,8 +573,8 @@ document.body.style.overflow='hidden';
 }
 function closeGranth(){document.getElementById('granth-modal').classList.remove('active');document.body.style.overflow='auto';}
 
+// ✅ আপডেট করা দ্রুত লোডিং ফাংশন
 async function initMain(){
-  // প্রথমে UI আপডেট (তাৎক্ষণিক)
   trackVisitor();
   updateDate();
   renderBooks();
@@ -617,7 +618,6 @@ async function initMain(){
     renderHomeBlocks();
   } catch(e){
     console.error('Data fetch error:', e);
-    // এরর হলেও ক্যাশ থেকে দেখাবে
     if(c && c.posts){
       notify('⚠️ ইন্টারনেট সমস্যা - ক্যাশ থেকে দেখানো হচ্ছে');
     }
@@ -986,7 +986,6 @@ document.getElementById('article-modal').addEventListener('click',function(e){if
 document.getElementById('granth-modal').addEventListener('click',function(e){if(e.target.id==='granth-modal')closeGranth();});
 document.getElementById('paper-modal').addEventListener('click',function(e){if(e.target.id==='paper-modal')closePaper();});
 
-// ===== নিচের ফাংশনটি এখানে বসান =====
 function secretAdminLogin() {
     var code = prompt("অ্যাডমিন প্যানেলে প্রবেশ করতে সম্পাদক কোড দিন:");
     if (code === 'SB2026') {
@@ -995,8 +994,6 @@ function secretAdminLogin() {
         alert("ভুল কোড! অ্যাক্সেস denied।");
     }
 }
-// ===== শেষ =====
-
 </script>
 </body>
 </html>
