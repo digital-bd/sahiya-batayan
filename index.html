@@ -270,7 +270,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text
 <p><a href="#" onclick="showAbout();return false;">আমাদের সম্পর্কে</a></p>
 <p><a href="#" onclick="showPrivacy();return false;">গোপনীয়তা নীতি</a></p>
 <p><a href="#" onclick="showContact();return false;">যোগাযোগ</a></p>
-<p><a href="#" onclick="showAdminPanel();return false;">অ্যাডমিন প্যানেল</a></p>
+<p><a href="#" onclick="secretAdminLogin();return false;">অ্যাডমিন প্যানেল</a></p>
 </div>
 <div><h3>অনুসরণ করুন</h3>
 <p><a href="https://www.facebook.com/profile.php?id=61594281560159" target="_blank">📘 Facebook</a> &nbsp; <a href="https://t.me/sahityabatayan" target="_blank">✈️ Telegram</a> &nbsp; <a href="https://whatsapp.com/channel/0029VbDjmKUIN9ivthbx0K34" target="_blank">💬 WhatsApp</a></p>
@@ -376,7 +376,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text
 </div></div></div>
 
 <div id="page-admin" style="display:none"><div class="container"><div class="admin-panel">
-<h2>⚙️ অ্যাডমিন প্যানেল</h2>
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:10px"><h2 style="margin:0">⚙️ অ্যাডমিন প্যানেল (শুধু সম্পাদক)</h2><button class="btn-secondary" style="background:#e74c3c;padding:8px 18px;font-size:14px" onclick="logoutAdmin()">🚪 লগআউট</button></div>
 <div class="admin-tabs">
 <button class="admin-tab active" onclick="switchAdminTab('pending',this)">অনুমোদনের অপেক্ষায়</button>
 <button class="admin-tab" onclick="switchAdminTab('edit',this)">✏️ লেখা এডিট</button>
@@ -883,6 +883,7 @@ list.innerHTML=items.map(p=>`<div class="pending-item"><h4>${p.title}</h4>
 <button class="reject-btn" onclick="approveItem('rejectPost','${p.id}')">❌ রিজেক্ট</button></div></div>`).join('');
 }
 async function approveItem(action,id){
+if(!isEditor()){alert('⛔ অনুমোদন দেওয়ার ক্ষমতা শুধুমাত্র সম্পাদকের আছে!');return;}
 if(!confirm('নিশ্চিত?'))return;
 const ok=await submitData({action,postId:id});
 if(ok){notify('✅ আপডেট হয়েছে');localStorage.removeItem('sb_cache');loadPending();initMain();}
@@ -895,6 +896,7 @@ list.innerHTML=ALL_POSTS.map(p=>{const st=statOf(p.id);return `<div class="pendi
 <div class="pending-actions"><button class="small-btn" onclick="startEdit('${p.id}')">✏️ এডিট করুন</button></div></div>`;}).join('');
 }
 function startEdit(id){
+if(!isEditor()){alert('⛔ লেখা এডিট করার ক্ষমতা শুধু সম্পাদকের আছে!');return;}
 const p=ALL_POSTS.find(x=>x.id===id);if(!p)return;
 editingId=id;
 document.getElementById('ed-title').value=p.title;
@@ -907,6 +909,7 @@ document.getElementById('edit-form-wrap').style.display='block';
 window.scrollTo(0,0);
 }
 async function saveEdit(){
+if(!isEditor()){alert('⛔ লেখা এডিট করার ক্ষমতা শুধু সম্পাদকের আছে!');return;}
 const code=document.getElementById('edit-code').value;
 if(!code){alert('সম্পাদক কোড দিন');return;}
 const ok=await submitData({action:'updatePost',postId:editingId,editorcode:code,title:document.getElementById('ed-title').value,category:document.getElementById('ed-category').value,author:document.getElementById('ed-author').value,excerpt:document.getElementById('ed-excerpt').value,content:document.getElementById('ed-content').value,image:document.getElementById('ed-image').value});
@@ -923,6 +926,7 @@ list.innerHTML=comments.map(c=>`<div class="pending-item" style="border-left-col
 <button class="delete-btn" onclick="deleteCommentItem('${c.id}')">🗑️ ডিলিট</button></div>`).join('');
 }
 async function deleteCommentItem(id){
+if(!isEditor()){alert('⛔ মন্তব্য ডিলিট করার ক্ষমতা শুধু সম্পাদকের আছে!');return;}
 if(!confirm('মন্তব্যটি ডিলিট করবেন?'))return;
 const ok=await submitData({action:'deleteComment',commentId:id});
 if(ok){notify('✅ ডিলিট হয়েছে');loadAllComments();}
@@ -1042,7 +1046,12 @@ function hideAll(){['page-main','page-writer','page-writer-register','page-write
 function showMain(){hideAll();document.getElementById('page-main').style.display='block';initMain();window.scrollTo(0,0);}
 function showWriter(){hideAll();document.getElementById('page-writer').style.display='block';window.scrollTo(0,0);}
 function showWriterRegister(){hideAll();document.getElementById('page-writer-register').style.display='block';window.scrollTo(0,0);}
-function showAdminPanel(){hideAll();document.getElementById('page-admin').style.display='block';loadPending();window.scrollTo(0,0);}
+function isEditor(){return sessionStorage.getItem('sb_editor')==='true';}
+function logoutAdmin(){sessionStorage.removeItem('sb_editor');notify('🚪 আপনি লগআউট হয়েছেন');showMain();}
+function showAdminPanel(){
+if(!isEditor()){alert('⛔ দুঃখিত! অ্যাডমিন প্যানেলে প্রবেশ ও পরিচালনার অনুমতি শুধুমাত্র সম্পাদকের আছে।');showMain();return;}
+hideAll();document.getElementById('page-admin').style.display='block';loadPending();window.scrollTo(0,0);
+}
 function showAbout(){hideAll();document.getElementById('page-about').style.display='block';window.scrollTo(0,0);}
 function showPrivacy(){hideAll();document.getElementById('page-privacy').style.display='block';window.scrollTo(0,0);}
 function showContact(){hideAll();document.getElementById('page-contact').style.display='block';window.scrollTo(0,0);}
@@ -1054,11 +1063,13 @@ document.getElementById('granth-modal').addEventListener('click',function(e){if(
 document.getElementById('paper-modal').addEventListener('click',function(e){if(e.target.id==='paper-modal')closePaper();});
 
 function secretAdminLogin() {
-    var code = prompt("অ্যাডমিন প্যানেলে প্রবেশ করতে সম্পাদক কোড দিন:");
-    if (code === 'SB2026') {
+    if (isEditor()) { showAdminPanel(); return; }
+    var code = prompt("🔐 সম্পাদক কোড দিন (শুধু সম্পাদক প্রবেশ করতে পারবেন):");
+    if (code === EDITOR_CODE) {
+        sessionStorage.setItem('sb_editor','true');
         showAdminPanel();
     } else if (code !== null) {
-        alert("ভুল কোড! অ্যাক্সেস denied।");
+        alert("⛔ ভুল কোড! এই প্যানেলে প্রবেশের অনুমতি শুধু সম্পাদকের আছে।");
     }
 }
 </script>
