@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সাহিত্য বাতায়ন - ই-পেপার</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Noto Sans Bengali',sans-serif;background:#e9efe9;min-height:100vh;padding:20px}
+
+.paper-page{display:none;max-width:1000px;margin:0 auto;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.15)}
+.paper-page.active{display:block}
+
+.masthead{display:flex;align-items:center;gap:15px;padding:18px 25px;background:#fff;border:2px solid #147a3d;border-bottom:none}
+.mh-title{flex:1;text-align:center}
+.mh-bn{color:#d21f2f;font-size:2.7em;font-weight:700;line-height:1.15}
+.mh-en{font-family:Georgia,'Times New Roman',serif;color:#111;font-size:1.3em;margin-top:2px}
+.mh-logo{width:115px;height:115px;flex-shrink:0}
+.green-bar{height:14px;background:#147a3d}
+
+.page-body{border:2px solid #147a3d;border-top:none;padding:25px;min-height:65vh;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ctext x='60' y='72' font-family='sans-serif' font-size='26' fill='%23147a3d' opacity='0.05' text-anchor='middle'%3Eবা%3C/text%3E%3C/svg%3E");
+background-repeat:repeat;background-size:95px 95px}
+.page-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+
+.card{background:#fff;border-radius:12px;padding:20px;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.1);border-top:4px solid #147a3d;position:relative;overflow:hidden;transition:all .3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 25px rgba(0,0,0,.18);border-top-color:#d21f2f}
+.card>*{position:relative;z-index:1}
+.card-head{display:flex;align-items:center;gap:12px;border-bottom:2px solid #147a3d;padding-bottom:10px;margin-bottom:12px}
+.author-photo{width:54px;height:54px;border-radius:50%;object-fit:cover;border:3px solid #c9a227;background:#fff;flex-shrink:0}
+.card-head h3{color:#147a3d;font-size:1.25em;margin-bottom:3px}
+.card-head .author{color:#666;font-size:.92em;font-style:italic;font-weight:600}
+.card .preview{color:#333;font-size:.92em;line-height:1.7;white-space:pre-line;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}
+.card .read-more{display:inline-block;margin-top:12px;color:#147a3d;font-weight:700;font-size:.92em}
+.card:hover .read-more{color:#d21f2f}
+
+.sheet-footer{border:2px solid #147a3d;border-top:none;text-align:center;padding:10px;background:#fff}
+.foot-line{font-size:.9em;color:#555;margin-bottom:4px}
+.foot-line a{color:#1e3a8a;text-decoration:none;font-weight:600}
+.copy-line{font-size:.88em;color:#222;font-weight:600}
+
+.pagination{display:flex;justify-content:center;align-items:center;gap:15px;margin:25px 0;flex-wrap:wrap}
+.page-btn{padding:12px 25px;background:#fff;border:2px solid #147a3d;border-radius:10px;cursor:pointer;font-family:inherit;font-size:1em;font-weight:600;color:#147a3d}
+.page-btn:hover:not(:disabled){background:#147a3d;color:#fff}
+.page-btn:disabled{opacity:.4;cursor:not-allowed}
+.page-info{padding:12px 25px;background:#fff;border-radius:10px;font-weight:600;color:#147a3d;border:2px solid #147a3d}
+.print-btn{position:fixed;bottom:25px;right:25px;z-index:900;padding:15px 30px;border:none;border-radius:50px;background:#147a3d;color:#fff;font-family:inherit;font-size:1.05em;font-weight:700;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.3)}
+.print-btn:hover{background:#d21f2f}
+
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1000;justify-content:center;align-items:center;padding:20px;backdrop-filter:blur(5px)}
+.modal-overlay.active{display:flex}
+.modal-content{background:#fff;border-radius:18px;padding:35px;padding-top:22px;max-width:720px;width:100%;max-height:85vh;overflow-y:auto;position:relative}
+.modal-content::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:350px;height:350px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ctext x='60' y='72' font-family='sans-serif' font-size='26' fill='%23147a3d' opacity='0.06' text-anchor='middle'%3Eবা%3C/text%3E%3C/svg%3E");background-repeat:repeat;pointer-events:none}
+.modal-content>*{position:relative;z-index:1}
+#modalMasthead .masthead{border:none;padding:6px 8px 12px}
+#modalMasthead .mh-bn{font-size:1.9em}
+#modalMasthead .mh-en{font-size:1.05em}
+#modalMasthead .mh-logo{width:75px;height:75px}
+#modalMasthead .green-bar{height:8px;margin-bottom:18px;border-radius:4px}
+.modal-head{display:flex;align-items:center;gap:16px;border-bottom:3px solid #147a3d;padding-bottom:15px;margin-bottom:20px}
+.modal-photo{width:82px;height:82px;border-radius:50%;object-fit:cover;border:4px solid #c9a227;background:#fff;flex-shrink:0}
+.modal-head h2{color:#d21f2f;font-size:1.9em;margin-bottom:4px}
+.modal-head .author{color:#666;font-size:1.1em;font-style:italic;font-weight:600}
+.modal-content .full-text{color:#333;font-size:1.12em;line-height:2.1;white-space:pre-line}
+.close-btn{position:absolute;top:18px;right:22px;background:#147a3d;color:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:1.7em;cursor:pointer;z-index:2;line-height:1}
+.close-btn:hover{background:#d21f2f;transform:rotate(90deg)}
+.btn-row{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+.download-btn,.print-poem-btn{padding:13px 30px;color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:1em;font-weight:600;cursor:pointer}
+.download-btn{background:#1e3a8a}
+.print-poem-btn{background:#c9a227}
+.download-btn:hover,.print-poem-btn:hover{background:#d21f2f}
+
+/* ===== PDF শীট: স্বাভাবিক অবস্থায় স্ক্রিনের বাইরে ===== */
+#printSheet{position:absolute;left:-9999px;top:0;width:210mm;background:#fff;pointer-events:none}
+
+/* ===== PDF প্রিভিউ ওভারলে ===== */
+#printSheet.pdf-preview{position:fixed;left:0;top:0;right:0;bottom:0;width:auto;background:rgba(0,0,0,.88);overflow:auto;padding:70px 15px 30px;display:flex;justify-content:center;pointer-events:auto;z-index:3000}
+#printSheet.pdf-preview .mag-page{width:210mm;max-width:100%;margin:0 auto;box-shadow:0 0 45px rgba(0,0,0,.6)}
+.preview-bar{position:fixed;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:3100;flex-wrap:wrap;justify-content:center}
+.preview-bar button{padding:11px 20px;border:none;border-radius:50px;font-family:inherit;font-weight:700;cursor:pointer;color:#fff;font-size:.95em;box-shadow:0 5px 15px rgba(0,0,0,.4)}
+.preview-bar .pb-close{background:#d21f2f}
+.preview-bar .pb-print{background:#147a3d}
+.preview-bar .pb-dl{background:#1e3a8a}
+
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#147a3d;color:#fff;padding:12px 26px;border-radius:50px;font-weight:700;box-shadow:0 8px 25px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .3s;z-index:4000;white-space:nowrap}
+#toast.show{opacity:1}
+
+.mag-page{background:#fff}
+.mag-head{display:flex;align-items:flex-end;gap:10px;padding:0 3mm 3mm}
+.mag-head-left{flex:1}
+.mag-tagline{font-size:9pt;color:#333;font-weight:600;margin-bottom:1mm}
+.mag-bn{color:#d21f2f;font-size:26pt;font-weight:700;line-height:1.1}
+.mag-en{font-family:Georgia,'Times New Roman',serif;color:#222;font-size:13pt}
+.mag-head .mh-logo{width:30mm;height:30mm}
+.mag-frame{position:relative;border:0.4mm solid #8a8a8a;padding:12mm 14mm 8mm;min-height:235mm;overflow:hidden}
+.mag-badge{position:absolute;top:6mm;left:6mm;background:#8a8a8a;color:#fff;font-size:10pt;font-weight:700;padding:1.5mm 4mm;z-index:2}
+.mag-leaf{position:absolute;top:8mm;right:8mm;width:26mm;z-index:1}
+.mag-title{text-align:center;font-size:20pt;color:#333;font-weight:700;margin:8mm 0 2mm;position:relative;z-index:2}
+.mag-author{text-align:center;font-size:12pt;color:#444;font-weight:600;margin-bottom:9mm;position:relative;z-index:2}
+.mag-watermark{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);font-size:46pt;font-weight:700;color:rgba(210,31,47,0.08);white-space:nowrap;z-index:0;pointer-events:none}
+.mag-text{position:relative;z-index:2;font-size:11.5pt;line-height:2.15;white-space:pre-line;color:#222;padding:0 6mm}
+.mag-art{display:block;margin:10mm auto 0;width:52mm;position:relative;z-index:1}
+.mag-foot{margin-top:3mm;text-align:center;font-size:8.5pt;color:#555}
+.mag-foot div+div{margin-top:1mm;color:#222;font-weight:600}
+
+@media (max-width:900px){
+body{padding:10px}
+.masthead{flex-direction:column;text-align:center;padding:15px;gap:8px}
+.mh-bn{font-size:2em}
+.mh-logo{width:85px;height:85px}
+.page-body{padding:15px}
+.page-grid{grid-template-columns:1fr}
+.print-btn{bottom:15px;right:15px;padding:12px 22px;font-size:.95em}
+.pagination{gap:8px}
+.page-btn{padding:10px 16px;font-size:.9em}
+.page-info{padding:10px 16px;font-size:.9em}
+.modal-overlay{padding:10px}
+.modal-content{padding:20px 16px}
+.modal-head{gap:12px}
+.modal-photo{width:64px;height:64px}
+.modal-head h2{font-size:1.4em}
+.btn-row{flex-direction:column}
+.download-btn,.print-poem-btn{width:100%}
+}
+
+@page{size:A4;margin:8mm}
+@media print{
+*{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+body{background:#fff;padding:0}
+.no-print{display:none !important}
+#printSheet{display:none !important}
+.paper-page{display:block !important;max-width:none;box-shadow:none;page-break-after:always;break-after:page}
+.paper-page:last-child{page-break-after:auto;break-after:auto}
+.masthead{padding:5mm 8mm;border-width:.5mm}
+.mh-bn{font-size:22pt}
+.mh-en{font-size:12pt}
+.mh-logo{width:28mm;height:28mm}
+.green-bar{height:4mm}
+.page-body{border-width:.5mm;padding:6mm;min-height:auto;background-size:32mm 32mm}
+.page-grid{display:block;column-count:3;column-gap:5mm}
+.card{box-shadow:none;border:.3mm solid #cfd8cf;border-top:.8mm solid #147a3d;border-radius:2mm;padding:3mm;margin:0 0 4mm;page-break-inside:avoid;break-inside:avoid;-webkit-column-break-inside:avoid}
+.card-head{padding-bottom:2mm;margin-bottom:2mm;gap:2.5mm;border-bottom-width:.4mm}
+.author-photo{width:11mm;height:11mm;border-width:.6mm}
+.card-head h3{font-size:10.5pt}
+.card-head .author{font-size:8pt}
+.card .preview{display:block;-webkit-line-clamp:unset;overflow:visible;font-size:8.5pt;line-height:1.55}
+.card .read-more{display:none}
+.sheet-footer{border-width:.5mm;padding:2.5mm}
+.foot-line{font-size:8pt;margin-bottom:1mm}
+.copy-line{font-size:8pt}
+body.print-single #pages,body.print-single .pagination,body.print-single .print-btn,body.print-single .modal-overlay{display:none !important}
+body.print-single #printSheet{display:block !important;position:static !important;left:0 !important;top:0 !important;width:auto !important;background:#fff !important;padding:0 !important;overflow:visible !important}
+.mag-frame{min-height:235mm;border-width:0.4mm}
+}
+</style>
+</head>
+<body>
+
+<div id="pages"></div>
+
+<div class="pagination no-print">
+<button class="page-btn" id="prevBtn">← পূর্ববর্তী</button>
+<div class="page-info">পৃষ্ঠা <span id="curPg">১</span> / <span id="totPg">১</span></div>
+<button class="page-btn" id="nextBtn">পরবর্তী →</button>
+</div>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ সম্পূর্ণ PDF সেভ করুন</button>
+
+<div class="modal-overlay no-print" id="modal">
+<div class="modal-content">
+<button class="close-btn" onclick="closeModal()">×</button>
+<div id="modalMasthead"></div>
+<div class="modal-head">
+<img class="modal-photo" id="modalPhoto" alt="লেখক">
+<div>
+<h2 id="modalTitle"></h2>
+<p class="author" id="modalAuthor"></p>
+</div>
+</div>
+<div class="full-text" id="modalText"></div>
+<div class="btn-row">
+<button class="download-btn" onclick="downloadPoem()">📥 টেক্সট ডাউনলোড</button>
+<button class="print-poem-btn" onclick="printPoem()">🖨️ এই লেখার PDF</button>
+</div>
+</div>
+</div>
+
+<div id="printSheet"></div>
+
+<script>
+let DEFAULT_PHOTO = "";
+
+const allPoems = [
+  {
+    title: "শরৎ",
+    author: "বি এম মিজানুর রহমান",
+    type: "কবিতা",
+    text: `শরৎ তুমি শুভ্র মেঘে
+আসলে মোদের দেশ,
+কাশফুলের ওই দোলায় তোমার
+উড়ে বুঝি কেশ!
+শিউলি তলায় ঘাসের বুকে
+ঝরা শিউলি ফুল,
+প্রেমিক হৃদয় তোমায় পেয়ে
+করে ছোট্ট ভুল।
+শরৎ তুমি পিঠাপুলির
+মিষ্টি মধুর ঘ্রাণ,
+ষড়ঋতুর বাংলাদেশ যে
+তুমি ছাড়া ম্লান।`
+  },
+  {
+    title: "কাশ বালিকা",
+    author: "মোঃ মোরছালিন ইসলাম",
+    type: "কবিতা",
+    text: `শরৎ এলে কাশের ভুবন
+নদীর পাড়ে ফুটে,
+খোকা খুকির হইহুল্লোড়ে
+মেঘগুলো তাই ছুটে।
+কাশফুলে কাশ বালিকা
+উড়িয়ে দুটি ডানা,
+মাঝির গানে বাদল নামে
+ভিজতে নাহি মানা।
+শিউলি বকুল গন্ধে ভরা
+নতুন বধুর হাতে,
+কাশফুল তার মনে ফোটে
+জোনাক হাসে রাতে।`
+  },
+  {
+    title: "রূপের শরৎ",
+    author: "খলিলুর রহমান খলিল",
+    type: "কবিতা",
+    text: `শরৎ এলো রূপের সাজে
+দেখতে লাগে বেশ,
+কাশবনেতে রঙের জোয়ার
+সবুজ বাংলাদেশ।
+সবুজ ঘেরা নজর কাড়া
+বিশ্ব বুকে পেশ,
+পল্লী পাড়ে রূপের শরৎ
+রূপের নাই যে শেষ।`
+  },
+  {
+    title: "খুশীর রংধনু",
+    author: "সাজ্জাদ হাসান",
+    type: "কবিতা",
+    text: `কী আনন্দ লাগ‌ছে
+খুশীতে মন নাচ‌ছে,
+প্রজাপ‌তি পাখনা
+খেয়া তরী ঐ ভাসছে।
+আকাশে বাতা‌সে দোলনা
+কাশফুল কী ছড়া‌ছে,
+সোনা রোদে রংধনু
+শরতে ভাদ্রে কাছে।
+এ মা‌টির এ ধরায়
+হাসিমু‌খে অনুরাগে,
+বাবুই পাখির বাসা
+তালগাছে ধুম লাগে।
+সোনালী রূপালী আলো
+নজরুলে স্মরণে,
+সাত রংয়ে ভুবন
+দূর নী‌লিমা বরণে।
+শরতে তালি বাজছে
+দুষ্টু ছেলের দল,
+ভাদ্র এ আশ্বিনে
+গ্রাম বাংলা মল।`
+  },
+  {
+    title: "শরৎকাল",
+    author: "মোঃ জামাল উদ্দিন",
+    type: "কবিতা",
+    text: `ছয় ঋতুর রূপসী বাংলায়
+শরৎকালে কাশফুল ফোটে,
+চলো আমার প্রাণের প্রিয়া
+কাশ ফুলের মাঠে।
+হাতে হাত রেখে চলবো
+কাশফুলের ওই মাঠে,
+হৃদয়ের যত কথা আছে
+বলবো ঠোটে ঠোঁটে।
+শরৎকালে তোমাকে সাথে নিয়ে
+ঘুরবো সারাক্ষণ,
+প্রেমের কথা বলবো তোমায়
+দিব জীবন যৌবন।
+শরৎকালের হালকা হালকা বৃষ্টি
+ভিজবো তোমায় নিয়ে,
+মনের কথা বলবো তোমায়
+কোলেতে বসিয়ে,
+তুমি আমার প্রাণ সজনী
+শরৎকালের ফুল,
+সারা জীবন সঙ্গে রাখবো
+বুঝিও না ভুল।`
+  },
+  {
+    title: "শরৎ আসে হেসে",
+    author: "মুহাম্মদ ছোলেমান ভূঁইয়া",
+    type: "কবিতা",
+    text: `বর্ষা রানী বিদায় নিলে
+শরৎ আসে হেসে,
+রূপের রানী শরৎকে আজ
+নিলাম ভালোবেসে।
+শরৎ কালে শিউলি ফোটে
+রূপের কতো বাহার,
+সাদা বকের সারি খুঁজে
+জলাশয়ে আহার।
+শরৎ কালের কাশের বনে
+কাশফুল ঢেউ তোলে,
+আকাশে সাদা মেঘমালা
+দক্ষিণ হাওয়ায় দোলে।
+নদীনালার জল নেমে যায়
+বিষন্নতার সুরে,
+ডিঙা বেয়ে চলে মাঝি
+যাবে অচিন পুরে।
+নদীর ধারে বটের ছায়ে
+রাখাল বাজায় বাঁশি,
+সোনার ধান কাটে কৃষক
+মুখে তাদের হাসি।`
+  },
+  {
+    title: "শরৎকাল",
+    author: "অশোক কুমার পাইক",
+    type: "কবিতা",
+    text: `কী অপরূপ শরৎ খেলায়
+মেঘের ভেলা ভাসছে উড়ে,
+অরুন আলোয় চিকন ঝরে
+স্মিন্গ্ধ প্রকৃতি মাতায় পুরে l
+নদীর ধারে কাশ ফুলেতে
+পাপড়ি সাদা রূপ যে তার,
+হাওয়ায় মাথা দুলছে নুয়ে
+শিশুরা ছুটছে নদীর ধার l
+খসছে গাছের বুড়োপাতা
+নতুন পাতা গজায় ডালে,
+ধানেরক্ষেতে সবুজশোভা
+প্রকৃতি জাগে শরৎকালে l
+শরৎকালে শিউলি ফুলের
+গন্ধে আকুল পথের পথিক，
+দীঘিতে ফুটে শাপলা,পদ্ম，
+চোখ ভরানো দৃশ্য অধিক l
+ঘাসের পরে হিমের পরশ
+শরৎশোভায় ভেজায় পথ，
+শারদপূজার সানাই বাজে
+কার না ছোটায় মনের রথ l`
+  },
+  {
+    title: "শরৎকাল",
+    author: "শ্রী পিনাকী সরকার",
+    type: "কবিতা",
+    text: `এসেছে শরৎ হিমের পরশ
+কাশের রাশি রাশি,
+শারদীয়ায় মাতবো মোরা
+বাজবে পুজোর বাঁশি।
+কচিকাঁচা মাতবে সবাই
+পুজো পুজো গন্ধ,
+আম বাঙালির সেরা উৎসব
+আবেগ অতি অন্ধ।
+শিশির ভেজা সকাল বেলা
+শিউলি ফুলের মেলা,
+তোমার আমার দুর্গাপূজা
+হরেক রকম খেলা।
+গোটা বছর বসে থাকি
+শিউলি ফুলের জন্য,
+লক্ষ্মী পেঁচা এসে করে
+মোদের জীবন ধন্য।`
+  },
+  {
+    title: "হারিয়ে যায় মন",
+    author: "আবুল কালাম তালুকদার",
+    type: "কবিতা",
+    text: `পাতার ফাঁকে সূর্য উঠে
+জুড়ায় মন প্রাণ
+বাতায়নে চাঁদের আলো
+মিষ্টি মধুর গান।
+শিশির ভেজা প্রভাত বেলা
+সুখের সমীরণ
+উঠান জুড়ে সবুজ ঘাসে
+হারিয়ে যায় মন।`
+  },
+  {
+    title: "শরৎকাল",
+    author: "শিহাব সুমন",
+    type: "কবিতা",
+    text: `শরৎ এলো নতুন সাজে
+নীল আকাশের তলে;
+সাদা মেঘের ভেলা ভাসে
+বাতাস যখন চলে।
+কাশফুল দোলে নদীর তীরে
+সাদা রঙের মেলা;
+শিশিরভেজা ঘাসের বুকে
+জাগে আলোর খেলা।
+শিউলি ফুলের মিষ্টি গন্ধ
+ছড়ায় প্রভাতকালে;
+পাখিরা সব গান গেয়ে যায়
+বসে গাছের ডালে।
+ধানের ক্ষেতে সোনার হাসি
+স্বপ্ন ভরা মনে;
+শরৎ যেন সুখের বার্তা
+হারিয়ে যাই ক্ষণে।`
+  },
+  {
+    title: "শরৎ এলো",
+    author: "সুনীল রায়",
+    type: "কবিতা",
+    text: `শরৎ এলো ধরার মাঝে
+কী অপরূপ সাজ,
+মেঘেরা আজ ফিরছে ঘরে
+শেষ হলো তার কাজ।
+নদীর তীরে চামর দোলায়
+স্নিগ্ধ ধবল কাশ,
+ছড়িয়ে যায় দূরে হাওয়ায়
+শিউলি ফুলের বাস।
+পুজোর ছুটি এলো এবার
+ফিরবে সবাই ঘর,
+নৌকো ভিড়ে মানুষ নামে
+ভরে নদীর চর।
+বাতাসে আজ ভেসে আসে
+আগমনী গান,
+সোনা রোদের মিষ্টি হাসি
+দেখে জুড়োয় প্রাণ।`
+  },
+  {
+    title: "শরতের গোপন প্রেম",
+    author: "ড. নজরুল ইসলাম খান",
+    type: "কবিতা",
+    text: `শরৎ এলে আকাশ যেন
+নীলের কাছে চিঠি লেখে,
+সাদা মেঘেরা ভেসে যায়
+অলস স্বপ্নের মতো।
+কাশবনে বাতাস এসে
+গোপন গান গায়,
+দূরের নদী রৌদ্রের আয়না হয়ে
+নির্জনে জেগে থাকে।
+মনে হয়, ঋতুরও বুঝি
+একান্ত কোনো প্রেম আছে—
+যে প্রেম ছুঁয়ে যায়,
+অথচ ধরা দেয় না।`
+  },
+  {
+    title: "নীল আকাশ",
+    author: "মিজান পঞ্চায়েত",
+    type: "কবিতা",
+    text: `নীল আকাশে সাদা মেঘের ভেলা
+বাতাস হেথা তাদের নিয়ে
+করছে সদা খেলা।
+ইচ্ছে মতো যায় উড়ে
+মনটা আমার স্বপ্ন পাখায়
+তাদের সাথে ঘুরে।
+বলাকার শুভ্র সারি
+পাহাড় নদী দিয়ে পাড়ি
+দূর আকাশে যাচ্ছে হারি।
+রাতের আকাশ স্বচ্ছ দিঘী
+তারার আলোর ঝলকানিতে
+জোনাক জ্বলে মিটিমিটি।
+সূর্যিমামা ঘুমিয়ে গেলে
+জাগে চন্দ্র তারা,
+বাতাস মেঘের ছোটাছুটি
+মন যে দিশেহারা`
+  },
+  {
+    title: "সন্ধ্যা নেমেছে",
+    author: "তাবাসসুম সিকদার",
+    type: "গল্প",
+    text: `গোধূলি বেলার শেষে নামবে আবার সন্ধ্যা। পাখিরা ছোটাছুটি করে ফিরবে আপন নীড়ে। দিনের আলোর পরিসমাপ্তি ঘটিয়ে নেমে আসবে অন্ধকার।
+সন্ধ্যার সেই মিটিমিটি, মন মাতানো আলো মনে জাগাবে আবার প্রশান্তি। সেই আলো ছাপিয়ে নেমে আসবে রাত।
+
+এরূপ মানব জীবনেও মাঝে মাঝে নেমে আসে, আঁধার কালো রাত। তবে কি তার পরিসমাপ্তি হয় নহে ? আঁধার ঠেলে হয় না উদিত সূর্য? তবে এত মিছে ভয় কিসের আমাদের? জীবনের অন্ধকার তা তো ক্ষণস্থায়ী হয়?
+
+তবে কিসের এত চিন্তা?
+কেটে যাবে ফির অন্ধকার, ফুটে উঠবে সেই স্নিগ্ধ আলো। মুছে যাবে সকল দুঃখ, বিলীন হয়ে যাবে সকল কষ্ট। দেখা মিলবে ফের সেই ভোরের। সকল কিছুর পরিসমাপ্তি ঘটিয়ে আলো দেখা মিলবে ,সকল সাধ্য সাধন হবে আমাদের।`
+  },
+  {
+    title: "অনাদরের মেয়ে",
+    author: "বিনতে নজরুল",
+    type: "কবিতা",
+    text: `এই জমিনে আল্লাহর পরে,
+মা নামটিই শ্রেষ্ঠ জানি,
+কপাল আমার বড্ড কঠিন,
+পাই না আদর একটুখানি।
+আশেপাশে সব সাথীদের
+মায়েরা করে কতই আদর,
+আমি এক হতভাগী,
+ গায়ে জড়াই দুঃখের চাদর।
+যখন শুনি মায়ের গালি,
+বুকটা আমার ভেঙে যায়,
+সেই গালিতে কাঁদতে কাঁদতে 
+রাতটি আমার কেটে যায়।
+মাগো তুমি কেন করো
+আমার সাথে এমন আচরণ?
+আমি কি তোমার মেয়ে নই মা,
+কোথায় যাবো বল এখন?
+জীবন আমার শূন্য ভীষণ
+তোমার একটু আদর ছাড়া,
+তুমি কেন বুঝলে না মা,
+কপাল আমার বড্ড পোড়া।
+সব অবহেলা ভুলে যখন আমার 
+নামটি ধরে ডাকো,
+সব কষ্ট দূর হয়ে যায় 
+বিশ্বাস মাগো করো।`
+  },
+  {
+    title: "নতুন ভোরের অপেক্ষা",
+    author: "মুহিতুল ইসলাম মুন্না",
+    type: "গল্প",
+    text: `মেঘের আড়ালে যখন চাঁদ ঢেকে যায়
+সেই রাতটা খুব অন্ধকার হয়।
+একটু মৃদু বাতাস বয়তে শুরু করলেই 
+অন্ধকার আবার কেটে যায়। 
+এই অনিশ্চিত কালো মেঘের পর
+একদিন জ্যোৎস্নার রাত আসবে 
+সকল অন্ধকার দূরীভূত হবে, নতুন সূর্য উঁকি দিবে।
+এমন একটা দিনের অপেক্ষায় এই সমাজ এই দেশ।`
+  },
+  {
+    title: "শেষ চিঠি",
+    author: "মুহিতুল ইসলাম মুন্না",
+    type: "গল্প",
+    text: `ডাকপিয়ন এসেছিল দুপুরের রোদে। হাতে একটা পুরনো খাম, কিনারা হলুদ হয়ে গেছে সময়ের ছোঁয়ায়।
+
+রহিমা খালা খামটা হাতে নিয়ে কাঁপতে থাকল। চিঠির উপরে লেখা নামটা তার চেনা—বহু বছর আগের চেনা।
+
+খাম খুলতেই একটা শুকনো গোলাপ পাতা পড়ে গেল। সাথে কয়েক লাইনের চিঠি—"ক্ষমা চেয়ে লিখছি, অনেক দেরি হয়ে গেছে। তবু লিখছি, কারণ না লিখলে আমার শান্তি নেই।"
+
+রহিমা খালাদের চোখ দিয়ে পানি গড়িয়ে পড়ল। চল্লিশ বছর আগে যে মানুষটা কোনো কথা না বলে চলে গিয়েছিল, সে আজ ক্ষমা চায়।
+
+তিনি জানালার ধারে বসে রইলেন অনেকক্ষণ। তারপর ধীরে ধীরে কলম ধরলেন। উত্তর লিখবেন কি না, বুঝতে পারছিলেন না।
+
+শেষে লিখলেন মাত্র এক লাইন—"ক্ষমা তো অনেক আগেই করে দিয়েছি, তুমি আসার অপেক্ষায় ছিলাম শুধু।"
+
+চিঠিটা ডাকে ফেলতে গিয়ে দেখলেন, আকাশে সন্ধ্যার প্রদীপ জ্বলে উঠেছে। মনে হলো, বহু বছরের ভারী বোঝা আজ হালকা হয়ে গেল।`
+  }
+];
+
+const LOGO = `<svg class="mh-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M40 160 Q100 140 160 160 L160 170 Q100 150 40 170 Z" fill="#1e3a8a"/>
+<path d="M40 155 Q100 135 160 155 L160 165 Q100 145 40 165 Z" fill="#c9a227"/>
+<path d="M50 155 L50 100 Q50 30 100 30 Q150 30 150 100 L150 155" fill="none" stroke="#c9a227" stroke-width="12" stroke-linecap="round"/>
+<path d="M58 155 L58 105 Q58 40 100 40 Q142 40 142 105 L142 155" fill="none" stroke="#1e3a8a" stroke-width="8" stroke-linecap="round"/>
+<circle cx="100" cy="70" r="12" fill="#c9a227"/>
+<g stroke="#c9a227" stroke-width="3" stroke-linecap="round">
+<line x1="100" y1="50" x2="100" y2="45"/><line x1="100" y1="95" x2="100" y2="90"/>
+<line x1="80" y1="70" x2="75" y2="70"/><line x1="125" y1="70" x2="120" y2="70"/>
+<line x1="85" y1="55" x2="82" y2="52"/><line x1="115" y1="85" x2="118" y2="88"/>
+<line x1="115" y1="55" x2="118" y2="52"/><line x1="85" y1="85" x2="82" y2="88"/></g>
+<text x="100" y="115" font-family="Noto Sans Bengali,sans-serif" font-size="40" fill="#1e3a8a" text-anchor="middle" font-weight="bold">বা</text>
+<path d="M150 50 L165 35 L170 40 L155 55 Z" fill="#c9a227"/><circle cx="167" cy="38" r="2" fill="#1e3a8a"/>
+<path d="M150 100 Q160 95 170 100 Q175 105 170 110 Q160 115 150 110" fill="#c9a227"/>
+<circle cx="150" cy="105" r="3" fill="#1e3a8a"/></svg>`;
+
+DEFAULT_PHOTO = "data:image/svg+xml," + encodeURIComponent(LOGO);
+
+const bn = n => String(n).replace(/\d/g, d => '০১২৩৪৫৬৮৯'[d]);
+const PER = 12;
+const totalPages = Math.ceil(allPoems.length / PER);
+let cur = 1, curIdx = null;
+
+function mastheadHTML(){
+return `<div class="masthead">
+  <div class="mh-title">
+    <div class="mh-bn">সাহিত্য বাতায়ন</div>
+    <div class="mh-en">Sahitya Batayon</div>
+  </div>
+  ${LOGO}
+</div>
+<div class="green-bar"></div>`;
+}
+function footerHTML(num){
+return `<div class="sheet-footer">
+  <div class="foot-line">পৃষ্ঠা: ${num} | 📮 সাহিত্য বাতায়নে লেখা পাঠান: <a href="mailto:sahityabatayan@gmail.com">sahityabatayan@gmail.com</a></div>
+  <div class="copy-line">© স্বত্ব সংরক্ষিত © ২০২৬</div>
+</div>`;
+}
+
+const wrap = document.getElementById('pages');
+for(let p=0;p<totalPages;p++){
+  const sec=document.createElement('section');
+  sec.className='paper-page'+(p===0?' active':'');
+  const list=allPoems.slice(p*PER,p*PER+PER);
+  sec.innerHTML = mastheadHTML() +
+  `<div class="page-body"><div class="page-grid">` + list.map((poem,i)=>
+  `<div class="card" data-idx="${p*PER+i}">
+     <div class="card-head">
+       <img class="author-photo" src="photos/${p*PER+i+1}.jpg" alt="${poem.author}">
+       <div><h3>${poem.title}</h3><p class="author">— ${poem.author}</p></div>
+     </div>
+     <div class="preview">${poem.text}</div>
+     <span class="read-more">পুরোটা পড়ুন →</span>
+   </div>`).join('') + `</div></div>` + footerHTML(bn(p+1));
+  wrap.appendChild(sec);
+}
+document.querySelectorAll('.author-photo').forEach(img=>{
+  img.addEventListener('error',function(){this.src=DEFAULT_PHOTO;},{once:true});
+});
+document.getElementById('totPg').textContent = bn(totalPages);
+
+wrap.addEventListener('click',e=>{
+  const card=e.target.closest('.card');
+  if(card) openModal(+card.dataset.idx);
+});
+
+function showPage(n){
+  cur=n;
+  document.querySelectorAll('.paper-page').forEach((s,i)=>s.classList.toggle('active',i===n-1));
+  document.getElementById('curPg').textContent=bn(n);
+  document.getElementById('prevBtn').disabled=(n===1);
+  document.getElementById('nextBtn').disabled=(n===totalPages);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('prevBtn').onclick=()=>showPage(cur-1);
+document.getElementById('nextBtn').onclick=()=>showPage(cur+1);
+
+function openModal(i){
+  curIdx=i;
+  const p=allPoems[i];
+  const ph=document.getElementById('modalPhoto');
+  ph.src='photos/'+(i+1)+'.jpg';
+  ph.onerror=function(){this.src=DEFAULT_PHOTO;};
+  document.getElementById('modalTitle').textContent=p.title;
+  document.getElementById('modalAuthor').textContent='— '+p.author;
+  document.getElementById('modalText').textContent=p.text;
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow='auto';
+}
+document.getElementById('modal').onclick=e=>{if(e.target===e.currentTarget)closeModal();};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closePreview();}});
+
+function downloadPoem(){
+  if(curIdx===null)return;
+  const p=allPoems[curIdx];
+  const content=`${p.title}\n${'═'.repeat(40)}\n\nলেখক: ${p.author}\n\n${p.text}\n\n${'─'.repeat(40)}\nসাহিত্য বাতায়ন | Sahitya Batayon\nলেখা পাঠান: sahityabatayan@gmail.com\n© স্বত্ব সংরক্ষিত © ২০২৬`;
+  const blob=new Blob([content],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`${p.title}_${p.author}.txt`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+const LEAF = "data:image/svg+xml," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><g fill="#a02020"><path d="M60 62 Q48 40 58 18 Q70 40 62 62 Z"/><path d="M60 64 Q36 52 30 30 Q52 40 62 60 Z"/><path d="M62 60 Q72 38 92 32 Q84 54 64 64 Z"/><path d="M60 66 Q40 70 26 62 Q42 56 60 62 Z" opacity=".85"/><path d="M64 66 Q84 66 96 56 Q82 52 64 62 Z" opacity=".85"/></g><path d="M60 62 Q58 80 50 96" stroke="#5a3a1a" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`);
+
+const ART = "data:image/svg+xml," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 160"><path d="M20 30 Q90 18 160 28 Q220 36 280 26 L280 44 Q210 54 150 46 Q80 38 20 48 Z" fill="#7a93a8" opacity=".55"/><path d="M150 60 Q120 90 105 120 Q140 100 165 78 Q158 70 150 60 Z" fill="#222"/><path d="M165 78 Q200 60 215 62 Q205 84 178 96 Q170 86 165 78 Z" fill="#333"/><path d="M105 120 Q95 132 88 128 Q96 122 105 120 Z" fill="#111"/><path d="M30 140 Q60 128 90 140 Q120 152 150 140 Q180 128 210 140 Q240 152 270 140" stroke="#555" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M120 60 Q100 40 96 20" stroke="#222" stroke-width="2.5" fill="none"/></svg>`);
+
+function sheetHTML(p){
+  const type = p.type || 'কবিতা';
+  return `<div class="mag-page">
+    <div class="mag-head">
+      <div class="mag-head-left">
+        <div class="mag-tagline">সাহিত্য-সংবাদ-সংস্কৃতি</div>
+        <div class="mag-bn">সাহিত্য বাতায়ন</div>
+        <div class="mag-en">Sahitya Batayon</div>
+      </div>
+      ${LOGO}
+    </div>
+    <div class="mag-frame">
+      <span class="mag-badge">${type}</span>
+      <img class="mag-leaf" src="${LEAF}" alt="">
+      <h2 class="mag-title">${p.title}</h2>
+      <p class="mag-author">${p.author}</p>
+      <div class="mag-watermark">সাহিত্য বাতায়ন</div>
+      <div class="mag-text">${p.text}</div>
+      <img class="mag-art" src="${ART}" alt="">
+    </div>
+    <div class="mag-foot">
+      <div>📮 লেখা পাঠান: sahityabatayan@gmail.com | সাহিত্য বাতায়ন</div>
+      <div>© স্বত্ব সংরক্ষিত © ২০২৬</div>
+    </div>
+  </div>`;
+}
+
+/* ===== টোস্ট বার্তা ===== */
+function toast(msg){
+  let t=document.getElementById('toast');
+  if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t);}
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+/* ===== প্রিভিউ খোলা/বন্ধ ===== */
+function openPreview(html){
+  const sheet=document.getElementById('printSheet');
+  sheet.innerHTML =
+  `<div class="preview-bar no-print">
+     <button class="pb-close" onclick="closePreview()">✕ বন্ধ</button>
+     <button class="pb-print" onclick="printFromPreview()">🖨️ প্রিন্ট / Save as PDF</button>
+   </div>` + html;
+  sheet.classList.add('pdf-preview');
+  document.body.style.overflow='hidden';
+}
+function closePreview(){
+  const sheet=document.getElementById('printSheet');
+  sheet.classList.remove('pdf-preview');
+  document.body.style.overflow='auto';
+}
+function printFromPreview(){
+  closePreview();
+  document.body.classList.add('print-single');
+  setTimeout(()=>window.print(),150);
+}
+window.addEventListener('afterprint',()=>document.body.classList.remove('print-single'));
+
+/* ===== মূল PDF ফাংশন: আগে দৃশ্যমান প্রিভিউ, তারপর ক্যাপচার ===== */
+async function printPoem(){
+  if(curIdx===null) return;
+  closeModal();
+  openPreview(sheetHTML(allPoems[curIdx]));
+
+  const target = document.querySelector('#printSheet .mag-page');
+  try{
+    if(typeof html2pdf === 'undefined'){ throw new Error('লাইব্রেরি লোড হয়নি'); }
+    if(document.fonts && document.fonts.ready){ await document.fonts.ready; }
+    await new Promise(r=>setTimeout(r,500));
+
+    const opt = {
+      margin: 0,
+      filename: `${allPoems[curIdx].title}_${allPoems[curIdx].author}.pdf`,
+      image: { type: 'jpeg', quality: 0.95 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', scrollX: 0, scrollY: 0, logging: false },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['css', 'legacy'] }
+    };
+    await html2pdf().set(opt).from(target).save();
+    closePreview();
+    toast('✅ PDF ডাউনলোড সম্পন্ন হয়েছে');
+  }catch(err){
+    console.error('PDF ত্রুটি:', err);
+    toast('⚠️ অটো ডাউনলোড ব্যর্থ — প্রিন্ট অপশন খুলছে, Save as PDF বেছে নিন');
+    printFromPreview();
+  }
+}
+
+document.getElementById('modalMasthead').innerHTML = mastheadHTML();
+showPage(1);
+</script>
+</body>
+</html>

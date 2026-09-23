@@ -24,6 +24,10 @@ h1{text-align:center;color:#1f3a5f;margin-bottom:30px;font-size:28px}
 .back a{color:#1f3a5f;text-decoration:none;font-weight:600}
 footer{background:#1f3a5f;color:#bdc3c7;text-align:center;padding:25px 20px;margin-top:40px;font-size:14px}
 footer b{color:#fff}
+
+/* নতুন ইস্যুর জন্য বিশেষ স্টাইল */
+.issue.latest{border-left-color:#147a3d;position:relative}
+.issue.latest::before{content:'নতুন';position:absolute;top:-10px;right:15px;background:#147a3d;color:#fff;padding:3px 12px;border-radius:4px;font-size:12px;font-weight:700}
 </style>
 </head>
 <body>
@@ -38,10 +42,20 @@ footer b{color:#fff}
 </div></header>
 
 <div class="wrap">
-<h1> ই-পেপার আর্কাইভ</h1>
+<h1>📰 ই-পেপার আর্কাইভ</h1>
 
 <!-- নতুন ইস্যু যোগ করতে এই ব্লক কপি করে উপরে বসান -->
 
+<!-- ✅ শরৎ সংখ্যা ২০২৬ - নতুন ইস্যু -->
+<div class="issue latest">
+  <div>
+    <h3>📅 শরৎ সংখ্যা - অক্টোবর ২০২৬</h3>
+    <p>১৭টি কবিতা ও গল্পের বিশেষ সংকলন | শরৎ, কাশফুল, প্রেম ও প্রকৃতি</p>
+  </div>
+  <a href="epaper-issue-02.html" class="read">📖 এখনই পড়ুন</a>
+</div>
+
+<!-- প্রথম সংস্করণ - সেপ্টেম্বর ২০২৬ -->
 <div class="issue">
   <div>
     <h3>📅 প্রথম সংস্করণ - সেপ্টেম্বর ২০২৬</h3>
@@ -50,7 +64,7 @@ footer b{color:#fff}
   <a href="epaper-issue-01.html" class="read">📖 এখনই পড়ুন</a>
 </div>
 
-<!-- ভবিষ্যতে দ্বিতীয় সংস্করণ এখানে যোগ করবেন -->
+<!-- ভবিষ্যতে নতুন সংস্করণ এখানে যোগ করবেন -->
 
 <div class="back">
   <a href="index.html">← মূল সাইটে ফিরে যান</a>
