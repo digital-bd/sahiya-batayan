@@ -290,6 +290,7 @@ body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text
 <div id="page-writer" style="display:none"><div class="container"><div class="writer-wrap">
 <h2>✍️ নতুন লেখা যোগ করুন</h2>
 <p class="writer-note">লেখা জমা দিলে সম্পাদকের অনুমোদনের পর প্রকাশিত হবে।</p>
+<div id="writer-session-bar" style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:var(--bg-light);border:1px solid var(--border);border-radius:8px;padding:10px 15px;margin-bottom:20px;font-size:14px"></div>
 <form id="writer-form">
 <div class="form-group"><label>শিরোনাম *</label><input id="w-title" required></div>
 <div class="form-group"><label>বিভাগ *</label><select id="w-category"><option>কবিতা</option><option>ছড়া</option><option>ছোটগল্প</option><option>অণুগল্প</option><option>প্রবন্ধ</option><option>কলাম</option><option>ফিচার</option><option>সংবাদ</option><option>বুক রিভিউ</option><option>অনুবাদ</option><option>ভ্রমণ</option><option>সাক্ষাৎকার</option><option>খেলাধুলা</option><option>সাংস্কৃতিক</option><option>তরুণ উদীয়মান কলম</option><option>নারীদের কথা</option></select></div>
@@ -304,19 +305,29 @@ body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text
 </form>
 </div></div></div>
 
+<div id="page-writer-login" style="display:none"><div class="container"><div class="writer-wrap">
+<h2>🔐 লেখক লগইন</h2>
+<p class="writer-note">লেখা জমা দিতে লগইন করুন। নিবন্ধন না থাকলে আগে নিবন্ধন করুন।</p>
+<form id="writer-login-form">
+<div class="form-group"><label>লগইন নাম (ইউজারনেম) *</label><input id="wl-username" required></div>
+<div class="form-group"><label>পাসওয়ার্ড *</label><input id="wl-password" type="password" required></div>
+<div class="form-actions"><button type="submit" class="btn-primary" id="wl-submit">লগইন</button><button type="button" class="btn-secondary" onclick="showWriterRegister()">📝 নতুন নিবন্ধন</button><button type="button" class="btn-secondary" onclick="showMain()">← ফিরে যান</button></div>
+</form>
+</div></div></div>
+
 <div id="page-writer-register" style="display:none"><div class="container"><div class="writer-wrap">
 <h2>📝 লেখক নিবন্ধন</h2>
 <p class="writer-note">নিবন্ধিত লেখকদের আলাদা প্রোফাইল পেজ থাকবে</p>
 <form id="writer-register-form">
 <div class="form-group"><label>📷 আপনার ছবি (ক্লিক করে ফাইল থেকে আপলোড করুন) *</label><input type="file" id="wr-image" accept="image/*" required><img id="wr-preview" class="image-preview"></div>
-<div class="form-group"><label>লগইন নাম (ইংরেজি) *</label><input id="wr-username" required></div>
+<div class="form-group"><label>লগইন নাম (ইংরেজি) *</label><input id="wr-username" required><small>এটিই আপনার ইউজারনেম — পরে লগইন করতে লাগবে।</small></div>
 <div class="form-group"><label>নাম (বাংলায়) *</label>
 <div class="radio-group"><label><input type="radio" name="name-type" value="obhro" checked> অভ্র</label><label><input type="radio" name="name-type" value="english"> ইংরেজি</label><label><input type="radio" name="name-type" value="unijoy"> ইউনিজয়</label></div>
 <input id="wr-name-bn" required></div>
 <div class="form-group"><label>নাম (ইংরেজিতে) *</label><input id="wr-name-en" required></div>
 <div class="form-group"><label>ইমেইল *</label><input type="email" id="wr-email" required></div>
-<div class="form-group"><label>পাসওয়ার্ড *</label><input type="password" id="wr-password" required minlength="6"></div>
-<div class="form-group"><label>পুনরায় পাসওয়ার্ড *</label><input type="password" id="wr-password-confirm" required></div>
+<div class="form-group"><label>🔑 পাসওয়ার্ড (নিজের পছন্দের নতুন পাসওয়ার্ড) *</label><input id="wr-password" type="password" required minlength="6"><small>⚠️ ইমেইলের পাসওয়ার্ড দেবেন না — নিজের মতো নতুন পাসওয়ার্ড দিন। পরে সাইটে লগইন করতে এটি লাগবে।</small></div>
+<div class="form-group"><label>পুনরায় পাসওয়ার্ড *</label><input id="wr-password-confirm" type="password" required></div>
 <div class="form-group"><label>ফোন নম্বর *</label><input id="wr-phone" required placeholder="যেমন: ০১৫৭৭৪৩৯২৫৭"></div>
 <div class="form-group"><label>জন্ম তারিখ *</label><input id="wr-birth" required placeholder="যেমন: ১০ এপ্রিল"></div>
 <div class="form-group"><label>জন্মস্থান *</label><input id="wr-birthplace" required placeholder="যেমন: কিশোরগঞ্জ, ময়মনসিংহ, বাংলাদেশ"></div>
@@ -556,6 +567,7 @@ let url=SCRIPT_URL+'?action='+action;
 if(params.postId)url+='&postId='+encodeURIComponent(params.postId);
 if(params.writerId)url+='&writerId='+encodeURIComponent(params.writerId);
 if(params.writerName)url+='&writerName='+encodeURIComponent(params.writerName);
+if(params.password)url+='&password='+encodeURIComponent(params.password);
 try{const res=await fetch(url);return await res.json();}catch(e){return [];}
 }
 async function submitData(data){
@@ -1044,13 +1056,43 @@ if(document.getElementById('wr-password').value!==document.getElementById('wr-pa
 const btn=document.getElementById('wr-submit');btn.disabled=true;btn.textContent='পাঠানো হচ্ছে...';
 const data={action:'registerWriter',imageData:imageData2,username:document.getElementById('wr-username').value,name_bn:document.getElementById('wr-name-bn').value,name_en:document.getElementById('wr-name-en').value,email:document.getElementById('wr-email').value,password:document.getElementById('wr-password').value,phone:document.getElementById('wr-phone').value,birth_date:document.getElementById('wr-birth').value,birth_place:document.getElementById('wr-birthplace').value,current_address:document.getElementById('wr-address').value,profession:document.getElementById('wr-profession').value,education:document.getElementById('wr-education').value,facebook:document.getElementById('wr-facebook').value,bio:document.getElementById('wr-bio').value};
 const ok=await submitData(data);
-if(ok){notify('✅ নিবন্ধন সফল!');this.reset();imageData2='';document.getElementById('wr-preview').style.display='none';setTimeout(showMain,1500);}
+if(ok){notify('✅ নিবন্ধন সফল! এখন ইউজারনেম ও পাসওয়ার্ড দিয়ে লগইন করুন।');this.reset();imageData2='';document.getElementById('wr-preview').style.display='none';setTimeout(showWriterLogin,1500);}
 btn.disabled=false;btn.textContent='যোগ দিন';
 });
 
-function hideAll(){['page-main','page-writer','page-writer-register','page-writer-directory','page-writer-profile','page-granth','page-admin','page-epaper','page-about','page-privacy','page-contact'].forEach(id=>{document.getElementById(id).style.display='none';});}
+document.getElementById('writer-login-form').addEventListener('submit',async function(e){
+e.preventDefault();
+const btn=document.getElementById('wl-submit');btn.disabled=true;btn.textContent='যাচাই হচ্ছে...';
+const u=document.getElementById('wl-username').value.trim();
+const p=document.getElementById('wl-password').value;
+const res=await fetchData('loginWriter',{writerName:u,password:p});
+btn.disabled=false;btn.textContent='লগইন';
+if(res&&res.status==='success'&&res.writer){
+sessionStorage.setItem('sb_writer',JSON.stringify(res.writer));
+notify('✅ স্বাগতম, '+res.writer.name+'!');
+showWriter();
+}else{alert('⛔ ভুল ইউজারনেম বা পাসওয়ার্ড!');}
+});
+
+function hideAll(){['page-main','page-writer','page-writer-login','page-writer-register','page-writer-directory','page-writer-profile','page-granth','page-admin','page-epaper','page-about','page-privacy','page-contact'].forEach(id=>{document.getElementById(id).style.display='none';});}
 function showMain(){hideAll();document.getElementById('page-main').style.display='block';initMain();window.scrollTo(0,0);}
-function showWriter(){hideAll();document.getElementById('page-writer').style.display='block';window.scrollTo(0,0);}
+function writerSession(){try{return JSON.parse(sessionStorage.getItem('sb_writer')||'null');}catch(e){return null;}}
+function logoutWriter(){sessionStorage.removeItem('sb_writer');notify('🚪 আপনি লগআউট হয়েছেন');showMain();}
+function showWriterLogin(){hideAll();document.getElementById('page-writer-login').style.display='block';window.scrollTo(0,0);}
+function showWriter(){
+hideAll();
+const ws=writerSession();
+if(!ws&&!isEditor()){document.getElementById('page-writer-login').style.display='block';window.scrollTo(0,0);return;}
+document.getElementById('page-writer').style.display='block';
+if(ws){
+document.getElementById('writer-session-bar').innerHTML='✅ লগইন আছে: <strong>'+escapeHtml(ws.name)+' (@'+escapeHtml(ws.username)+')</strong> <button class="btn-secondary" style="background:#e74c3c;padding:6px 14px;font-size:13px" onclick="logoutWriter()">🚪 লগআউট</button>';
+}else{
+document.getElementById('writer-session-bar').innerHTML='👑 সম্পাদক মোড — সম্পাদক কোড দিলে লেখা সরাসরি প্রকাশিত হবে';
+}
+const authorEl=document.getElementById('w-author');
+if(authorEl&&!authorEl.value)authorEl.value=ws?ws.name:'';
+window.scrollTo(0,0);
+}
 function showWriterRegister(){hideAll();document.getElementById('page-writer-register').style.display='block';window.scrollTo(0,0);}
 function isEditor(){return sessionStorage.getItem('sb_editor')==='true';}
 function logoutAdmin(){sessionStorage.removeItem('sb_editor');notify('🚪 আপনি লগআউট হয়েছেন');showMain();}
