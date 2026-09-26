@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://digital-bd.github.io/sahiya-batayan/sitemap.xml
