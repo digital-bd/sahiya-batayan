@@ -20,12 +20,12 @@ h1{text-align:center;color:#1f3a5f;margin-bottom:30px;font-size:28px}
 .issue p{color:#7f8c8d;font-size:14px}
 .read{background:#f85c2c;color:#fff;padding:12px 25px;text-decoration:none;border-radius:6px;font-weight:700}
 .read:hover{background:#c0392b}
+.pdf{background:#1f3a5f;color:#fff;padding:12px 20px;text-decoration:none;border-radius:6px;font-weight:700}
+.pdf:hover{background:#142a47}
 .back{text-align:center;margin-top:40px}
 .back a{color:#1f3a5f;text-decoration:none;font-weight:600}
 footer{background:#1f3a5f;color:#bdc3c7;text-align:center;padding:25px 20px;margin-top:40px;font-size:14px}
 footer b{color:#fff}
-
-/* নতুন ইস্যুর জন্য বিশেষ স্টাইল */
 .issue.latest{border-left-color:#147a3d;position:relative}
 .issue.latest::before{content:'নতুন';position:absolute;top:-10px;right:15px;background:#147a3d;color:#fff;padding:3px 12px;border-radius:4px;font-size:12px;font-weight:700}
 </style>
@@ -44,10 +44,20 @@ footer b{color:#fff}
 <div class="wrap">
 <h1>📰 ই-পেপার আর্কাইভ</h1>
 
-<!-- নতুন ইস্যু যোগ করতে এই ব্লক কপি করে উপরে বসান -->
-
-<!-- ✅ শরৎ সংখ্যা ২০২৬ - নতুন ইস্যু -->
+<!-- ✅ সংখ্যা ৩ - তরুণ উদীয়মান কলম (নতুন) -->
 <div class="issue latest">
+  <div>
+    <h3>📅 সংখ্যা ৩ - তরুণ উদীয়মান কলম | ০৯ অক্টোবর ২০২৬</h3>
+    <p>কোন সে মোহমায়া?, ডেঙ্গু মশার সভা, বৃষ্টির শরৎ, কৃষকের ছেলে আমি সহ তরুণ কলমদের লেখা | ফ্লিপবুক + PDF</p>
+  </div>
+  <div>
+    <a href="epaper-issue-03.html" class="read">📖 এখনই পড়ুন</a>
+    <a href="2ae9150ac1.pdf" class="pdf" download>⬇ PDF</a>
+  </div>
+</div>
+
+<!-- শরৎ সংখ্যা ২০২৬ -->
+<div class="issue">
   <div>
     <h3>📅 শরৎ সংখ্যা - অক্টোবর ২০২৬</h3>
     <p>১৯টি কবিতা ও গল্পের বিশেষ সংকলন | শরৎ, কাশফুল, প্রেম ও প্রকৃতি</p>
@@ -63,8 +73,6 @@ footer b{color:#fff}
   </div>
   <a href="epaper-issue-01.html" class="read">📖 এখনই পড়ুন</a>
 </div>
-
-<!-- ভবিষ্যতে নতুন সংস্করণ এখানে যোগ করবেন -->
 
 <div class="back">
   <a href="index.html">← মূল সাইটে ফিরে যান</a>

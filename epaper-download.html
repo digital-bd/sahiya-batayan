@@ -18,6 +18,15 @@ header{background:#fff;padding:15px 0;box-shadow:0 2px 8px rgba(0,0,0,.08);posit
 .sec-title{text-align:center;font-size:26px;font-weight:900;color:#1f3a5f;margin:25px 0 5px}
 .sec-title span{color:#c0392b}
 .sec-note{text-align:center;color:#7f8c8d;font-size:14px;margin-bottom:25px}
+.issue3{background:linear-gradient(135deg,#1f3a5f,#2980b9);border-radius:12px;padding:22px 25px;margin-bottom:30px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;box-shadow:0 4px 15px rgba(0,0,0,.15)}
+.issue3 h3{font-size:19px;margin-bottom:4px}
+.issue3 p{font-size:13px;opacity:.9}
+.issue3 .btns{display:flex;gap:10px;flex-wrap:wrap}
+.issue3 a{padding:11px 20px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px}
+.i3-read{background:#fff;color:#1f3a5f}
+.i3-dl{background:#c4a24a;color:#222}
+.i3-read:hover{background:#e8e8e8}
+.i3-dl:hover{background:#d9b65c}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:25px}
 .card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.08);position:relative;display:flex;flex-direction:column;transition:transform 0.3s}
 .card:hover{transform:translateY(-5px)}
@@ -73,6 +82,19 @@ footer b{color:#fff}
 <div class="wrap">
 <h2 class="sec-title">— <span>লেখা</span> ডাউনলোড —</h2>
 <p class="sec-note">প্রিয় লেখকদের গল্প ও কবিতা আলাদা আলাদা PDF হিসেবে ডাউনলোড করুন</p>
+
+<!-- ✅ সংখ্যা ৩ ব্যানার (নতুন যোগ করা হয়েছে) -->
+<div class="issue3">
+  <div>
+    <h3>📰 সংখ্যা ৩ — তরুণ উদীয়মান কলম | ০৯ অক্টোবর ২০২৬</h3>
+    <p>সম্পূর্ণ পত্রিকা (৩ পাতা, লেখকদের ছবি ও ডিজাইনসহ) — ফ্লিপবুকে পড়ুন বা PDF নামান</p>
+  </div>
+  <div class="btns">
+    <a class="i3-read" href="epaper-issue-03.html" target="_blank">📖 অনলাইনে পড়ুন</a>
+    <a class="i3-dl" href="2ae9150ac1.pdf" download>⬇ সম্পূর্ণ PDF ডাউনলোড</a>
+  </div>
+</div>
+
 <div class="grid" id="articles-grid"></div>
 <div class="back-link">
   <a href="epaper-archive.html">← ই-পেপার আর্কাইভে ফিরে যান</a>
@@ -88,7 +110,6 @@ footer b{color:#fff}
 const LOGO_SVG = `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D4AF37" d="M100 20c-40 0-70 30-70 70v60l70 30 70-30V90c0-40-30-70-70-70z"/><path fill="#1f3a5f" d="M100 40c-25 0-45 20-45 45v50l45 20 45-20V85c0-25-20-45-45-45z"/><text x="100" y="110" font-family="serif" font-size="45" fill="#D4AF37" text-anchor="middle" font-weight="bold">বা</text></svg>`;
 
 const ARTICLES = [
-  // ===== শরৎ সংখ্যা ২০২৬ - নতুন লেখা =====
   {
     category: 'কবিতা',
     title: 'শরৎ',
@@ -439,8 +460,6 @@ const ARTICLES = [
 
 চিঠিটা ডাকে ফেলতে গিয়ে দেখলেন, আকাশে সন্ধ্যার প্রদীপ জ্বলে উঠেছে। মনে হলো, বহু বছরের ভারী বোঝা আজ হালকা হয়ে গেল।`
   },
-
-  // ===== সেপ্টেম্বর ২০২৬ - পুরনো লেখা =====
   {
     category: 'গল্প',
     title: 'একটুখানি মায়া',
@@ -714,8 +733,7 @@ function generatePDF(index) {
       compress: true
     },
     pagebreak: { 
-      mode: ['avoid-all']
-    }
+      mode: ['avoid-all'] }
   };
   
   html2pdf().set(opt).from(pdfContent).save().then(() => {
