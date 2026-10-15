@@ -28,6 +28,11 @@ footer{background:#1f3a5f;color:#bdc3c7;text-align:center;padding:25px 20px;marg
 footer b{color:#fff}
 .issue.latest{border-left-color:#147a3d;position:relative}
 .issue.latest::before{content:'নতুন';position:absolute;top:-10px;right:15px;background:#147a3d;color:#fff;padding:3px 12px;border-radius:4px;font-size:12px;font-weight:700}
+#reader4{display:none;background:#fff;border-radius:10px;box-shadow:0 3px 12px rgba(0,0,0,.08);padding:15px;margin-bottom:20px}
+#reader4 .rhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+#reader4 .rhead b{color:#1f3a5f}
+#reader4 .rhead a{color:#c0392b;font-weight:700;text-decoration:none}
+#reader4 iframe{width:100%;height:75vh;border:0;border-radius:8px;background:#eee}
 </style>
 </head>
 <body>
@@ -44,14 +49,35 @@ footer b{color:#fff}
 <div class="wrap">
 <h1>📰 ই-পেপার আর্কাইভ</h1>
 
-<!-- ✅ সংখ্যা ৩ - তরুণ উদীয়মান কলম (নতুন) -->
+<!-- ✅ সংখ্যা ৪ - তরুণ উদীয়মান কলম-২ (সবচেয়ে নতুন) -->
 <div class="issue latest">
+  <div>
+    <h3>📅 সংখ্যা ৪ - তরুণ উদীয়মান কলম-২ | ১৬ অক্টোবর ২০২৬</h3>
+    <p>তরুণ উদীয়মান কলমের দ্বিতীয় পর্ব | সম্পূর্ণ সংখ্যাটি ফ্লিপবুকে পড়ুন — পাতা উল্টে, ডিজাইনসহ</p>
+  </div>
+  <div>
+    <a href="https://heyzine.com/flip-book/1f939073cf.html" target="_blank" class="read">📖 এখনই পড়ুন</a>
+    <a href="#" onclick="toggleReader();return false" class="pdf">📰 এখানেই পড়ুন</a>
+  </div>
+</div>
+
+<!-- ফ্লিপবুক রিডার -->
+<div id="reader4">
+  <div class="rhead">
+    <b>📰 সংখ্যা ৪ — তরুণ উদীয়মান কলম-২</b>
+    <a href="https://heyzine.com/flip-book/1f939073cf.html" target="_blank">নতুন উইন্ডোতে খুলুন ↗</a>
+  </div>
+  <iframe id="frame4" data-src="https://heyzine.com/flip-book/1f939073cf.html" title="সংখ্যা ৪ ফ্লিপবুক" allowfullscreen></iframe>
+</div>
+
+<!-- সংখ্যা ৩ - তরুণ উদীয়মান কলম -->
+<div class="issue">
   <div>
     <h3>📅 সংখ্যা ৩ - তরুণ উদীয়মান কলম | ০৯ অক্টোবর ২০২৬</h3>
     <p>কোন সে মোহমায়া?, ডেঙ্গু মশার সভা, বৃষ্টির শরৎ, কৃষকের ছেলে আমি সহ তরুণ কলমদের লেখা | ফ্লিপবুক + PDF</p>
   </div>
   <div>
-    <a href="epaper-issue-03.html" class="read">📖 এখনই পড়ুন</a>
+    <a href="https://heyzine.com/flip-book/2ae9150ac1.html" target="_blank" class="read">📖 এখনই পড়ুন</a>
     <a href="2ae9150ac1.pdf" class="pdf" download>⬇ PDF</a>
   </div>
 </div>
@@ -83,5 +109,19 @@ footer b{color:#fff}
 <p><b>© ২০২৬ সাহিত্য বাতায়ন</b> — সর্বস্বত্ব সংরক্ষিত</p>
 <p>📞 ০১৫৭৭৪৩৯২৫৭ | 📧 sahityabatayan@gmail.com</p>
 </footer>
+
+<script>
+function toggleReader(){
+  var box=document.getElementById('reader4');
+  var fr=document.getElementById('frame4');
+  if(box.style.display==='none'||box.style.display===''){
+    if(!fr.getAttribute('src')) fr.setAttribute('src', fr.getAttribute('data-src'));
+    box.style.display='block';
+    box.scrollIntoView({behavior:'smooth',block:'start'});
+  }else{
+    box.style.display='none';
+  }
+}
+</script>
 </body>
 </html>
