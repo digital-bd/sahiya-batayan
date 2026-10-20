@@ -545,7 +545,7 @@ function statOf(id){return STATS_MAP[id]||(STATS_MAP[id]={views:0,likes:0});}
 function updateMetaTags(post) {
     if (!post) return;
     const baseUrl = location.origin + location.pathname;
-    const postUrl = `${baseUrl}?post=${post.id}`;
+    const postUrl = `${baseUrl}post/${post.id}.html`;
     const title = post.title ? `${post.title} | সাহিত্য বাতায়ন` : 'সাহিত্য বাতায়ন';
     const desc = post.excerpt || post.content?.substring(0, 150) || 'বাংলা সাহিত্যের বিশ্বকোষ।';
     const image = post.image || 'https://digital-bd.github.io/sahiya-batayan/og-banner.png';
@@ -605,7 +605,7 @@ try{await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type'
 }
 
 function shareButtonsHTML(p,stop){
-const u=location.origin+location.pathname+'?post='+p.id;
+const u=location.origin+location.pathname+'post/'+p.id+'.html';
 const t=p.title+' | সাহিত্য বাতায়ন';
 return `<div class="share-buttons" ${stop?'onclick="event.stopPropagation()"':''}>
 <button class="share-btn share-facebook" title="Facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(u))">📘</button>
