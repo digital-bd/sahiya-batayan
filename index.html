@@ -19,7 +19,7 @@
 <meta name="description" id="meta-desc" content="বাংলা সাহিত্য, কবিতা, গল্প, প্রবন্ধ ও সংবাদ বিষয়ক অনলাইন পত্রিকা।">
 <meta property="og:title" id="og-title" content="সাহিত্য বাতায়ন - অনলাইন পত্রিকা">
 <meta property="og:description" id="og-desc" content="বাংলা সাহিত্যের বিশ্বকোষ।">
-<meta property="og:image" id="og-image" content="https://via.placeholder.com/600x400/c0392b/ffffff?text=Sahitya+Batayan">
+<meta property="og:image" id="og-image" content="https://digital-bd.github.io/sahiya-batayan/og-banner.png">
 <meta property="og:url" id="og-url" content="">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -548,7 +548,7 @@ function updateMetaTags(post) {
     const postUrl = `${baseUrl}?post=${post.id}`;
     const title = post.title ? `${post.title} | সাহিত্য বাতায়ন` : 'সাহিত্য বাতায়ন';
     const desc = post.excerpt || post.content?.substring(0, 150) || 'বাংলা সাহিত্যের বিশ্বকোষ।';
-    const image = post.image || 'https://via.placeholder.com/600x400/c0392b/ffffff?text=Sahitya+Batayan';
+    const image = post.image || 'https://digital-bd.github.io/sahiya-batayan/og-banner.png';
 
     document.title = title;
     
