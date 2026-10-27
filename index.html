@@ -23,18 +23,40 @@
 body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text);background:var(--bg-light);top:0!important}
 .goog-te-banner-frame,.goog-tooltip,#goog-gt-tt{display:none!important}
 .container{max-width:1200px;margin:0 auto;padding:0 20px}
-.top-bar{background:var(--secondary);color:#fff;padding:8px 0;font-size:14px}
-.top-bar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:5px}
-.top-bar a{color:#fff;text-decoration:none;margin-left:15px}
-.main-header{background:#fff;padding:20px 0;text-align:center;border-bottom:3px solid var(--primary)}
-.main-nav{background:#fff;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--primary)}
-.main-nav .container{display:flex;align-items:center;flex-wrap:wrap}
-.nav-menu{list-style:none;display:flex;flex-wrap:wrap;flex:1}
-.nav-menu li a{display:block;color:var(--text);text-decoration:none;padding:12px 14px;font-weight:600;font-size:15px}
-.nav-menu li a:hover,.nav-menu li a.active{background:var(--primary);color:#fff}
-.admin-link{background:none;color:var(--primary);font-size:14px}
-.admin-link:hover{background:var(--primary);color:#fff}
-.mobile-menu-btn{display:none;background:none;border:none;color:var(--primary);font-size:24px;cursor:pointer;padding:15px}
+/* ===== ইত্তেফাক স্টাইল হেডার ===== */
+.it-header{background:#fff;border-bottom:1px solid var(--border)}
+.it-row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:12px 20px;flex-wrap:wrap}
+.it-left{display:flex;align-items:center;gap:10px;flex:1;min-width:150px}
+.it-icon{background:none;border:none;font-size:20px;cursor:pointer;color:var(--text);padding:4px 6px}
+.it-icon:hover{color:var(--primary)}
+.it-date{font-size:13px;color:var(--text-light)}
+.it-logo{flex:0 0 auto;text-align:center}
+.it-right{flex:1;display:flex;justify-content:flex-end;align-items:center;gap:7px;flex-wrap:wrap}
+.it-right a{color:var(--text);text-decoration:none;font-size:13px;font-weight:600}
+.it-right a:hover{color:var(--primary)}
+.it-right .sep{color:var(--border)}
+.it-night{background:none;border:none;cursor:pointer;font-size:16px}
+#search-box{display:flex;gap:10px;padding:0 20px 12px;max-width:1200px;margin:0 auto}
+#search-box input{flex:1;padding:10px 15px;border:1px solid var(--border);border-radius:5px;font-family:inherit;font-size:14px;background:#fff;color:var(--text)}
+.cat-nav{background:#fff;border-bottom:2px solid var(--primary);position:sticky;top:0;z-index:100}
+.cat-nav .container{display:flex;align-items:center;overflow-x:auto}
+.nav-menu{list-style:none;display:flex;flex-wrap:nowrap;margin:0 auto;padding:0}
+.nav-menu li a{display:block;color:var(--text);text-decoration:none;padding:10px 13px;font-weight:600;font-size:14px;white-space:nowrap}
+.nav-menu li a:hover,.nav-menu li a.active{color:var(--primary);box-shadow:inset 0 -3px 0 var(--primary)}
+.drawer{position:fixed;top:0;left:-290px;width:265px;height:100%;background:var(--secondary);z-index:1200;transition:left .3s;overflow-y:auto}
+.drawer.open{left:0}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;color:#fff;padding:14px 18px;font-weight:700;background:var(--primary)}
+.drawer-head button{background:none;border:none;color:#fff;font-size:18px;cursor:pointer}
+.drawer ul{list-style:none}
+.drawer ul li a{display:block;color:#e6eef7;padding:10px 18px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px}
+.drawer ul li a:hover{background:rgba(255,255,255,.12);color:#fff}
+.drawer-utils{padding:12px 18px;display:flex;flex-direction:column;gap:8px}
+.drawer-utils a{color:#ffd98e;text-decoration:none;font-size:13px;font-weight:600}
+.drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1100}
+.drawer-overlay.show{display:block}
+body.night .it-header,body.night .cat-nav{background:#10161d}
+body.night .nav-menu li a,body.night .it-right a,body.night .it-icon,body.night .it-date{color:#e6edf3}
+body.night #search-box input{background:#222c38;color:#e0e6ed;border-color:#3a4654}
 .ad-slot{min-height:0;text-align:center;margin:0 auto}
 .stats-bar{background:linear-gradient(135deg,var(--secondary),var(--primary));color:#fff;padding:20px 0}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;text-align:center}
@@ -243,28 +265,20 @@ body{font-family:'Noto Sans Bengali',sans-serif;line-height:1.8;color:var(--text
 .ar-item h4{flex:1;font-size:15px;line-height:1.5}
 .ar-item img{width:90px;height:65px;object-fit:cover;border-radius:4px;flex-shrink:0}
 .ar-item:hover h4{color:var(--primary)}
-/* ===== নাইট মোড ===== */
 body.night{--bg-light:#141a21;--text:#e0e6ed;--text-light:#9aa7b4;--border:#2a3542;--shadow:0 2px 10px rgba(0,0,0,.5);background:#141a21;color:#e0e6ed}
 body.night .main-header,body.night .post-card,body.night .nd-card,body.night .ar-main,body.night .ar-side,body.night .modal-content,body.night .writer-wrap,body.night .admin-panel,body.night .info-page,body.night .notice-item,body.night .epaper-card,body.night .paper-page,body.night .featured-main,body.night .featured-item,body.night .writer-card,body.night .ad-side-box,body.night .ad-bottom-banner,body.night .in-article-ad{background:#1b232c;color:#e0e6ed}
 body.night .notice-board-wrapper{background:#161d26}
-body.night .main-nav{background:#10161d}
-body.night .nav-menu li a{color:#e6edf3}
-body.night .nav-menu li a:hover,body.night .nav-menu li a.active{background:#c0392b;color:#fff}
-body.night .admin-link{background:none;color:#e77c6d}
-body.night .admin-link:hover{background:#c0392b;color:#fff}
-body.night .mobile-menu-btn{color:#e6edf3}
 body.night .breaking-news{background:#202933}
-body.night .site-footer,body.night .top-bar{background:#10161d}
+body.night .site-footer{background:#10161d}
 body.night .granth-poem summary,body.night .comment-item,body.night .pending-item,body.night .profile-table td:first-child,body.night .admin-tab,body.night .post-card blockquote{background:#222c38}
 body.night .agreement-box{background:#2a2415;color:#e0e6ed}
 body.night .form-group input,body.night .form-group select,body.night .form-group textarea{background:#222c38;color:#e0e6ed;border-color:#3a4654}
 body.night .ar-main h1,body.night .notice-item h3{color:#8fb7e8}
 body.night .ar-cat{color:#e77c6d}
-body.night .modal-content .article-body::before{color:rgba(231,124,109,0.06)}
 @media(max-width:768px){
-.nav-menu{display:none;width:100%}
-.nav-menu.active{display:flex;flex-direction:column}
-.mobile-menu-btn{display:block;margin-left:auto}
+.it-row{flex-direction:column;gap:8px}
+.it-left,.it-right{justify-content:center;min-width:100%}
+.it-logo{order:-1}
 .featured-section,.posts-grid{grid-template-columns:1fr}
 .modal-content{padding:25px}
 .modal-content h1{font-size:24px}
@@ -288,9 +302,15 @@ body.night .modal-content .article-body::before{color:rgba(231,124,109,0.06)}
 
 <div id="page-main">
 <header>
-<div class="top-bar"><div class="container"><span id="current-date"></span><div><a href="https://www.facebook.com/profile.php?id=61594281560159" target="_blank">📘 Facebook</a><a href="https://t.me/sahityabatayan" target="_blank">✈️ Telegram</a><a href="https://whatsapp.com/channel/0029VbDjmKUIN9ivthbx0K34" target="_blank">💬 WhatsApp</a><a href="tel:01577439257">📞 ০১৭৭৩৯৫৭</a><a href="#" onclick="setLang('en');return false;">English</a><a href="#" onclick="setLang('bn');return false;">বাংলা</a><button id="night-btn" onclick="toggleNight()" style="background:none;border:none;color:#fff;cursor:pointer;font-size:14px;margin-left:15px">🌙 নাইট মোড</button></div></div></div>
-<div class="main-header"><div class="container">
-<svg width="230" height="190" viewBox="0 0 360 300" style="margin:0 auto;display:block" role="img" aria-label="সাহিত্য বাতায়ন লোগো">
+<div class="it-header">
+<div class="it-row">
+<div class="it-left">
+<button class="it-icon" onclick="openDrawer()" title="মেনু">☰</button>
+<button class="it-icon" onclick="toggleSearch()" title="খুঁজুন">🔍</button>
+<span class="it-date" id="current-date"></span>
+</div>
+<div class="it-logo">
+<svg width="180" height="150" viewBox="0 0 360 300" style="margin:0 auto;display:block" role="img" aria-label="সাহিত্য বাতায়ন লোগো">
 <path d="M96 168 L96 150 A84 84 0 0 1 264 150 L264 168 L242 168 L242 150 A62 62 0 0 0 118 150 L118 168 Z" fill="#d9a520"/>
 <circle cx="180" cy="112" r="17" fill="#d9a520"/>
 <g stroke="#d9a520" stroke-width="5" stroke-linecap="round">
@@ -305,8 +325,22 @@ body.night .modal-content .article-body::before{color:rgba(231,124,109,0.06)}
 <text x="180" y="276" text-anchor="middle" fill="#1f3a5f" font-size="36" font-weight="900" font-family="'Noto Sans Bengali',sans-serif">সাহিত্য বাতায়ন</text>
 <text x="180" y="297" text-anchor="middle" fill="#1f3a5f" font-size="14" letter-spacing="5" font-family="sans-serif">A LITERARY PORTAL</text>
 </svg>
-</div></div>
-<nav class="main-nav"><div class="container"><ul class="nav-menu" id="nav-menu">
+</div>
+<div class="it-right">
+<a href="#" onclick="showNotices();return false;">নোটিশ বোর্ড</a><span class="sep">|</span>
+<a href="epaper-archive.html">ই-পেপার</a><span class="sep">|</span>
+<a href="#" onclick="showGranth();return false;">কাব্যগ্রন্থ</a><span class="sep">|</span>
+<a href="ebook-shop.html">ই-বুক শপ</a><span class="sep">|</span>
+<a href="#" onclick="showWriterDirectory();return false;">লেখক তালিকা</a><span class="sep">|</span>
+<a href="#" onclick="showWriter();return false;">লিখুন</a><span class="sep">|</span>
+<a href="#" onclick="showWriterRegister();return false;">নিবন্ধন</a><span class="sep">|</span>
+<a href="#" onclick="setLang('en');return false;">English</a><span class="sep">|</span>
+<button id="night-btn" class="it-night" onclick="toggleNight()" title="নাইট মোড">🌙</button>
+</div>
+</div>
+<div id="search-box" style="display:none"><input id="search-input" placeholder="লেখা, লেখক বা বিভাগ খুঁজুন..." onkeydown="if(event.key==='Enter')doSearch()"><button class="btn-primary" style="padding:8px 22px;font-size:14px" onclick="doSearch()">খুঁজুন</button></div>
+</div>
+<nav class="cat-nav"><div class="container"><ul class="nav-menu" id="nav-menu">
 <li><a href="#" class="active" data-category="all">প্রচ্ছদ</a></li>
 <li><a href="#" data-category="সংবাদ">সংবাদ</a></li>
 <li><a href="#" data-category="কবিতা,ছড়া">কবিতা-ছড়া</a></li>
@@ -325,15 +359,21 @@ body.night .modal-content .article-body::before{color:rgba(231,124,109,0.06)}
 <li><a href="#" data-category="খেলাধুলা,সাংস্কৃতিক">খেলা-সংস্কৃতি</a></li>
 <li><a href="#" data-category="তরুণ উদীয়মান কলম">তরুণ কলম</a></li>
 <li><a href="#" data-category="নারীদের কথা">নারীদের কথা</a></li>
-</ul><button class="mobile-menu-btn" onclick="document.getElementById('nav-menu').classList.toggle('active')">☰</button>
-<a href="#" onclick="showNotices();return false;" class="admin-link" style="padding:12px 14px;text-decoration:none">📢 নোটিশ বোর্ড</a>
-<a href="epaper-archive.html" class="admin-link" style="padding:12px 14px;text-decoration:none">📰 ই-পেপার</a>
-<a href="#" onclick="showGranth();return false;" class="admin-link" style="padding:12px 14px;text-decoration:none">📚 কাব্যগ্রন্থ</a>
-<a href="ebook-shop.html" class="admin-link" style="padding:12px 14px;text-decoration:none">🛍️ ই-বুক শপ</a>
-<a href="#" onclick="showWriterDirectory();return false;" class="admin-link" style="padding:12px 14px;text-decoration:none">👥 লেখক তালিকা</a>
-<a href="#" onclick="showWriter();return false;" class="admin-link" style="padding:12px 14px;text-decoration:none">✍️ লিখুন</a>
-<a href="#" onclick="showWriterRegister();return false;" class="admin-link" style="padding:12px 14px;text-decoration:none">📝 নিবন্ধন</a>
-</div></nav>
+</ul></div></nav>
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer">
+<div class="drawer-head"><span>📚 সাহিত্য বাতায়ন</span><button onclick="closeDrawer()">✕</button></div>
+<ul id="drawer-list"></ul>
+<div class="drawer-utils">
+<a href="#" onclick="showNotices();closeDrawer();return false;">📢 নোটিশ বোর্ড</a>
+<a href="epaper-archive.html">📰 ই-পেপার</a>
+<a href="#" onclick="showGranth();closeDrawer();return false;">📚 কাব্যগ্রন্থ</a>
+<a href="ebook-shop.html">🛍️ ই-বুক শপ</a>
+<a href="#" onclick="showWriterDirectory();closeDrawer();return false;">👥 লেখক তালিকা</a>
+<a href="#" onclick="showWriter();closeDrawer();return false;">✍️ লিখুন</a>
+<a href="#" onclick="showWriterRegister();closeDrawer();return false;">📝 নিবন্ধন</a>
+</div>
+</aside>
 </header>
 
 <div class="ad-slot" id="ad-top"></div>
@@ -350,10 +390,10 @@ body.night .modal-content .article-body::before{color:rgba(231,124,109,0.06)}
 <section><h2 class="section-title">📚 বিখ্যাত কাব্যগ্রন্থ</h2><p class="section-note">ক্লিক করুন — গ্রন্থ থেকে কবিতা পড়ুন</p><div class="posts-grid" id="granth-grid"></div></section>
 <section><h2 class="section-title">🌟 বিখ্যাত কবি ও লেখক</h2><p class="section-note">বাংলা সাহিত্যের কিংবদন্তিদের স্মরণে</p>
 <div class="posts-grid">
-<article class="post-card"><div class="post-card-body"><span class="category-tag">কবিতা</span><h3>রবীন্দ্রনাথ ঠাকুর (১৮৬১-১৯১)</h3><blockquote>"যেখানে অবাক ভয়, যেখানে উন্নত শির..."</blockquote><p class="excerpt">বিশ্বকবি, নোবেলজয়ী। গীতাঞ্জলি, সোনার তরী — বাংলা সাহিত্যের সম্রাট।</p><div class="meta">📚 কবিতা | গল্প | উপন্যাস | গান</div></div></article>
-<article class="post-card"><div class="post-card-body"><span class="category-tag">কবিতা</span><h3>কাজী নজরুল ইসলাম (১৮৯৯-১৯৭৬)</h3><blockquote>"আমি চঞ্চল, আমি অস্থির..."</blockquote><p class="excerpt">বিদ্রোহী কবি, জাতীয় কবি। অগ্নিবীণা, সঞ্চিতা — সাম্য ও বিদ্রোহের কণ্ঠ।</p><div class="meta">📚 কবিতা | গান | উপন্যাস</div></div></article>
-<article class="post-card"><div class="post-card-body"><span class="category-tag">কবিতা</span><h3>জীবনানন্দ দাশ (১৮৯৯-১৯৪)</h3><blockquote>"বাংলার মুখ আমি দেখিয়াছি..."</blockquote><p class="excerpt">প্রকৃতি ও বিরহের কবি। ধূসর পান্ডুলিপি, বনলতা সেন।</p><div class="meta">📚 কবিতা | প্রবন্ধ</div></div></article>
-<article class="post-card"><div class="post-card-body"><span class="category-tag">উপন্যাস</span><h3>শরৎচন্দ্র চট্টোপাধ্যায় (১৮৭৬-১৯৮)</h3><p class="excerpt">বাংলা কথাসাহিত্যের জনপ্রিয়তম ঔপন্যাসিক। পথের দাবী, দেবদাস, শ্রীকান্ত।</p><div class="meta">📚 উপন্যাস | ছোটগল্প</div></div></article>
+<article class="post-card"><div class="post-card-body"><span class="category-tag">কবিতা</span><h3>রবীন্দ্রনাথ ঠাকুর (১৮৬১-১৯)</h3><blockquote>"যেখানে অবাক ভয়, যেখানে উন্নত শির..."</blockquote><p class="excerpt">বিশ্বকবি, নোবেলজয়ী। গীতাঞ্জলি, সোনার তরী — বাংলা সাহিত্যের সম্রাট।</p><div class="meta">📚 কবিতা | গল্প | উপন্যাস | গান</div></div></article>
+<article class="post-card"><div class="post-card-body"><span class="category-tag">কবিতা</span><h3>কাজী নজরুল ইসলাম (১৮৯৯-১৯৬)</h3><blockquote>"আমি চঞ্চল, আমি অস্থির..."</blockquote><p class="excerpt">বিদ্রোহী কবি, জাতীয় কবি। অগ্নিবীণা, সঞ্চিতা — সাম্য ও বিদ্রোহের কণ্ঠ।</p><div class="meta">📚 কবিতা | গান | উপন্যাস</div></div></article>
+<article class="post-card"><div class="post-card-body"><span class="category-tag">কবিতা</span><h3>জীবনানন্দ দাশ (১৮৯-১৯৫৪)</h3><blockquote>"বাংলার মুখ আমি দেখিয়াছি..."</blockquote><p class="excerpt">প্রকৃতি ও বিরহের কবি। ধূসর পান্ডুলিপি, বনলতা সেন।</p><div class="meta">📚 কবিতা | প্রবন্ধ</div></div></article>
+<article class="post-card"><div class="post-card-body"><span class="category-tag">উপন্যাস</span><h3>শরৎচন্দ্র চট্টোপাধ্যায় (১৮৬-১৯৩৮)</h3><p class="excerpt">বাংলা কথাসাহিত্যের জনপ্রিয়তম ঔপন্যাসিক। পথের দাবী, দেবদাস, শ্রীকান্ত।</p><div class="meta">📚 উপন্যাস | ছোটগল্প</div></div></article>
 <article class="post-card"><div class="post-card-body"><span class="category-tag">উপন্যাস</span><h3>বঙ্কিমচন্দ্র চট্টোপাধ্যায় (১৮৮-১৮৯৪)</h3><blockquote>"বন্দে মাতরম্"</blockquote><p class="excerpt">বাংলা উপন্যাসের জনক। দুর্গেশনন্দিনী, আনন্দমঠ।</p><div class="meta">📚 উপন্যাস | প্রবন্ধ</div></div></article>
 <article class="post-card"><div class="post-card-body"><span class="category-tag">কবিতা</span><h3>জসীম উদ্‌দীন (১৯০৩-১৯৭৬)</h3><p class="excerpt">পল্লীকবি। নকশী কাঁথার মাঠ, সোনার বাংলা — গ্রামবাংলার কবি।</p><div class="meta">📚 কবিতা | ছড়া</div></div></article>
 </div></section>
@@ -378,7 +418,7 @@ body.night .modal-content .article-body::before{color:rgba(231,124,109,0.06)}
 <footer class="site-footer"><div class="container">
 <div class="footer-content">
 <div><h3>সাহিত্য বাতায়ন</h3><p>সাহিত্য, সংবাদ ও সংস্কৃতি বিষয়ক অনলাইন পত্রিকা।</p></div>
-<div><h3>যোগাযোগ</h3><p>📍 খিলগাঁও, ঢাকা-১২১৯</p><p>📞 ০১৫৭৪৯২৫</p><p> sahityabatayan@gmail.com</p></div>
+<div><h3>যোগাযোগ</h3><p>📍 খিলগাঁও, ঢাকা-১২১৯</p><p>📞 ০১৫৭৭৪৩৯২৫৭</p><p>📧 sahityabatayan@gmail.com</p></div>
 <div><h3>দ্রুত লিংক</h3>
 <p><a href="#" onclick="showNotices();return false;">📢 নোটিশ বোর্ড</a></p>
 <p><a href="#" onclick="showWriterDirectory();return false;">লেখক তালিকা ও প্রোফাইল</a></p>
@@ -403,7 +443,6 @@ body.night .modal-content .article-body::before{color:rgba(231,124,109,0.06)}
 </div></footer>
 </div>
 
-<!-- ===== নোটিশ বোর্ড পেজ ===== -->
 <div id="page-notice" style="display:none"><div class="container" style="padding-top:30px">
 <div class="back-to-home" onclick="showMain()">← প্রচ্ছদে ফিরুন</div>
 <div class="notice-board-wrapper" style="margin:0 0 40px">
@@ -412,7 +451,6 @@ body.night .modal-content .article-body::before{color:rgba(231,124,109,0.06)}
 </div>
 </div></div>
 
-<!-- ===== আর্টিকেল পেজ ===== -->
 <div id="page-article" style="display:none"><div class="container" style="padding-top:30px">
 <div class="back-to-home" onclick="showMain()">← প্রচ্ছদে ফিরুন</div>
 <div class="ar-layout">
@@ -628,7 +666,7 @@ body.night .modal-content .article-body::before{color:rgba(231,124,109,0.06)}
 <div class="form-actions"><button type="button" class="btn-secondary" onclick="showMain()">← প্রচ্ছদে ফিরুন</button></div>
 </div></div></div>
 
-<div id="page-about" style="display:none"><div class="container"><div class="info-page"><h2>আমাদের সম্পর্কে</h2><p>সাহিত্য বাতায়ন বাংলা ভাষার সেবায় নিবেদিত একটি অনলাইন পত্রিকা। ২০২৪ সাল থেকে আমরা নিয়মিত কবিতা, গল্প, প্রবন্ধ, সাক্ষাৎকার ও সংবাদ প্রকাশ করে আসছি।</p><p>📞 ১৫৭৭৪৩৯২৫৭ | sahityabatayan@gmail.com</p><div class="form-actions"><button type="button" class="btn-secondary" onclick="showMain()">← ফিরে যান</button></div></div></div></div>
+<div id="page-about" style="display:none"><div class="container"><div class="info-page"><h2>আমাদের সম্পর্কে</h2><p>সাহিত্য বাতায়ন বাংলা ভাষার সেবায় নিবেদিত একটি অনলাইন পত্রিকা। ২০২৪ সাল থেকে আমরা নিয়মিত কবিতা, গল্প, প্রবন্ধ, সাক্ষাৎকার ও সংবাদ প্রকাশ করে আসছি।</p><p>📞 ০১৫৭৭৪৩৯২৫৭ | sahityabatayan@gmail.com</p><div class="form-actions"><button type="button" class="btn-secondary" onclick="showMain()">← ফিরে যান</button></div></div></div></div>
 <div id="page-privacy" style="display:none"><div class="container"><div class="info-page"><h2>গোপনীয়তা নীতি</h2><p>আমরা আপনার তথ্য তৃতীয় পক্ষের কাছে বিক্রি করি না। লেখকদের তথ্য ও ছবি শুধু প্রোফাইল প্রদর্শনের জন্য ব্যবহৃত হয়।</p><div class="form-actions"><button type="button" class="btn-secondary" onclick="showMain()">← ফিরে যান</button></div></div></div></div>
 <div id="page-contact" style="display:none"><div class="container"><div class="info-page"><h2>যোগাযোগ</h2><p>📧 sahityabatayan@gmail.com<br>📞 ০১৫৭৭৪৩৯২৫৭<br>📍 খিলগাঁও, ঢাকা-১২১৯</p><div class="form-actions"><button type="button" class="btn-secondary" onclick="showMain()">← ফিরে যান</button></div></div></div></div>
 
@@ -667,7 +705,7 @@ function getCache(){try{var raw=localStorage.getItem('sb_cache');if(!raw)return 
 function setCache(o){try{o.t=Date.now();localStorage.setItem('sb_cache',JSON.stringify(o));}catch(e){}}
 
 const BOOKS=[{t:'পথের পাঁচালী',a:'বিভূতিভূষণ বন্দ্যোপাধ্যায়',d:'অপু-দুর্গার অমর গল্প।',s:'পথের+পাঁচালী'},{t:'ফেলুদা সমগ্র',a:'সত্যজিৎ রায়',d:'রোমাঞ্চকর গোয়েন্দা সমগ্র।',s:'ফেলুদা'},{t:'পদ্মা নদীর মাঝি',a:'মানিক বন্দ্যোপাধ্যায়',d:'বাংলা সাহিত্যের ক্লাসিক উপন্যাস।',s:'পদ্মা+নদীর+মাঝি'},{t:'দেবদাস',a:'শরৎচন্দ্র চট্টোপাধ্যায়',d:'চিরন্তন প্রেমের উপন্যাস।',s:'দেবদাস'},{t:'শ্রীকান্ত',a:'শরৎচন্দ্র চট্টোপাধ্যায়',d:'ভবঘুরে শ্রীকান্তের জীবনকথা।',s:'শ্রীকান্ত'},{t:'চোখের বালি',a:'রবীন্দ্রনাথ ঠাকুর',d:'সামাজিক উপন্যাসের মাইলফলক।',s:'চোখের+বালি'},{t:'কপালকুণ্ডলা',a:'বঙ্কিমচন্দ্র চট্টোপাধ্যায়',d:'রহস্য-রোমান্সের আদি পর্ব।',s:'কপালকুণ্ডলা'},{t:'আনন্দমঠ',a:'বঙ্কিমচন্দ্র চট্টোপাধ্যায়',d:'বন্দে মাতরমের জন্মভূমি।',s:'আনন্দমঠ'},{t:'গীতাঞ্জলি',a:'রবীন্দ্রনাথ ঠাকুর',d:'নোবেলজয়ী কাব্যগ্রন্থ।',s:'গীতাঞ্জলি'},{t:'বনলতা সেন',a:'জীবনানন্দ দাশ',d:'আধুনিক কবিতার মাইলফলক।',s:'বনলতা+সেন'},{t:'সঞ্চিতা',a:'কাজী নজরুল ইসলাম',d:'বিদ্রোহী কবির নির্বাচিত সংগ্রহ।',s:'সঞ্চিতা'},{t:'নকশী কাঁথার মাঠ',a:'জসীম উদ্‌দীন',d:'পল্লীকাব্যের অমর সৃষ্টি।',s:'নকশী+কাঁথার+মাঠ'}];
-const GRANTHO=[{book:'গীতাঞ্জলি',author:'রবীন্দ্রনাথ ঠাকুর',year:'১৯০',desc:'নোবেল পুরস্কার এনে দেওয়া অমর কাব্যগ্রন্থ।',poems:[{t:'চিত্ত যেথা ভয়শূন্য',c:'চিত্ত যেথা ভয়শূন্য, উচ্চ যেথা শির,\nজ্ঞান যেথা মুক্ত, যেথা গৃহের প্রাচীর\nআপন প্রাঙ্গণতলে দিবসশর্বরী\nবসুধারে রাখে নাই খণ্ড ক্ষুদ্র করি,\nযেথা বাক্য হৃদয়ের উৎসমুখ হতে\nউচ্ছ্বসিয়া উঠে, যেথা নির্বারিত স্রোতে\nদেশে দেশে দিশে দিশে কর্মধারা ধায়\nঅজস্র সহস্রবিধ চরিতার্থতায়—\nযেথা তুচ্ছ আচারের মরুবালুরাশি\nবিচারের স্রোতঃপথ ফেলে নাই গ্রাসি,\nপৌরুষেরে করে নি শতধা; নিত্য যেথা\nতুমি সর্ব কর্ম চিন্তা আনন্দের নেতা—\nনিজ হস্তুে নির্দয় আঘাত করি, পিতঃ,\nভারতেরে সেই স্বর্গে করো জাগরিত।'}]},{book:'বনলতা সেন',author:'জীবনানন্দ দাশ',year:'১৯৪২',desc:'আধুনিক বাংলা কবিতার মাইলফলক সংগ্রহ।',poems:[{t:'বনলতা সেন',c:'হাজার বছর ধরে আমি পথ হাঁটিতেছি পৃথিবীর পথে,\nসিংহলের সমুদ্র থেকে নিশীথে অন্ধকার মালয় সাগরে\nঅনেক ঘুরেছি; বিম্বিসার অশোকের ধূসর নগরে\nআমি ছিলাম; সেখানে ম্লান স্মৃতির মন্দিরে আমার\nক্লান্ত কয়েকটি কথা মনে আছে; আজও আমি ভুলি নাই\nসে-সব অন্ধকার যুগ; আমি জানিতাম রাজীদের, তবু মনে আছে\nসে-কালের একটি মেয়ে-মানুষের মুখ—বনলতা সেন।'}]},{book:'সঞ্চিতা',author:'কাজী নজরুল ইসলাম',year:'১৯২৭',desc:'বিদ্রোহী কবির নির্বাচিত কবিতা সংগ্রহ।',poems:[{t:'বিদ্রোহী (নির্বাচিত অংশ)',c:'কহ, মহাবীর,\nবলিষ্ঠ কণ্ঠে—\n"আমি চঞ্চল, আমি অস্থির,\nআমি বাঁধন মানি না, মানি না!"'}]},{book:'আনন্দমঠ',author:'বঙ্কিমচন্দ্র চট্টোপাধ্যায়',year:'১৮২',desc:'জাতীয় সংগীত "বন্দে মাতরম"-এর জন্মভূমি।',poems:[{t:'বন্দে মাতরম্',c:'বন্দে মাতরম্!\nসুজলাং সুফলাং মলয়জশীতলাং\nশস্যশ্যামলাং মাতরম্!\nশুভ্রজ্যোৎস্না পুলকিত যামিনীং,\nফুল্লকুসুমিত দ্রুমদলশোভিনীং,\nসুহাসিনীং সুমধুর ভাষিনীং\nসুখদাং বরদাং মাতরম্!'}]}];
+const GRANTHO=[{book:'গীতাঞ্জলি',author:'রবীন্দ্রনাথ ঠাকুর',year:'১৯১০',desc:'নোবেল পুরস্কার এনে দেওয়া অমর কাব্যগ্রন্থ।',poems:[{t:'চিত্ত যেথা ভয়শূন্য',c:'চিত্ত যেথা ভয়শূন্য, উচ্চ যেথা শির,\nজ্ঞান যেথা মুক্ত, যেথা গৃহের প্রাচীর\nআপন প্রাঙ্গণতলে দিবসশর্বরী\nবসুধারে রাখে নাই খণ্ড ক্ষুদ্র করি,\nযেথা বাক্য হৃদয়ের উৎসমুখ হতে\nউচ্ছ্বসিয়া উঠে, যেথা নির্বারিত স্রোতে\nদেশে দেশে দিশে দিশে কর্মধারা ধায়\nঅজস্র সহস্রবিধ চরিতার্থতায়—\nযেথা তুচ্ছ আচারের মরুবালুরাশি\nবিচারের স্রোতঃপথ ফেলে নাই গ্রাসি,\nপৌরুষেরে করে নি শতধা; নিত্য যেথা\nতুমি সর্ব কর্ম চিন্তা আনন্দের নেতা—\nনিজ হস্তুে নির্দয় আঘাত করি, পিতঃ,\nভারতেরে সেই স্বর্গে করো জাগরিত।'}]},{book:'বনলতা সেন',author:'জীবনানন্দ দাশ',year:'১৪২',desc:'আধুনিক বাংলা কবিতার মাইলফলক সংগ্রহ।',poems:[{t:'বনলতা সেন',c:'হাজার বছর ধরে আমি পথ হাঁটিতেছি পৃথিবীর পথে,\nসিংহলের সমুদ্র থেকে নিশীথে অন্ধকার মালয় সাগরে\nঅনেক ঘুরেছি; বিম্বিসার অশোকের ধূসর নগরে\nআমি ছিলাম; সেখানে ম্লান স্মৃতির মন্দিরে আমার\nক্লান্ত কয়েকটি কথা মনে আছে; আজও আমি ভুলি নাই\nসে-সব অন্ধকার যুগ; আমি জানিতাম রাজীদের, তবু মনে আছে\nসে-কালের একটি মেয়ে-মানুষের মুখ—বনলতা সেন।'}]},{book:'সঞ্চিতা',author:'কাজী নজরুল ইসলাম',year:'১৯২৭',desc:'বিদ্রোহী কবির নির্বাচিত কবিতা সংগ্রহ।',poems:[{t:'বিদ্রোহী (নির্বাচিত অংশ)',c:'কহ, মহাবীর,\nবলিষ্ঠ কণ্ঠে—\n"আমি চঞ্চল, আমি অস্থির,\nআমি বাঁধন মানি না, মানি না!"'}]},{book:'আনন্দমঠ',author:'বঙ্কিমচন্দ্র চট্টোপাধ্যায়',year:'১৮৮২',desc:'জাতীয় সংগীত "বন্দে মাতরম"-এর জন্মভূমি।',poems:[{t:'বন্দে মাতরম্',c:'বন্দে মাতরম্!\nসুজলাং সুফলাং মলয়জশীতলাং\nশস্যশ্যামলাং মাতরম্!\nশুভ্রজ্যোৎস্না পুলকিত যামিনীং,\nফুল্লকুসুমিত দ্রুমদলশোভিনীং,\nসুহাসিনীং সুমধুর ভাষিনীং\nসুখদাং বরদাং মাতরম্!'}]}];
 const EPAPER_PAGES=[{n:1,name:'প্রথম পাতা',cats:['সংবাদ','ফিচার']},{n:2,name:'কবিতা পাতা',cats:['কবিতা','ছড়া']},{n:3,name:'গল্প পাতা',cats:['ছোটগল্প','অণুগল্প','উপন্যাস','নাটক']},{n:4,name:'প্রবন্ধ পাতা',cats:['প্রবন্ধ','কলাম','বুক রিভিউ','সমালোচনা','সম্পাদকীয়']},{n:5,name:'ভ্রমণ পাতা',cats:['ভ্রমণ','অনুবাদ','স্মৃতিকথা','জীবনী']},{n:6,name:'নতুন প্রজন্ম পাতা',cats:['তরুণ উদীয়মান কলম','নারীদের কথা','শিশু-কিশোর']},{n:7,name:'বিনোদন পাতা',cats:['সাক্ষাৎকার','খেলাধুলা','সাংস্কৃতিক','রম্যরচনা']}];
 
 function toBn(n){const b=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];return String(n).split('').map(c=>/[0-9]/.test(c)?b[c]:c).join('');}
@@ -682,9 +720,13 @@ function statOf(id){return STATS_MAP[id]||(STATS_MAP[id]={views:0,likes:0});}
 function sid(id){return String(id).replace(/[^A-Za-z0-9_-]/g,'');}
 function postUrl(id){return STATIC_PAGES?BASE+'post/'+sid(id)+'.html':BASE+'?p='+encodeURIComponent(id);}
 
-/* ===== নাইট মোড ও ভাষা ===== */
-function applyNight(){if(localStorage.getItem('sb_night')==='1'){document.body.classList.add('night');const b=document.getElementById('night-btn');if(b)b.textContent='☀️ ডে মোড';}}
-function toggleNight(){const on=document.body.classList.toggle('night');localStorage.setItem('sb_night',on?'1':'0');const b=document.getElementById('night-btn');if(b)b.textContent=on?'☀️ ডে মোড':'🌙 নাইট মোড';}
+/* ===== নাইট মোড, ড্রয়ার, সার্চ, ভাষা ===== */
+function applyNight(){if(localStorage.getItem('sb_night')==='1'){document.body.classList.add('night');const b=document.getElementById('night-btn');if(b)b.textContent='☀️';}}
+function toggleNight(){const on=document.body.classList.toggle('night');localStorage.setItem('sb_night',on?'1':'0');const b=document.getElementById('night-btn');if(b)b.textContent=on?'☀️':'🌙';}
+function openDrawer(){document.getElementById('drawer').classList.add('open');document.getElementById('drawer-overlay').classList.add('show');}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('drawer-overlay').classList.remove('show');}
+function toggleSearch(){const b=document.getElementById('search-box');b.style.display=b.style.display==='none'?'flex':'none';if(b.style.display==='flex')document.getElementById('search-input').focus();}
+function doSearch(){const q=(document.getElementById('search-input').value||'').trim().toLowerCase();if(!q)return;const res=ALL_POSTS.filter(p=>((p.title||'')+' '+(p.author||'')+' '+(p.category||'')+' '+(p.content||'')).toLowerCase().includes(q));hideAll();document.getElementById('page-main').style.display='block';document.getElementById('section-title').textContent='🔍 অনুসন্ধান: '+q;POSTS_SHOWN=20;renderGrid(res);window.scrollTo(0,0);}
 function setLang(lang){
 if(lang==='en'){document.cookie='googtrans=/bn/en; path=/';document.cookie='googtrans=/bn/en; path=/; domain='+location.hostname;}
 else{document.cookie='googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';document.cookie='googtrans=; path=/; domain='+location.hostname+'; expires=Thu, 01 Jan 1970 00:00:00 GMT';}
@@ -711,10 +753,9 @@ function shareButtonsHTML(p,stop){const id=p.id;return `<div class="share-button
 function miniShareHTML(p){const id=p.id;return `<div class="mini-share" onclick="event.stopPropagation()"><button class="ms-fb" title="Facebook" onclick="event.stopPropagation();shareTo('fb','${id}')">📘</button><button class="ms-wa" title="WhatsApp" onclick="event.stopPropagation();shareTo('wa','${id}')">📱</button><button class="ms-tw" title="Twitter" onclick="event.stopPropagation();shareTo('tw','${id}')">🐦</button><button class="ms-cp" title="লিংক কপি" onclick="event.stopPropagation();shareTo('cp','${id}')">🔗 কপি</button></div>`;}
 function statLine(p){const st=statOf(p.id);return '<div class="nd-stat"><span>👁️ <b>'+toBn(st.views||0)+'</b> বার পঠিত</span><span>❤️ <b>'+toBn(st.likes||0)+'</b> লাইক</span></div>';}
 
-/* ===== বিজ্ঞাপন ===== */
 function adsFor(pos){return ALL_ADS.filter(a=>String(a.position||'feed')===pos);}
 function adCardHTML(a){return `<div class="nd-card ad-card" onclick="window.open('${a.link_url||'#'}','_blank')"><div class="ad-tag">📢 বিজ্ঞাপন</div><img src="${a.image_url}" onerror="this.style.display='none'"><div class="nd-card-body"><h4>${escapeHtml(a.title||'বিজ্ঞাপন')}</h4></div></div>`;}
-function renderBottomAd(){const el=document.getElementById('ad-bottom');if(!el)return;const ads=adsFor('bottom');if(ads.length){el.innerHTML=ads.map(a=>`<a class="ad-bottom-banner" href="${a.link_url}" target="_blank"><img src="${a.image_url}" onerror="this.style.display='none'"><span>${escapeHtml(a.title||'বিজ্ঞাপন')}</span></a>`).join('');}else{el.innerHTML=`<div class="ad-banner" onclick="window.open('https://wa.me/8801577439257?text='+encodeURIComponent('আমি সাহিত্য বাতায়নে বিজ্ঞাপন দিতে চাই, বিস্তারিত জানতে চাই।'),'_blank')"><h3>📢 আপনার বিজ্ঞাপন এখানে প্রচারিত হোক!</h3><p>প্রতিদিন হাজারো পাঠক পড়ছেন। বিস্তারিত জানতে ক্লিক করুন | 📞 ০১৫৭৭৪৩৯২৫৭</p></div>`;}}
+function renderBottomAd(){const el=document.getElementById('ad-bottom');if(!el)return;const ads=adsFor('bottom');if(ads.length){el.innerHTML=ads.map(a=>`<a class="ad-bottom-banner" href="${a.link_url}" target="_blank"><img src="${a.image_url}" onerror="this.style.display='none'"><span>${escapeHtml(a.title||'বিজ্ঞাপন')}</span></a>`).join('');}else{el.innerHTML=`<div class="ad-banner" onclick="window.open('https://wa.me/8801577439257?text='+encodeURIComponent('আমি সাহিত্য বাতায়নে বিজ্ঞাপন দিতে চাই, বিস্তারিত জানতে চাই।'),'_blank')"><h3>📢 আপনার বিজ্ঞাপন এখানে প্রচারিত হোক!</h3><p>প্রতিদিন হাজারো পাঠক পড়ছেন। বিস্তারিত জানতে ক্লিক করুন | 📞 ১৫৭৭৪৩৯২৫৭</p></div>`;}}
 function renderSideAd(){const el=document.getElementById('ad-side');if(!el)return;const ads=adsFor('side');el.innerHTML=ads.length?('<h3 style="margin-top:18px">📢 বিজ্ঞাপন</h3>'+ads.map(a=>`<a class="ad-side-box" href="${a.link_url}" target="_blank"><img src="${a.image_url}" onerror="this.style.display='none'"><span>${escapeHtml(a.title||'বিজ্ঞাপন')}</span></a>`).join('')):'';}
 async function loadAds(){const list=await fetchData('getAds');ALL_ADS=Array.isArray(list)?list:[];renderBottomAd();renderSideAd();}
 
@@ -727,13 +768,23 @@ function closeGranth(){document.getElementById('granth-modal').classList.remove(
 
 async function initMain(){applyNight();trackVisitor();updateDate();renderBooks();renderGranthGrids();loadNotices();var c=getCache();if(c&&c.posts&&c.posts.length>0){ALL_POSTS=c.posts;ALL_WRITERS=c.writers||[];STATS_MAP=c.stats||{};renderHomeBlocks();}else{document.getElementById('posts-grid').innerHTML='<p style="text-align:center;padding:40px">লেখা লোড হচ্ছে...</p>';}setupNavigation();try{const [statsRes,postsRes,writersRes,postStatsRes,adsRes]=await Promise.all([fetchData('getStats'),fetchData('getPosts'),fetchData('getWriters'),fetchData('getPostStats'),fetchData('getAds')]);let posts=Array.isArray(postsRes)?postsRes:[];posts=posts.map(normalizePost).filter(p=>p.status!=='pending'&&p.status!=='rejected');ALL_ADS=Array.isArray(adsRes)?adsRes:[];if(posts.length>0||!c){ALL_POSTS=posts;const stats=statsRes||{};ALL_WRITERS=Array.isArray(writersRes)?writersRes:[];STATS_MAP={};(Array.isArray(postStatsRes)?postStatsRes:[]).forEach(s=>{STATS_MAP[s.id]={views:s.views||0,likes:s.likes||0};});setCache({posts:ALL_POSTS,writers:ALL_WRITERS,stats:STATS_MAP});document.getElementById('stat-visitors').textContent=toBn(stats.visitors||0);document.getElementById('stat-today').textContent=toBn(stats.today||0);renderHomeBlocks();}renderBottomAd();renderSideAd();}catch(e){console.error('Fetch Error:',e);if(!c||!c.posts){document.getElementById('posts-grid').innerHTML='<p style="text-align:center;color:red;padding:40px">ডেটা লোড করতে সমস্যা হচ্ছে। পরে আবার চেষ্টা করুন।</p>';}}}
 
-function setupNavigation(){if(!NAV_DONE){NAV_DONE=true;document.querySelectorAll('#nav-menu a[data-category]').forEach(function(link){link.onclick=function(e){e.preventDefault();document.querySelectorAll('#nav-menu a').forEach(a=>a.classList.remove('active'));link.classList.add('active');const cat=link.dataset.category;if(cat==='all'){showMain();}else{showCategory(link.textContent.trim(),cat.split(','));}};});}if(DEEP_DONE)return;const qs=new URLSearchParams(location.search);const pid=qs.get('p')||qs.get('post');if(pid){DEEP_DONE=true;const t=setInterval(()=>{if(ALL_POSTS.length>0){const post=ALL_POSTS.find(p=>String(p.id)===String(pid));clearInterval(t);if(post){openArticle(post.id);}}},400);setTimeout(()=>clearInterval(t),12000);}}
+function setupNavigation(){
+if(!NAV_DONE){
+NAV_DONE=true;
+const dl=document.getElementById('drawer-list');
+if(dl&&!dl.children.length){dl.innerHTML=document.getElementById('nav-menu').innerHTML;}
+document.querySelectorAll('#nav-menu a[data-category], #drawer-list a[data-category]').forEach(function(link){
+link.onclick=function(e){e.preventDefault();closeDrawer();document.querySelectorAll('#nav-menu a').forEach(a=>a.classList.remove('active'));const cat=link.dataset.category;if(cat==='all'){showMain();}else{showCategory(link.textContent.trim(),cat.split(','));}};
+});
+}
+if(DEEP_DONE)return;const qs=new URLSearchParams(location.search);const pid=qs.get('p')||qs.get('post');if(pid){DEEP_DONE=true;const t=setInterval(()=>{if(ALL_POSTS.length>0){const post=ALL_POSTS.find(p=>String(p.id)===String(pid));clearInterval(t);if(post){openArticle(post.id);}}},400);setTimeout(()=>clearInterval(t),12000);}
+}
 
 function renderHomeBlocks(){document.getElementById('stat-posts').textContent=toBn(ALL_POSTS.length);document.getElementById('stat-writers').textContent=toBn(ALL_WRITERS.length);document.getElementById('breaking-ticker').innerHTML=ALL_POSTS.slice(0,8).map(p=>`<span onclick="openArticle('${p.id}')" style="margin:0 20px">📰 ${escapeHtml(p.title)}</span>`).join(' • ')||'📰 নতুন লেখা শীঘ্রই আসছে';POSTS_SHOWN=20;renderGrid(ALL_POSTS);if(ALL_WRITERS.length){document.getElementById('writer-count-section').style.display='block';document.getElementById('writer-list').innerHTML=ALL_WRITERS.slice(0,6).map(writerCardHTML).join('');}const featured=ALL_POSTS.filter(p=>String(p.featured||'').toLowerCase()==='yes'||String(p.featured||'').toLowerCase()==='true');const featSec=document.getElementById('featured-section');if(featured.length){featSec.style.display='grid';const main=featured[0];document.getElementById('featured-main').innerHTML='<img src="'+(main.image||'https://placehold.co/800x400/c0392b/ffffff?text=Sahitya+Batayan')+'" style="width:100%;height:100%;object-fit:cover" onerror="this.src=\'https://placehold.co/800x400/c0392b/ffffff?text=Sahitya+Batayan\'"><div class="featured-overlay"><span class="category-tag">'+main.category+'</span><h2>'+main.title+'</h2><div class="meta">✍️ '+main.author+'</div></div>';document.getElementById('featured-main').onclick=function(){openArticle(main.id);};document.getElementById('featured-side').innerHTML=featured.slice(1,3).map(p=>'<div class="featured-item" onclick="openArticle(\''+p.id+'\')"><img src="'+(p.image||'https://placehold.co/600x120/c0392b/ffffff?text=SB')+'" onerror="this.src=\'https://placehold.co/600x120/c0392b/ffffff?text=SB\'"><div class="featured-item-body"><span class="category-tag">'+p.category+'</span><h4 style="margin:8px 0;font-size:16px">'+p.title+'</h4></div></div>').join('');}else{featSec.style.display='none';}}
 
 function renderGrid(posts){CURRENT_LIST=posts;const grid=document.getElementById('posts-grid');if(!posts.length){grid.innerHTML='<p style="text-align:center;padding:40px">এই বিভাগে এখনো কোনো লেখা প্রকাশিত হয়নি।</p>';return;}const ph='https://placehold.co/600x350/c0392b/ffffff?text=Sahitya+Batayan';const img=p=>(p.image||ph);const visible=posts.slice(0,POSTS_SHOWN);const lead=visible[0],side=visible.slice(1,4),rest=visible.slice(4);const feedAds=adsFor('feed');let cards=[];rest.forEach((p,i)=>{cards.push('<div class="nd-card" onclick="openArticle(\''+p.id+'\')"><img src="'+img(p)+'" loading="lazy" onerror="this.src=\''+ph+'\'"><div class="nd-card-body"><h4>'+p.title+'</h4><small>✍️ '+p.author+' | 📅 '+p.date+'</small>'+statLine(p)+miniShareHTML(p)+'</div></div>');if(feedAds.length&&((i+1)%8===0)){cards.push(adCardHTML(feedAds[Math.floor((i+1)/8-1)%feedAds.length]));}});let html='<div class="nd-top">'+'<div class="nd-lead" onclick="openArticle(\''+lead.id+'\')"><img src="'+img(lead)+'" onerror="this.src=\''+ph+'\'"><h2>'+lead.title+'</h2><p>'+(lead.excerpt||'')+'</p><small>✍️ '+lead.author+' | 📅 '+lead.date+'</small>'+statLine(lead)+miniShareHTML(lead)+'</div>'+'<div class="nd-side">'+side.map(p=>'<div class="nd-row" onclick="openArticle(\''+p.id+'\')"><div style="flex:1"><h4>'+p.title+'</h4><small>✍️ '+p.author+'</small>'+statLine(p)+miniShareHTML(p)+'</div><img src="'+img(p)+'" onerror="this.src=\''+ph+'\'"></div>').join('')+'</div>'+'</div>'+'<div class="nd-grid">'+cards.join('')+'</div>';if(posts.length>POSTS_SHOWN){html+='<button class="load-more-btn" onclick="loadMorePosts()">আরও '+toBn(posts.length-POSTS_SHOWN)+'টি লেখা দেখুন ↓</button>';}grid.innerHTML=html;}
 function loadMorePosts(){POSTS_SHOWN+=20;renderGrid(CURRENT_LIST);}
-function showCategory(label,cats){const posts=ALL_POSTS.filter(p=>cats.indexOf(p.category)>-1);document.getElementById('section-title').textContent=label+' বিভাগ';POSTS_SHOWN=20;renderGrid(posts);window.scrollTo(0,0);}
+function showCategory(label,cats){const posts=ALL_POSTS.filter(p=>cats.indexOf(p.category)>-1);hideAll();document.getElementById('page-main').style.display='block';document.getElementById('section-title').textContent=label+' বিভাগ';POSTS_SHOWN=20;renderGrid(posts);window.scrollTo(0,0);}
 function showNotices(){hideAll();document.getElementById('page-notice').style.display='block';loadNotices();window.scrollTo(0,0);}
 
 function showArticlePage(id){const post=ALL_POSTS.find(p=>p.id===id);if(!post)return;currentPostId=id;updateMetaTags(post);try{history.replaceState(null,'',postUrl(id));}catch(e){}if(!sessionStorage.getItem('sb_viewed_'+id)){sessionStorage.setItem('sb_viewed_'+id,'1');submitData({action:'trackView',postId:id});statOf(id).views=(statOf(id).views||0)+1;}const st=statOf(id);document.getElementById('ap-category').textContent=post.category;document.getElementById('ap-title').textContent=post.title;document.getElementById('ap-author').innerHTML=metaText(post);document.getElementById('ap-date').textContent='📅 '+post.date;document.getElementById('ap-views').textContent='👁️ '+toBn(st.views)+' বার পঠিত';document.getElementById('ap-likes').textContent='❤️ '+toBn(st.likes)+' লাইক';const imgEl=document.getElementById('ap-image');if(post.image){imgEl.src=post.image;imgEl.style.display='block';}else{imgEl.style.display='none';}
@@ -770,7 +821,6 @@ function buildStaticPage(p){const url=BASE+'post/'+sid(p.id)+'.html';const rawDe
 function loadScriptOnce(src){return new Promise((res,rej)=>{if(window.JSZip){res();return;}const s=document.createElement('script');s.src=src;s.onload=()=>res();s.onerror=()=>rej(new Error('JSZip লোড হয়নি'));document.head.appendChild(s);});}
 async function generateStaticZip(){if(!isEditor()){alert('⛔ শুধু সম্পাদক এটি করতে পারবেন');return;}const st=document.getElementById('seo-status');if(!ALL_POSTS.length){st.textContent='⚠️ আগে লেখা লোড হতে দিন।';return;}st.textContent='⏳ তৈরি হচ্ছে...';try{await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');const zip=new JSZip();const today=new Date().toISOString().slice(0,10);let urls='<url><loc>'+xmlEsc(BASE)+'</loc><lastmod>'+today+'</lastmod><priority>1.0</priority></url>\n';ALL_POSTS.forEach(p=>{const f='post/'+sid(p.id)+'.html';zip.file(f,buildStaticPage(p));urls+='<url><loc>'+xmlEsc(BASE+f)+'</loc><lastmod>'+today+'</lastmod><priority>0.8</priority></url>\n';});zip.file('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+urls+'</urlset>');zip.file('robots.txt','User-agent: *\nAllow: /\n\nSitemap: '+BASE+'sitemap.xml\n');const blob=await zip.generateAsync({type:'blob'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sahitya-batayan-seo.zip';document.body.appendChild(a);a.click();a.remove();st.textContent='✅ '+toBn(ALL_POSTS.length)+'টি লেখার পেজ সহ ZIP ডাউনলোড হয়েছে।';}catch(e){console.error(e);st.textContent='❌ সমস্যা: '+e.message;}}
 
-/* ===== নোটিশ ===== */
 let ntImageData='',ntImageMime='',ntFileData='',ntFileMime='',ntFileName='',editingNoticeId='';
 const ntHtmlEl=document.getElementById('nt-htmlfile');if(ntHtmlEl){ntHtmlEl.addEventListener('change',function(e){const f=e.target.files[0];if(!f)return;if(f.size>1024*1024){alert('⚠️ 1MB এর কম HTML ফাইল দিন');e.target.value='';return;}const r=new FileReader();r.onload=function(ev){document.getElementById('nt-html').value=ev.target.result;notify('✅ HTML ফাইল লোড হয়েছে');};r.readAsText(f,'UTF-8');});}
 const ntImgEl=document.getElementById('nt-image');if(ntImgEl){ntImgEl.addEventListener('change',function(e){const f=e.target.files[0];if(!f)return;if(f.size>2*1024*1024){alert('⚠️ 2MB এর কম ছবি দিন');e.target.value='';return;}ntImageMime=f.type||'image/jpeg';const r=new FileReader();r.onload=function(ev){ntImageData=ev.target.result;const p=document.getElementById('nt-image-preview');if(p){p.src=ev.target.result;p.style.display='block';}};r.readAsDataURL(f);});}
@@ -785,7 +835,6 @@ function cancelNoticeEdit(){resetNoticeForm();}
 async function startEditNotice(id){const list=await fetchData('getNotices');const n=(Array.isArray(list)?list:[]).find(x=>x.id===id);if(!n)return;editingNoticeId=id;document.getElementById('nt-title').value=n.title||'';document.getElementById('nt-content').value=n.content||'';document.getElementById('nt-html').value=n.html_content||'';document.getElementById('nt-priority').value=String(n.priority||'normal').toLowerCase()==='urgent'?'urgent':'normal';if(n.image_url){const p=document.getElementById('nt-image-preview');p.src=n.image_url;p.style.display='block';}document.getElementById('nt-form-title').textContent='✏️ নোটিশ এডিট করুন';document.getElementById('nt-submit').textContent='💾 আপডেট করুন';document.getElementById('nt-cancel').style.display='inline-block';window.scrollTo(0,0);}
 async function removeNotice(id){if(!isEditor()){alert('⛔ শুধু সম্পাদক ডিলিট করতে পারবেন');return;}if(!confirm('নোটিশটি ডিলিট করবেন?'))return;const ok=await submitData({action:'deleteNotice',editorcode:EDITOR_CODE,noticeId:id});if(ok){notify('🗑️ ডিলিট হয়েছে');loadAdminNotices();loadNotices();}}
 
-/* ===== বিজ্ঞাপন অ্যাডমিন ===== */
 let adImageData='',adImageMime='',editingAdId='';
 const adImgEl=document.getElementById('ad-image');if(adImgEl){adImgEl.addEventListener('change',function(e){const f=e.target.files[0];if(!f)return;if(f.size>2*1024*1024){alert('⚠️ 2MB এর কম ছবি দিন');e.target.value='';return;}adImageMime=f.type||'image/jpeg';const r=new FileReader();r.onload=function(ev){adImageData=ev.target.result;const p=document.getElementById('ad-image-preview');if(p){p.src=ev.target.result;p.style.display='block';}};r.readAsDataURL(f);});}
 async function loadAdminAds(){const list=await fetchData('getAds');const items=Array.isArray(list)?list:[];ALL_ADS=items;const container=document.getElementById('admin-ads-list');const posName={feed:'লেখার মাঝে',side:'সাইডবার',bottom:'নীচে'};if(!items.length){container.innerHTML='<p style="text-align:center;padding:20px;color:var(--text-light)">কোনো বিজ্ঞাপন নেই। উপরের ফর্ম থেকে যোগ করুন।</p>';return;}container.innerHTML=items.map(a=>`<div class="pending-item" style="border-left-color:var(--gold)"><div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><img src="${a.image_url}" style="width:90px;height:55px;object-fit:cover;border-radius:6px" onerror="this.style.display='none'"><div style="flex:1"><h4>${escapeHtml(a.title||'(শিরোনাম নেই)')}</h4><div style="font-size:13px;color:var(--text-light)">📍 ${posName[a.position]||a.position} | 🔗 ${escapeHtml(a.link_url||'-')}</div></div></div><div class="pending-actions"><button class="small-btn" onclick="startEditAd('${a.id}')">✏️ এডিট</button><button class="delete-btn" onclick="removeAd('${a.id}')">🗑️ ডিলিট</button></div></div>`).join('');}
