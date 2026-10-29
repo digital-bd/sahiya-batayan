@@ -12,10 +12,9 @@
 <meta property="og:type" id="og-type" content="website">
 <meta property="og:site_name" content="সাহিত্য বাতায়ন">
 <meta property="og:title" id="og-title" content="সাহিত্য বাতায়ন - অনলাইন পত্রিকা">
-<meta property="og:description" id="og-desc" content="বাংলা সাহিত্যের বিশ্বকোষ।">
+<meta property="og:description" id="og-desc" content="বাংলা সাহিত্য, কবিতা, গল্প, প্রবন্ধ ও সংবাদ বিষয়ক অনলাইন পত্রিকা।">
 <meta property="og:image" id="og-image" content="https://digital-bd.github.io/sahiya-batayan/og-banner.png">
 <meta property="og:url" id="og-url" content="https://digital-bd.github.io/sahiya-batayan/">
-<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -92,6 +91,10 @@ body.night .ar-cat{color:#e77c6d}
 .ad-bottom-banner img{width:120px;height:70px;object-fit:cover;border-radius:6px}
 .ad-bottom-banner span{font-weight:700;color:var(--text)}
 #ad-bottom{margin:30px 0 10px}
+.ad-top-box{display:block;max-width:1200px;margin:15px auto;text-decoration:none}
+.ad-top-box img{width:100%;max-height:180px;object-fit:cover;border-radius:10px;display:block;box-shadow:var(--shadow)}
+.ad-top-title{display:block;text-align:center;font-weight:700;font-size:16px;margin-top:8px;color:#c0392b;background:none;border:none}
+body.night .ad-top-title{color:#8fb7e8}
 .in-article-ad{display:block;margin:22px 0;border:2px dashed var(--gold);border-radius:8px;overflow:hidden;background:#fffdf5;text-decoration:none}
 .in-article-ad img{width:100%;max-height:220px;object-fit:cover;display:block}
 .in-article-ad .ad-label{display:inline-block;background:var(--gold);color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:4px;margin:8px 0 0 10px}
@@ -334,7 +337,7 @@ body.night .ar-cat{color:#e77c6d}
 <a href="#" onclick="showWriter();return false;">️ লিখুন</a><span class="sep">|</span>
 <a href="#" onclick="showWriterRegister();return false;">📝 নিবন্ধন</a><span class="sep">|</span>
 <a href="#" onclick="setLang('en');return false;">English</a><span class="sep">|</span>
-<button id="night-btn" class="it-night" onclick="toggleNight()" title="নাইট মোড"></button>
+<button id="night-btn" class="it-night" onclick="toggleNight()" title="নাইট মোড">🌙</button>
 </div>
 </div>
 <div id="search-box"><input id="search-input" placeholder="লেখা, লেখক বা বিভাগ খুঁজুন..." onkeydown="if(event.key==='Enter')doSearch()"><button class="btn-primary" style="padding:8px 22px;font-size:14px" onclick="doSearch()">খুঁজুন</button></div>
@@ -760,10 +763,8 @@ function statLine(p){const st=statOf(p.id);return '<div class="nd-stat"><span>�
 function adsFor(pos){return ALL_ADS.filter(a=>String(a.position||'feed')===pos);}
 function adCardHTML(a){const click=a.link_url?` onclick="window.open('${a.link_url}','_blank')"`:'';return `<div class="nd-card ad-card"${click}><div class="ad-tag">📢 বিজ্ঞাপন</div><img src="${a.image_url}" onerror="this.style.display='none'"><div class="nd-card-body"><h4>${escapeHtml(a.title||'বিজ্ঞাপন')}</h4></div></div>`;}
 function renderBottomAd(){const el=document.getElementById('ad-bottom');if(!el)return;const ads=adsFor('bottom');if(ads.length){el.innerHTML=ads.map(a=>{const tag=a.link_url?'a':'div';const href=a.link_url?` href="${a.link_url}" target="_blank"`:'';return `<${tag} class="ad-bottom-banner"${href}><img src="${a.image_url}" onerror="this.style.display='none'"><span>${escapeHtml(a.title||'বিজ্ঞাপন')}</span></${tag}>`;}).join('');}else{el.innerHTML=`<div class="ad-banner" onclick="window.open('https://wa.me/8801577439257?text='+encodeURIComponent('আমি সাহিত্য বাতায়নে বিজ্ঞাপন দিতে চাই, বিস্তারিত জানতে চাই।'),'_blank')"><h3>📢 আপনার বিজ্ঞাপন এখানে প্রচারিত হোক!</h3><p>প্রতিদিন হাজারো পাঠক পড়ছেন। বিস্তারিত জানতে ক্লিক করুন | 📞 ০১৫৭৭৪৩৯২৫৭</p></div>`;}}
-function renderTopAd(){const el=document.getElementById('ad-top');if(!el)return;const ads=adsFor('top');if(ads.length){el.innerHTML=ads.map(a=>{const tag=a.link_url?'a':'div';const href=a.link_url?` href="${a.link_url}" target="_blank"`:'';return `<${tag} class="ad-banner"${href} style="margin:15px 0"><img src="${a.image_url}" style="max-width:100%;max-height:120px;object-fit:contain;border-radius:8px" onerror="this.style.display='none'"><h3 style="margin-top:8px">${escapeHtml(a.title||'বিজ্ঞাপন')}</h3></${tag}>`;}).join('');}else{el.innerHTML='';}}
-function renderSideAd(){const el=document.getElementById('ad-side');if(!el)return;const ads=adsFor('side');el.innerHTML=ads.length?('<h3 style="margin-top:18px">📢 বিজ্ঞাপন</h3>'+ads.map(a=>{const tag=a.link_url?'a':'div';const href=a.link_url?` href="${a.link_url}" target="_blank"`:'';return `<${tag} class="ad-side-box"${href}><img src="${a.image_url}" onerror="this.style.display='none'"><span>${escapeHtml(a.title||'বিজ্ঞাপন')}</span></${tag}>`;}).join('')):'';}
+function renderTopAd(){const el=document.getElementById('ad-top');if(!el)return;const ads=adsFor('top');if(ads.length){el.innerHTML=ads.map(a=>{const tag=a.link_url?'a':'div';const href=a.link_url?` href="${a.link_url}" target="_blank"`:'';return `<${tag} class="ad-top-box"${href}><img src="${a.image_url}" alt="${escapeHtml(a.title||'বিজ্ঞাপন')}"><span class="ad-top-title">${escapeHtml(a.title||'বিজ্ঞাপন')}</span></${tag}>`;}).join('');}else{el.innerHTML='';}}function renderSideAd(){const el=document.getElementById('ad-side');if(!el)return;const ads=adsFor('side');el.innerHTML=ads.length?('<h3 style="margin-top:18px">📢 বিজ্ঞাপন</h3>'+ads.map(a=>{const tag=a.link_url?'a':'div';const href=a.link_url?` href="${a.link_url}" target="_blank"`:'';return `<${tag} class="ad-side-box"${href}><img src="${a.image_url}" onerror="this.style.display='none'"><span>${escapeHtml(a.title||'বিজ্ঞাপন')}</span></${tag}>`;}).join('')):'';}
 async function loadAds(){const list=await fetchData('getAds');ALL_ADS=Array.isArray(list)?list:[];renderTopAd();renderBottomAd();renderSideAd();}
-
 function renderBooks(){document.getElementById('book-grid').innerHTML=BOOKS.map(b=>`<article class="post-card"><div class="post-card-body"><span class="category-tag">বুক রিভিউ</span><h3>${b.t}</h3><p class="excerpt">${b.a} — ${b.d}</p><a class="buy-btn" target="_blank" href="https://www.rokomari.com/search?term=${b.s}">🛒 বইটি দেখুন</a></div></article>`).join('');}
 function granthCardHTML(g,i){return `<article class="post-card" onclick="openGranth(${i})"><div class="post-card-body"><span class="category-tag">কাব্যগ্রন্থ</span><h3>${g.book}</h3><p class="excerpt">${g.author} | ${g.year} — ${g.desc}</p><div class="meta">📖 ${toBn(g.poems.length)}টি কবিতা — পড়তে ক্লিক করুন</div></div></article>`;}
 function renderGranthGrids(){const h=GRANTHO.map(granthCardHTML).join('');document.getElementById('granth-grid').innerHTML=h;document.getElementById('granth-page-grid').innerHTML=h;}
